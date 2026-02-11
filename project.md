@@ -1,33 +1,46 @@
-# Roadmap L'IMPÉRATRICE - Version 2.0 (Extension Infinite)
+# Roadmap L'IMPÉRATRICE - Version 3.0 (Ultimate Vinted Assistant)
 
-## 1. Jeu "Vinted Crush" (Match-3 Infini)
-- [ ] Moteur de jeu grille 8x8.
-- [ ] Logique de match-3 (swap, check matches, cascade).
-- [ ] Thème visuel : Emojis/SVG (Robe 👗, Chaussure 👠, Sac 👜, Colis 📦, Etoile ⭐, Cœur 💖).
-- [ ] Score et High Score persistants.
-- [ ] Animations douces (pas de flash agressif).
+## ✅ 1. Jeu "Vinted Crush" (Match-3 Infini)
+- [x] Moteur de jeu grille 8x8.
+- [x] Logique de match-3 (swap, check matches, cascade).
+- [x] Thème visuel : Emojis/SVG (Robe 👗, Chaussure 👠, Sac 👜, Colis 📦, Etoile ⭐, Cœur 💖).
+- [x] Score et High Score persistants.
+- [x] Animations douces (pas de flash agressif).
 
-## 2. Système de Succès & Trophées (Gamification)
-- [ ] Interface "Salle des Trophées".
-- [ ] Liste de 20 succès à débloquer (ex: "Première Annonce", "Reine du SEO", "Négociatrice", "Emballage Parfait").
-- [ ] Logique de déblocage (basée sur l'utilisation des autres outils).
-- [ ] Effet Confetti (Canvas JS) lors du déblocage.
+## ✅ 2. Système de Succès & Trophées (Gamification)
+- [x] Interface "Salle des Trophées".
+- [x] Liste de 30+ succès à débloquer.
+- [x] Logique de déblocage (basée sur l'utilisation des autres outils).
+- [x] Effet Confetti (Canvas JS) lors du déblocage.
 
-## 3. Nouveaux Outils Interactifs (Basés sur le Rapport)
-- [ ] **Calculatrice de Profit** : Prix Vente - (Prix Achat + Emballage) = Bénéfice + Marge %.
-- [ ] **Générateur de Réponses (Soft Skills)** :
-    - Scénarios : "Offre Lowball", "Pas de Bonjour", "Demande Réservation", "Litige", "Retard Envoi".
-    - Scripts copiables basés sur la technique du "Contre-Pivot".
-- [ ] **Checklist Colis Parfait** : Liste interactive (Lavage, Repassage, Pliage, Papier Soie, Parfum, Carte, Scotch).
-- [ ] **Calendrier Stratégique (Règle des 3 semaines)** :
-    - Widget affichant "Quoi vendre maintenant" et "Quoi préparer pour le mois prochain".
+## ✅ 3. Nouveaux Outils Interactifs (Basés sur le Rapport)
+- [x] **Calculatrice de Profit** : Prix Vente - (Prix Achat + Emballage) = Bénéfice + Marge %.
+- [x] **Générateur de Réponses (Soft Skills)** : Scénarios "Contre-Pivot".
+- [x] **Checklist Colis Parfait** : Persistante avec localStorage.
+- [x] **Calendrier Stratégique (Règle des 3 semaines)** : Widget de saisonnalité.
 
-## 4. Enrichissement UX & Dopamine
-- [ ] Micro-interactions (boutons qui rebondissent).
-- [ ] Messages de félicitations aléatoires ("Boost Moral").
-- [ ] Notifications visuelles douces (Toast notifications).
-- [ ] Intégration complète Dark Mode pour tous les nouveaux éléments.
+## ✅ 4. Enrichissement UX & Dopamine
+- [x] Micro-interactions (boutons qui rebondissent).
+- [x] Messages de félicitations aléatoires ("Boost Moral").
+- [x] Notifications visuelles douces (Toast notifications).
+- [x] Intégration complète Dark Mode.
 
-## 5. Architecture
-- [ ] Tout dans `index.html`.
-- [ ] Sauvegarde `localStorage` pour tout (Score jeu, Trophées, Checklists).
+## ✅ 5. Studio Virtuel V2 (Pro Mode)
+- [x] Refonte graphique complète (Style Card Immersive).
+- [x] Tips "Algorithmiques" profonds (OCR, CV, Trust Score).
+- [x] Navigation par étapes claire.
+
+## ✅ 6. SEO Generator V2 (Sales Explosion)
+- [x] **Titre Enhancer** : Barre de score en temps réel (0-100) avec conseils.
+- [x] **Hashtag Packs** : Clusters de hashtags 2026 (Gorpcore, Office Siren...).
+- [x] **Hashtag Library** : Ajout manuel + Bibliothèque cliquable.
+- [x] **Sales Copy** : Description orientée vente (Urgence, Emotion, Structure).
+
+## ✅ 7. SOS Panic Mode
+- [x] Bouton cœur pulsant en header.
+- [x] Overlay apaisant avec exercices de respiration et ancrage.
+- [x] Sortie douce.
+
+## 8. Architecture
+- [x] Tout dans `index.html`.
+- [x] Sauvegarde `localStorage` pour tout.

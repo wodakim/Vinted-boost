@@ -478,9 +478,21 @@
                         </div>
 
                         <div style="margin-top: 15px; background: var(--bg-color); padding: 15px; border-radius: 10px; border: 1px dashed var(--primary-dark); position: relative;">
-                            <label style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Aperçu du Titre</label>
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                                <label style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Aperçu du Titre</label>
+                                <span id="title-score-label" style="font-size: 0.8rem; font-weight: bold;">Score SEO: 0/100</span>
+                            </div>
+
+                            <!-- Score Bar -->
+                            <div style="height: 6px; background: #e0e0e0; border-radius: 3px; margin-bottom: 10px; overflow: hidden;">
+                                <div id="title-score-bar" style="height: 100%; width: 0%; background: #ff6b6b; transition: width 0.5s, background 0.5s;"></div>
+                            </div>
+
                             <p id="title-preview" style="font-weight: bold; font-size: 1.1rem; margin: 5px 0; color: var(--text-main); min-height: 1.5rem;">...</p>
-                            <button onclick="copyToClipboard('title-preview')" style="position: absolute; right: 10px; top: 10px; font-size: 0.8rem; color: var(--primary-dark); background: none; display: flex; align-items: center; gap: 5px;">
+
+                            <div id="title-feedback" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 8px; font-style: italic;"></div>
+
+                            <button onclick="copyToClipboard('title-preview')" style="position: absolute; right: 10px; top: 35px; font-size: 0.8rem; color: var(--primary-dark); background: none; display: flex; align-items: center; gap: 5px;">
                                 <svg class="icon" style="width:14px; height:14px;" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copier
                             </button>
                         </div>
@@ -495,18 +507,40 @@
                         <textarea id="gen-desc-details" placeholder="Détails supplémentaires (mesures, raison de la vente, défauts éventuels...)" style="width: 100%; height: 100px; padding: 10px; border-radius: 10px; border: 1px solid var(--accent-color);" oninput="updateSeoPreview()"></textarea>
 
                         <div style="margin-top: 15px;">
-                            <label style="font-size: 0.9rem; font-weight: bold; color: var(--text-muted);">Packs Hashtags 2026 (Max 5)</label>
-                            <select id="trend-pack-selector" onchange="applyTrendPack()" style="margin-top: 8px; margin-bottom: 8px;">
-                                <option value="">-- Choisir un Pack Tendance --</option>
-                                <option value="gorpcore">🏔 Gorpcore 2026 (Arc'teryx, Salomon)</option>
-                                <option value="officesiren">💼 Office Siren (Miu Miu, Lunettes)</option>
-                                <option value="coquette">🎀 Coquette / Balletcore (Nœuds)</option>
+                            <label style="font-size: 0.9rem; font-weight: bold; color: var(--text-muted);">Hashtags & Tendances</label>
+
+                            <!-- Manual Input -->
+                            <div style="display:flex; gap:10px; margin-top:8px;">
+                                <input type="text" id="manual-tag-input" placeholder="#HashtagManuel" style="flex:1;">
+                                <button onclick="addManualTag()" style="background:var(--primary-dark); color:white; padding:0 15px; border-radius:10px;">Ajouter</button>
+                            </div>
+
+                            <!-- Packs -->
+                            <select id="trend-pack-selector" onchange="applyTrendPack()" style="margin-top: 8px; width: 100%;">
+                                <option value="">-- Packs Experts (Clusters) --</option>
+                                <option value="gorpcore">🏔 Gorpcore 2026</option>
+                                <option value="officesiren">💼 Office Siren</option>
+                                <option value="coquette">🎀 Coquette / Balletcore</option>
                                 <option value="oldmoney">💸 Old Money / Quiet Luxury</option>
-                                <option value="y2k">💿 Y2K / Cyber (2000s)</option>
-                                <option value="darkacademia">📚 Dark Academia / Preppy</option>
+                                <option value="y2k">💿 Y2K / Cyber</option>
+                                <option value="darkacademia">📚 Dark Academia</option>
                             </select>
 
-                            <div id="active-tags" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                            <!-- Clickable Library -->
+                            <div style="margin-top: 10px; display: flex; gap: 5px; flex-wrap: wrap; max-height: 80px; overflow-y: auto;">
+                                <button class="tag-btn" onclick="addLibraryTag('#vintage')">#vintage</button>
+                                <button class="tag-btn" onclick="addLibraryTag('#summer')">#summer</button>
+                                <button class="tag-btn" onclick="addLibraryTag('#casual')">#casual</button>
+                                <button class="tag-btn" onclick="addLibraryTag('#chic')">#chic</button>
+                                <button class="tag-btn" onclick="addLibraryTag('#italy')">#italy</button>
+                                <button class="tag-btn" onclick="addLibraryTag('#laine')">#laine</button>
+                                <button class="tag-btn" onclick="addLibraryTag('#soie')">#soie</button>
+                                <button class="tag-btn" onclick="addLibraryTag('#cuir')">#cuir</button>
+                                <button class="tag-btn" onclick="addLibraryTag('#rare')">#rare</button>
+                                <button class="tag-btn" onclick="addLibraryTag('#tendance')">#tendance</button>
+                            </div>
+
+                            <div id="active-tags" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; padding: 10px; background: var(--bg-color); border-radius: 10px; min-height: 40px;">
                                 <!-- Tags injected here -->
                             </div>
                         </div>
@@ -1175,6 +1209,31 @@
         updateSeoPreview();
     }
 
+    // Manual Tag
+    window.addManualTag = function() {
+        const input = document.getElementById('manual-tag-input');
+        let val = input.value.trim();
+        if(!val) return;
+        if(!val.startsWith('#')) val = '#' + val;
+
+        if(!selectedTags.includes(val) && selectedTags.length < 15) {
+            selectedTags.push(val);
+            renderTags();
+            updateSeoPreview();
+            unlockTrophy('tag_collector');
+        }
+        input.value = "";
+    }
+
+    // Library Tag
+    window.addLibraryTag = function(tag) {
+        if(!selectedTags.includes(tag) && selectedTags.length < 15) {
+            selectedTags.push(tag);
+            renderTags();
+            updateSeoPreview();
+        }
+    }
+
     window.updateSeoPreview = function() {
         const brand = document.getElementById('gen-brand').value;
         const type = document.getElementById('gen-type').value;
@@ -1188,6 +1247,42 @@
         const titleParts = [brand, type, material, color, vibe, condition].filter(Boolean);
         const title = titleParts.join(' ');
         document.getElementById('title-preview').innerText = title || "...";
+
+        // --- TITLE SCORING ALGO ---
+        let score = 0;
+        let hints = [];
+
+        if(title.length > 10) score += 20;
+        else hints.push("Titre trop court !");
+
+        if(brand) score += 20; else hints.push("Manque la marque !");
+        if(type) score += 20; else hints.push("Quel est le type ?");
+        if(color) score += 10;
+        if(material) score += 10;
+        if(condition) score += 10;
+        if(vibe) score += 10; // Bonus
+
+        // Penalties
+        if(title.toLowerCase().includes("joli") || title.toLowerCase().includes("sympa")) {
+            score -= 10;
+            hints.push("Évite 'joli' ou 'sympa', sois factuelle !");
+        }
+
+        score = Math.min(100, Math.max(0, score));
+
+        const bar = document.getElementById('title-score-bar');
+        const label = document.getElementById('title-score-label');
+        const feedback = document.getElementById('title-feedback');
+
+        bar.style.width = score + "%";
+        label.innerText = `Score SEO: ${score}/100`;
+
+        if(score < 40) bar.style.background = "#ff6b6b"; // Red
+        else if(score < 80) bar.style.background = "#ffd93d"; // Yellow
+        else bar.style.background = "#6bff6b"; // Green
+
+        if(score < 100) feedback.innerText = "Conseil : " + hints.join(", ");
+        else feedback.innerText = "🔥 Titre Parfait ! L'algorithme va adorer.";
 
         // SALES COPY DESCRIPTION
         let desc = "";
