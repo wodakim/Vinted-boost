@@ -455,6 +455,12 @@
                         <option value="ghost" data-i18n="script_ghost">Plus de réponse</option>
                         <option value="reserve" data-i18n="script_reserve">Demande de réservation</option>
                         <option value="late" data-i18n="script_late">Retard d'envoi</option>
+                        <option value="accept" data-i18n="script_accept_label">Accepter une offre</option>
+                        <option value="counter" data-i18n="script_counter_label">Contre-offre</option>
+                        <option value="bundle" data-i18n="script_bundle_label">Proposer un lot</option>
+                        <option value="thanks" data-i18n="script_thanks_label">Merci & Envoi</option>
+                        <option value="review" data-i18n="script_review_label">Demander un avis</option>
+                        <option value="measure" data-i18n="script_measure_label">Donner les mesures</option>
                     </select>
                     <textarea id="script-output" readonly style="height: 120px; font-size: 0.9rem; color: var(--text-muted); background: var(--bg-color);"></textarea>
                     <button onclick="copyToClipboard('script-output')" style="margin-top: 10px; width: 100%; background: var(--primary-dark); color: white; padding: 10px; border-radius: 10px;" data-i18n="copy_response">Copier la réponse</button>
@@ -766,6 +772,12 @@
             script_ghost: "Bonjour, êtes-vous toujours intéressé(e) ? Je vais à la poste demain, je pourrais poster votre colis en même temps. Dites-moi si vous avez besoin d'infos !",
             script_reserve: "Bonjour, je ne fais malheureusement plus de réservations (trop de désistements). Mais l'article est à vous dès que vous le prenez ! Premier arrivé, premier servi 🌸",
             script_late: "Bonjour ! Petit message pour vous prévenir que je dépose votre colis demain matin sans faute. Merci pour votre patience et à très vite !",
+            script_accept: "Bonjour ! J'accepte votre offre avec plaisir. ✨ Je prépare le colis dès maintenant pour qu'il parte au plus vite. Merci !",
+            script_counter: "Bonjour, merci pour votre intérêt ! Je ne peux pas descendre si bas, mais je peux vous le laisser à [PRIX]€. C'est une très belle pièce. Qu'en dites-vous ? 😊",
+            script_bundle: "Bonjour ! Pour plusieurs articles, je peux vous faire une réduction de -15% sur le lot. N'hésitez pas à faire un tour dans mon dressing pour amortir les frais de port ! 📦",
+            script_thanks: "Merci beaucoup pour votre commande ! 💖 Le colis est prêt, je le dépose demain. J'ai ajouté une petite protection supplémentaire. À très vite !",
+            script_review: "Bonjour ! J'espère que l'article vous plaît ! Si tout est OK, n'hésitez pas à valider la commande. Un petit avis 5⭐ me ferait très plaisir. Belle journée ! ☀️",
+            script_measure: "Bonjour, voici les mesures demandées : [MESURES]. La coupe est vraiment top. Dites-moi si vous avez besoin d'autre chose ! 📏",
             // Tips
             tips: ["Ne baisse jamais le prix de plus de 10% d'un coup.", "Un emballage soigné (papier de soie) fidélise à 100%.", "Réponds toujours, même pour dire non.", "Poste tes articles par grappes de 3 ou 5.", "Reliste tes articles invendus depuis 3 semaines.", "La politesse est ton arme fatale.", "Utilise la lumière naturelle, toujours.", "L'algo adore la régularité.", "Tes photos sont ta vitrine."],
             // Jokes
@@ -788,6 +800,12 @@
             script_ghost: "Hello, are you still interested? I'm going to the post office tomorrow, I could ship your package at the same time. Let me know!",
             script_reserve: "Hello, unfortunately I no longer do holds (too many cancellations). But the item is yours as soon as you grab it! First come, first served 🌸",
             script_late: "Hello! Just a quick note to let you know I'll drop off your package tomorrow morning without fail. Thanks for your patience!",
+            script_accept: "Hello! I happily accept your offer. ✨ I'm packing it right now so it ships asap. Thanks!",
+            script_counter: "Hello, thanks for your interest! I can't go that low, but I can do [PRICE]€. It's a really nice piece. What do you think? 😊",
+            script_bundle: "Hello! If you like more items, I can give you a -15% discount on a bundle. Feel free to check my closet to save on shipping! 📦",
+            script_thanks: "Thank you so much for your order! 💖 The package is ready, dropping it off tomorrow. I added extra protection. See you soon!",
+            script_review: "Hello! Hope you love the item! If everything is OK, please validate the order. A 5⭐ review would make my day. Have a sunny day! ☀️",
+            script_measure: "Hello, here are the measurements: [MEASURES]. The fit is really great. Let me know if you need anything else! 📏",
             tips: ["Never lower price by more than 10% at once.", "Neat packaging builds 100% loyalty.", "Always reply, even to say no.", "Post items in batches of 3 or 5.", "Relist items unsold for 3 weeks.", "Politeness is your best weapon.", "Use natural light, always.", "The algo loves consistency.", "Your photos are your shop window."],
             jokes: ["Why do scuba divers fall backwards? Because otherwise they'd fall into the boat.", "What do you call a fake noodle? A impasta.", "Why did the scarecrow win an award? Because he was outstanding in his field.", "What do you call a bear with no teeth? A gummy bear.", "Why don't skeletons fight each other? They don't have the guts."],
             season_focus: ["Sport, Detox", "Valentine's", "Mid-season", "Dresses, Festivals", "Swimwear, Summer", "Heatwave, Linen", "Sales", "Back to School", "Autumn, Boots", "Halloween", "Ski, Holidays", "Gifts"],
@@ -807,6 +825,12 @@
             script_ghost: "Hallo, noch interessiert? Ich gehe morgen zur Post und könnte dein Paket mitnehmen. Sag Bescheid!",
             script_reserve: "Hallo, ich reserviere leider nicht mehr (zu viele Absagen). Aber greif zu, wenn du bereit bist! Wer zuerst kommt, mahlt zuerst 🌸",
             script_late: "Hallo! Kurze Info: Ich bringe dein Paket morgen früh sicher zur Post. Danke für deine Geduld!",
+            script_accept: "Hallo! Ich nehme dein Angebot gerne an. ✨ Ich packe es gleich ein, damit es schnell rausgeht. Danke!",
+            script_counter: "Hallo, danke! So tief kann ich nicht gehen, aber [PREIS]€ wäre okay. Es ist ein tolles Teil. Was meinst du? 😊",
+            script_bundle: "Hallo! Bei mehreren Artikeln gebe ich gerne -15% Rabatt. Schau dich um, um Versand zu sparen! 📦",
+            script_thanks: "Vielen Dank für deine Bestellung! 💖 Paket ist fertig, geht morgen raus. Habe es gut geschützt. Bis bald!",
+            script_review: "Hallo! Ich hoffe, der Artikel gefällt dir! Wenn alles passt, bestätige bitte den Erhalt. Eine 5⭐ Bewertung würde mich sehr freuen. Schönen Tag! ☀️",
+            script_measure: "Hallo, hier die Maße: [MASSE]. Der Schnitt ist echt super. Sag Bescheid, wenn du noch was brauchst! 📏",
             tips: ["Senke den Preis nie um mehr als 10%.", "Gute Verpackung bringt Stammkunden.", "Antworte immer, auch bei Nein.", "Poste Artikel in 3er oder 5er Gruppen.", "Stelle alte Artikel neu ein.", "Höflichkeit ist deine Waffe.", "Nutze immer Tageslicht.", "Der Algo liebt Regelmäßigkeit.", "Deine Fotos sind dein Schaufenster."],
             jokes: ["Was ist grün und rennt durch den Wald? Ein Rudel Gurken.", "Was macht ein Clown im Büro? Faxen.", "Warum können Geister so schlecht lügen? Weil man durch sie hindurchsehen kann.", "Was essen Autos? Parkplätzchen.", "Egal wie gut du schläfst, Albert schläft wie Einstein."],
             season_focus: ["Sport, Detox", "Valentinstag", "Übergang", "Kleider", "Bade, Sommer", "Hitze, Leinen", "Sale", "Schulstart", "Herbst, Stiefel", "Halloween", "Ski, Fest", "Geschenke"],
@@ -826,6 +850,12 @@
             script_ghost: "Hola, ¿sigues interesado? Voy a correos mañana y podría llevar tu paquete. ¡Dime algo!",
             script_reserve: "Hola, ya no hago reservas (muchas cancelaciones). ¡Pero es tuyo si lo compras ya! El primero se lo lleva 🌸",
             script_late: "¡Hola! Solo avisarte que dejo tu paquete mañana por la mañana sin falta. ¡Gracias por esperar!",
+            script_accept: "¡Hola! Acepto tu oferta con gusto. ✨ Lo empaqueto ahora mismo para que salga rápido. ¡Gracias!",
+            script_counter: "Hola, gracias. No puedo bajar tanto, pero te lo dejo en [PRECIO]€. Es una pieza preciosa. ¿Qué dices? 😊",
+            script_bundle: "¡Hola! Si te llevas varios, te hago un -15% en el lote. ¡Aprovecha para ahorrar envío! 📦",
+            script_thanks: "¡Muchas gracias por tu pedido! 💖 El paquete está listo, sale mañana. Lo he protegido bien. ¡Hasta pronto!",
+            script_review: "¡Hola! Espero que te guste. Si todo está bien, por favor valida el pedido. Una valoración de 5⭐ me haría muy feliz. ¡Buen día! ☀️",
+            script_measure: "Hola, aquí tienes las medidas: [MEDIDAS]. El corte queda genial. ¡Dime si necesitas algo más! 📏",
             tips: ["No bajes precio más del 10%.", "El packaging fideliza al 100%.", "Responde siempre.", "Publica en lotes de 3 o 5.", "Resube artículos antiguos.", "La educación es tu arma.", "Usa luz natural.", "El algo ama la constancia.", "Tus fotos son tu escaparate."],
             jokes: ["¿Qué hace una abeja en el gimnasio? ¡Zum-ba!", "¿Cuál es el último animal que subió al arca de Noé? El del-fin.", "¿Cómo se queda un mago después de comer? Magordito.", "¿Qué le dice un techo a otro? Techo de menos.", "¿Qué hace un perro con un taladro? Taladrando."],
             season_focus: ["Deporte", "San Valentín", "Entretiempo", "Vestidos", "Baño, Verano", "Calor, Lino", "Rebajas", "Vuelta al cole", "Otoño", "Halloween", "Esquí", "Regalos"],
@@ -845,6 +875,12 @@
             script_ghost: "Ciao, sei ancora interessato? Vado in posta domani. Fammi sapere!",
             script_reserve: "Ciao, non faccio più prenotazioni. Ma è tuo se lo prendi subito! Chi prima arriva... 🌸",
             script_late: "Ciao! Ti avviso che spedisco il pacco domani mattina senza fallo. Grazie della pazienza!",
+            script_accept: "Ciao! Accetto la tua offerta con piacere. ✨ Preparo il pacco subito. Grazie!",
+            script_counter: "Ciao, grazie! Non posso scendere così tanto, ma posso fare [PREZZO]€. È un bel capo. Che ne dici? 😊",
+            script_bundle: "Ciao! Se prendi più articoli, ti faccio il -15% sul set. Dai un'occhiata al mio armadio per risparmiare sulla spedizione! 📦",
+            script_thanks: "Grazie mille per l'ordine! 💖 Pacco pronto, spedisco domani. Ho aggiunto protezione extra. A presto!",
+            script_review: "Ciao! Spero ti piaccia! Se è tutto OK, per favore convalida l'ordine. Una recensione a 5⭐ mi farebbe molto piacere. Buona giornata! ☀️",
+            script_measure: "Ciao, ecco le misure: [MISURE]. La vestibilità è ottima. Dimmi se serve altro! 📏",
             tips: ["Non abbassare prezzo >10%.", "Il packaging fidelizza.", "Rispondi sempre.", "Pubblica 3-5 articoli insieme.", "Ripubblica articoli vecchi.", "La gentilezza vince.", "Usa luce naturale.", "L'algo ama la costanza.", "Le foto sono la vetrina."],
             jokes: ["Cosa fa un caffè allo specchio? Si guarda e si esprime.", "Qual è il colmo per un computer? Avere la memoria corta.", "Cosa dice un muro all'altro? Ci vediamo all'angolo!", "Perché i pesci vivono nell'acqua salata? Perché il pepe li fa starnutire.", "Cosa fa un pomodoro al mattino? La salsa."],
             season_focus: ["Sport", "San Valentino", "Mezza stagione", "Abiti", "Mare, Estate", "Caldo, Lino", "Saldi", "Rientro", "Autunno", "Halloween", "Sci, Feste", "Regali"],
@@ -864,6 +900,12 @@
             script_ghost: "Cześć, nadal zainteresowana? Idę jutro na pocztę, mogę wysłać twoją paczkę. Daj znać!",
             script_reserve: "Cześć, niestety nie robię rezerwacji. Kto pierwszy ten lepszy! 🌸",
             script_late: "Cześć! Daję znać, że wyślę paczkę jutro rano na pewno. Dzięki za cierpliwość!",
+            script_accept: "Cześć! Chętnie przyjmuję twoją ofertę. ✨ Już pakuję, żeby wysłać jak najszybciej. Dzięki!",
+            script_counter: "Cześć, dzięki! Nie mogę zejść tak nisko, ale mogę zaproponować [CENA]zł. To naprawdę ładna rzecz. Co ty na to? 😊",
+            script_bundle: "Cześć! Przy kilku rzeczach daję -15% na zestaw. Zobacz inne moje rzeczy, żeby zaoszczędzić na wysyłce! 📦",
+            script_thanks: "Wielkie dzięki za zamówienie! 💖 Paczka gotowa, wysyłam jutro. Dodałam dodatkowe zabezpieczenie. Do usłyszenia!",
+            script_review: "Cześć! Mam nadzieję, że wszystko pasuje! Jeśli tak, proszę o potwierdzenie odbioru. Opinia 5⭐ sprawi mi wielką radość. Miłego dnia! ☀️",
+            script_measure: "Cześć, oto wymiary: [WYMIARY]. Krój jest naprawdę super. Daj znać, jeśli potrzebujesz czegoś jeszcze! 📏",
             tips: ["Nie obniżaj ceny o >10%.", "Pakowanie buduje lojalność.", "Zawsze odpisuj.", "Wstawiaj po 3-5 rzeczy.", "Wstawiaj ponownie stare rzeczy.", "Uprzejmość to twoja broń.", "Światło dzienne to podstawa.", "Algorytm lubi regularność.", "Zdjęcia to twoja witryna."],
             jokes: ["Dlaczego woda nie płaci rachunków? Bo cieknie.", "Co robi kucharz w biurze? Miesza w papierach.", "Jaki jest ulubiony owoc żołnierza? Granat.", "Co mówi zero do ósemki? Fajny pasek!", "Dlaczego komputer poszedł do lekarza? Bo złapał wirusa."],
             season_focus: ["Sport", "Walentynki", "Wiosna", "Sukienki", "Plaża, Lato", "Upał, Len", "Wyprzedaż", "Powrót do szkoły", "Jesień", "Halloween", "Narty", "Prezenty"],
@@ -877,6 +919,7 @@
             calc_buy_ph: "Prix d'Achat (€)", calc_sell_ph: "Prix de Vente (€)", calc_fees_ph: "Emballage/Divers (€)",
             scripts_title: "💬 Réponses Magiques", script_select_ph: "Choisir une situation...",
             script_lowball: "Offre ridicule (-50%)", script_rude: "Pas de \"Bonjour\"", script_ghost: "Plus de réponse", script_reserve: "Demande de réservation", script_late: "Retard d'envoi",
+            script_accept_label: "Accepter une offre", script_counter_label: "Contre-offre", script_bundle_label: "Proposer un lot", script_thanks_label: "Merci & Envoi", script_review_label: "Demander un avis", script_measure_label: "Donner les mesures",
             copy_response: "Copier la réponse", packing_title: "📦 Checklist Colis Parfait", reset_list: "Réinitialiser la liste",
             seo_title: "Générateur d'Annonce", seo_subtitle: "Remplis les champs pour créer une annonce optimisée pour l'algorithme Vinted.",
             title_perfect: "Le Titre Parfait", label_preview: "Aperçu", btn_copy: "Copier", desc_magic: "Description Magique", tags_title: "Hashtags & Tendances",
@@ -901,6 +944,7 @@
             calc_buy_ph: "Buy Price (€)", calc_sell_ph: "Sell Price (€)", calc_fees_ph: "Fees/Packing (€)",
             scripts_title: "💬 Magic Replies", script_select_ph: "Choose a scenario...",
             script_lowball: "Lowball offer (-50%)", script_rude: "No \"Hello\"", script_ghost: "Ghosting", script_reserve: "Hold request", script_late: "Shipping delay",
+            script_accept_label: "Accept Offer", script_counter_label: "Counter-Offer", script_bundle_label: "Suggest Bundle", script_thanks_label: "Thanks & Ship", script_review_label: "Ask for Review", script_measure_label: "Give Measurements",
             copy_response: "Copy Reply", packing_title: "📦 Perfect Package Checklist", reset_list: "Reset List",
             seo_title: "Listing Generator", seo_subtitle: "Fill in the fields to create an algorithm-optimized Vinted listing.",
             title_perfect: "The Perfect Title", label_preview: "Preview", btn_copy: "Copy", desc_magic: "Magic Description", tags_title: "Hashtags & Trends",
@@ -923,6 +967,7 @@
             calc_buy_ph: "Einkaufspreis (€)", calc_sell_ph: "Verkaufspreis (€)", calc_fees_ph: "Gebühren/Verpackung (€)",
             scripts_title: "💬 Magische Antworten", script_select_ph: "Szenario wählen...",
             script_lowball: "Unverschämtes Angebot", script_rude: "Kein \"Hallo\"", script_ghost: "Keine Antwort mehr", script_reserve: "Reservierungsanfrage", script_late: "Versandverzögerung",
+            script_accept_label: "Angebot annehmen", script_counter_label: "Gegenangebot", script_bundle_label: "Paket vorschlagen", script_thanks_label: "Danke & Versand", script_review_label: "Bewertung bitten", script_measure_label: "Maße senden",
             copy_response: "Antwort kopieren", packing_title: "📦 Perfektes Paket Checkliste", reset_list: "Liste zurücksetzen",
             seo_title: "Anzeigengenerator", seo_subtitle: "Fülle die Felder aus, um eine für den Vinted-Algorithmus optimierte Anzeige zu erstellen.",
             title_perfect: "Der perfekte Titel", label_preview: "Vorschau", btn_copy: "Kopieren", desc_magic: "Magische Beschreibung", tags_title: "Hashtags & Trends",
@@ -945,6 +990,7 @@
             calc_buy_ph: "Precio Compra (€)", calc_sell_ph: "Precio Venta (€)", calc_fees_ph: "Tasas/Embalaje (€)",
             scripts_title: "💬 Respuestas Mágicas", script_select_ph: "Elige un escenario...",
             script_lowball: "Oferta ridícula (-50%)", script_rude: "Sin \"Hola\"", script_ghost: "Sin respuesta", script_reserve: "Solicitud de reserva", script_late: "Retraso envío",
+            script_accept_label: "Aceptar oferta", script_counter_label: "Contraoferta", script_bundle_label: "Sugerir lote", script_thanks_label: "Gracias y Envío", script_review_label: "Pedir valoración", script_measure_label: "Dar medidas",
             copy_response: "Copiar respuesta", packing_title: "📦 Checklist Paquete Perfecto", reset_list: "Reiniciar lista",
             seo_title: "Generador de Anuncios", seo_subtitle: "Rellena los campos para crear un anuncio optimizado para el algoritmo Vinted.",
             title_perfect: "El Título Perfecto", label_preview: "Vista previa", btn_copy: "Copiar", desc_magic: "Descripción Mágica", tags_title: "Hashtags & Tendencias",
@@ -967,6 +1013,7 @@
             calc_buy_ph: "Prezzo Acquisto (€)", calc_sell_ph: "Prezzo Vendita (€)", calc_fees_ph: "Spese/Imballaggio (€)",
             scripts_title: "💬 Risposte Magiche", script_select_ph: "Scegli uno scenario...",
             script_lowball: "Offerta ridicola (-50%)", script_rude: "Niente \"Ciao\"", script_ghost: "Nessuna risposta", script_reserve: "Richiesta prenotazione", script_late: "Ritardo spedizione",
+            script_accept_label: "Accetta offerta", script_counter_label: "Contro-offerta", script_bundle_label: "Suggerisci set", script_thanks_label: "Grazie & Spedizione", script_review_label: "Chiedi recensione", script_measure_label: "Dare misure",
             copy_response: "Copia Risposta", packing_title: "📦 Checklist Pacco Perfetto", reset_list: "Resetta lista",
             seo_title: "Generatore di Annunci", seo_subtitle: "Compila i campi per creare un annuncio ottimizzato per l'algoritmo Vinted.",
             title_perfect: "Il Titolo Perfetto", label_preview: "Anteprima", btn_copy: "Copia", desc_magic: "Descrizione Magica", tags_title: "Hashtag & Tendenze",
@@ -989,6 +1036,7 @@
             calc_buy_ph: "Cena Zakupu (€)", calc_sell_ph: "Cena Sprzedaży (€)", calc_fees_ph: "Opłaty/Pakowanie (€)",
             scripts_title: "💬 Magiczne Odpowiedzi", script_select_ph: "Wybierz scenariusz...",
             script_lowball: "Śmieszna oferta (-50%)", script_rude: "Brak \"Cześć\"", script_ghost: "Brak odpowiedzi", script_reserve: "Prośba o rezerwację", script_late: "Opóźnienie wysyłki",
+            script_accept_label: "Akceptuj ofertę", script_counter_label: "Kontr-oferta", script_bundle_label: "Zaproponuj zestaw", script_thanks_label: "Dzięki i Wysyłka", script_review_label: "Poproś o opinię", script_measure_label: "Podaj wymiary",
             copy_response: "Kopiuj odpowiedź", packing_title: "📦 Idealna Paczka", reset_list: "Resetuj listę",
             seo_title: "Generator Ogłoszeń", seo_subtitle: "Wypełnij pola, aby stworzyć ogłoszenie zoptymalizowane pod algorytm Vinted.",
             title_perfect: "Idealny Tytuł", label_preview: "Podgląd", btn_copy: "Kopiuj", desc_magic: "Magiczny Opis", tags_title: "Hasztagi i Trendy",
@@ -2119,7 +2167,13 @@
             rude: d.script_rude,
             ghost: d.script_ghost,
             reserve: d.script_reserve,
-            late: d.script_late
+            late: d.script_late,
+            accept: d.script_accept,
+            counter: d.script_counter,
+            bundle: d.script_bundle,
+            thanks: d.script_thanks,
+            review: d.script_review,
+            measure: d.script_measure
         };
 
         if(scriptMap[key]) {
