@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'IMPÉRATRICE - Assistant Vinted Neuro-Inclusif</title>
+    <style>
+        /* --- CSS VARIABLES & THEMES --- */
+        :root {
+            /* Light Mode (Pastel/Feminine) */
+            --bg-color: #FFF0F5; /* Lavender Blush */
+            --surface-color: #FFFFFF;
+            --primary-color: #D8BFD8; /* Thistle */
+            --primary-dark: #BA55D3; /* Medium Orchid */
+            --secondary-color: #FFB7B2; /* Pastel Red/Pink */
+            --accent-color: #E0BBE4; /* Lavender */
+            --text-main: #4A4A4A;
+            --text-muted: #888888;
+            --success-color: #B5EAD7; /* Pastel Green */
+            --warning-color: #FFDAC1; /* Pastel Orange */
+            --border-radius: 20px;
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --transition-speed: 0.3s;
+        }
+
+        [data-theme="dark"] {
+            /* Dark Mode (Sensory Friendly - Slate/Mauve) */
+            --bg-color: #2D2D3A; /* Dark Slate */
+            --surface-color: #383848;
+            --primary-color: #6A5ACD; /* Slate Blue */
+            --primary-dark: #9370DB; /* Medium Purple */
+            --secondary-color: #CD5C5C; /* Indian Red (muted) */
+            --accent-color: #7B68EE; /* Medium Slate Blue */
+            --text-main: #E0E0E0;
+            --text-muted: #A0A0A0;
+            --success-color: #467860; /* Muted Green */
+            --warning-color: #9C6848; /* Muted Orange */
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- GLOBAL STYLES --- */
+        * {
+            box-sizing: border-box;
+            transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        /* --- LAYOUT & CONTAINERS --- */
+        .app-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 100px; /* Space for bottom nav if needed, or just breathing room */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .logo-area h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo-area p {
+            margin: 5px 0 0 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* --- DARK MODE TOGGLE --- */
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--bg-color);
+        }
+
+        .toggle-icon {
+            transition: transform 0.5s ease;
+        }
+
+        /* --- DASHBOARD GRID --- */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- NAVIGATION TABS --- */
+        .nav-tabs {
+            display: flex;
+            justify-content: space-around;
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius);
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-soft);
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            background: none;
+            padding: 10px 20px;
+            border-radius: 15px;
+            color: var(--text-muted);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .nav-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .nav-tab:hover:not(.active) {
+            background-color: var(--bg-color);
+            color: var(--primary-dark);
+        }
+
+        /* --- CONTENT SECTIONS --- */
+        .section-view {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- UTILITIES --- */
+        .icon {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* --- FORM STYLES --- */
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--accent-color);
+            border-radius: 10px;
+            background: var(--bg-color); /* Slightly distinct from surface */
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary-dark);
+            box-shadow: 0 0 0 2px var(--accent-color);
+        }
+
+        .tag-btn {
+            padding: 6px 12px;
+            border: 1px solid var(--primary-color);
+            border-radius: 20px;
+            background: var(--surface-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tag-btn:hover {
+            border-color: var(--primary-dark);
+            color: var(--primary-dark);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <header>
+        <div class="logo-area">
+            <h1>L'IMPÉRATRICE</h1>
+            <p>Ton assistante personnelle de vente</p>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">
+            <!-- Icon will be injected by JS -->
+            <svg class="icon toggle-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="nav-tabs">
+        <button class="nav-tab active" onclick="switchTab('dashboard')">
+            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            Accueil
+        </button>
+        <button class="nav-tab" onclick="switchTab('studio')">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+            Studio Photo
+        </button>
+        <button class="nav-tab" onclick="switchTab('seo')">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+            Générateur
+        </button>
+        <button class="nav-tab" onclick="switchTab('relax')">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            Détente
+        </button>
+    </nav>
+
+    <!-- SECTIONS -->
+    <main>
+        <!-- DASHBOARD VIEW -->
+        <section id="dashboard" class="section-view active">
+            <div class="dashboard-grid">
+                <!-- Spoons Card -->
+                <div class="card">
+                    <h3>
+                        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        Mes Cuillères
+                    </h3>
+                    <div id="spoon-tracker-container">
+                        <!-- Spoons will be injected here -->
+                        <p>Chargement de l'énergie...</p>
+                    </div>
+                </div>
+
+                <!-- Chrono Card -->
+                <div class="card">
+                    <h3>
+                        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        Chronobiologie
+                    </h3>
+                    <div id="chrono-widget">
+                        <!-- Time analysis here -->
+                        <p>Analyse temporelle...</p>
+                    </div>
+                </div>
+
+                <!-- Daily Motivation -->
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3>
+                        <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        Conseil du Jour
+                    </h3>
+                    <div id="daily-tip-container">
+                        <p>Chargement du conseil...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STUDIO PHOTO VIEW -->
+        <section id="studio" class="section-view">
+            <div class="card">
+                <h2>Studio Virtuel</h2>
+                <p>Sélectionne une catégorie pour commencer ton shooting guidé.</p>
+                <div id="studio-app-root">
+                    <!-- The Vanilla JS port of the React App will go here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO GENERATOR VIEW -->
+        <section id="seo" class="section-view">
+            <div class="card">
+                <h2 style="color: var(--primary-dark);">Générateur d'Annonce</h2>
+                <p>Remplis les champs pour créer une annonce optimisée pour l'algorithme Vinted.</p>
+
+                <div class="generator-container" style="display: grid; gap: 30px;">
+                    <!-- Title Form -->
+                    <div>
+                        <h3 style="font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                            Le Titre Parfait
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px;">
+                            <input type="text" id="gen-brand" placeholder="Marque (ex: Zara)" oninput="updateSeoPreview()">
+                            <input type="text" id="gen-type" placeholder="Type (ex: Robe Midi)" oninput="updateSeoPreview()">
+                            <input type="text" id="gen-color" placeholder="Couleur (ex: Vert)" oninput="updateSeoPreview()">
+                            <input type="text" id="gen-material" placeholder="Matière (ex: Satin)" oninput="updateSeoPreview()">
+                            <select id="gen-condition" oninput="updateSeoPreview()">
+                                <option value="">-- État --</option>
+                                <option value="Neuf avec étiquette">Neuf avec étiquette</option>
+                                <option value="Très bon état">Très bon état</option>
+                                <option value="Bon état">Bon état</option>
+                                <option value="Satisfaisant">Satisfaisant</option>
+                            </select>
+                            <input type="text" id="gen-vibe" placeholder="Style (ex: Y2K, Bohème)" oninput="updateSeoPreview()">
+                        </div>
+
+                        <div style="margin-top: 15px; background: var(--bg-color); padding: 15px; border-radius: 10px; border: 1px dashed var(--primary-dark); position: relative;">
+                            <label style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Aperçu du Titre</label>
+                            <p id="title-preview" style="font-weight: bold; font-size: 1.1rem; margin: 5px 0; color: var(--text-main); min-height: 1.5rem;">...</p>
+                            <button onclick="copyToClipboard('title-preview')" style="position: absolute; right: 10px; top: 10px; font-size: 0.8rem; color: var(--primary-dark); background: none; display: flex; align-items: center; gap: 5px;">
+                                <svg class="icon" style="width:14px; height:14px;" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copier
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Description Form -->
+                    <div>
+                        <h3 style="font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                            Description Magique
+                        </h3>
+                        <textarea id="gen-desc-details" placeholder="Détails supplémentaires (mesures, raison de la vente, défauts éventuels...)" style="width: 100%; height: 100px; padding: 10px; border-radius: 10px; border: 1px solid var(--accent-color);" oninput="updateSeoPreview()"></textarea>
+
+                        <div style="margin-top: 15px;">
+                            <label style="font-size: 0.9rem; font-weight: bold; color: var(--text-muted);">Hashtags Tendances (Max 5)</label>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                                <button class="tag-btn" onclick="toggleTag(this)">#y2k</button>
+                                <button class="tag-btn" onclick="toggleTag(this)">#vintage</button>
+                                <button class="tag-btn" onclick="toggleTag(this)">#oldmoney</button>
+                                <button class="tag-btn" onclick="toggleTag(this)">#coquette</button>
+                                <button class="tag-btn" onclick="toggleTag(this)">#gorpcore</button>
+                                <button class="tag-btn" onclick="toggleTag(this)">#office</button>
+                                <button class="tag-btn" onclick="toggleTag(this)">#streetwear</button>
+                                <button class="tag-btn" onclick="toggleTag(this)">#boheme</button>
+                                <button class="tag-btn" onclick="toggleTag(this)">#casual</button>
+                                <button class="tag-btn" onclick="toggleTag(this)">#chic</button>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 15px; background: var(--bg-color); padding: 15px; border-radius: 10px; border: 1px dashed var(--primary-dark); position: relative;">
+                             <label style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Aperçu Description</label>
+                             <div id="desc-preview" style="white-space: pre-wrap; margin: 5px 0; font-size: 0.9rem; color: var(--text-main);">...</div>
+                             <button onclick="copyToClipboard('desc-preview')" style="position: absolute; right: 10px; top: 10px; font-size: 0.8rem; color: var(--primary-dark); background: none; display: flex; align-items: center; gap: 5px;">
+                                <svg class="icon" style="width:14px; height:14px;" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copier
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RELAX VIEW -->
+        <section id="relax" class="section-view">
+            <div class="card">
+                <h2 style="color: var(--primary-dark);">Zone de Décompression</h2>
+                <p>Prends un moment pour respirer et recharger tes cuillères.</p>
+
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 20px;">
+
+                    <!-- Breathing Circle -->
+                    <div style="text-align: center;">
+                        <h3 style="color: var(--primary-dark); margin-bottom: 30px;">Cohérence Cardiaque</h3>
+                        <div class="breathing-circle">
+                            <span id="breath-text" style="position: relative; z-index:2; color: white; font-weight: bold; font-size: 1.2rem;">Inspire</span>
+                        </div>
+                        <p style="margin-top: 30px; color: var(--text-muted); font-size: 0.9rem;">Suit le rythme pour calmer ton anxiété.</p>
+                    </div>
+
+                    <!-- Joke Section -->
+                    <div style="text-align: center; width: 100%; max-width: 400px; background: var(--bg-color); padding: 20px; border-radius: 20px; border: 1px dashed var(--secondary-color);">
+                        <h3 style="color: var(--secondary-color); margin-top: 0;">Minute Sourire</h3>
+                        <p id="joke-text" style="min-height: 60px; display: flex; align-items: center; justify-content: center; font-style: italic; color: var(--text-main);">Clique pour une blague !</p>
+                        <button onclick="showJoke()" style="background: var(--secondary-color); color: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                            Une autre ! 🎭
+                        </button>
+                    </div>
+
+                </div>
+
+                <style>
+                @keyframes breathe {
+                    0% { transform: scale(1); background-color: var(--primary-color); opacity: 0.8; }
+                    50% { transform: scale(1.6); background-color: var(--primary-dark); opacity: 1; }
+                    100% { transform: scale(1); background-color: var(--primary-color); opacity: 0.8; }
+                }
+
+                .breathing-circle {
+                    width: 120px;
+                    height: 120px;
+                    background-color: var(--primary-color);
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    animation: breathe 8s infinite ease-in-out;
+                    margin: 0 auto;
+                    box-shadow: 0 0 30px var(--accent-color);
+                }
+                </style>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: 40px;">
+            L'IMPÉRATRICE © 2025 - Conçu pour réussir avec douceur.
+        </p>
+    </footer>
+</div>
+
+<script>
+    /* --- STATE MANAGEMENT & UTILS --- */
+
+    // Theme Management
+    const toggleBtn = document.getElementById('themeToggle');
+    const toggleIcon = toggleBtn.querySelector('.toggle-icon');
+
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateToggleIcon(savedTheme);
+    }
+
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateToggleIcon(newTheme);
+    }
+
+    function updateToggleIcon(theme) {
+        if (theme === 'dark') {
+            // Moon icon
+            toggleIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+        } else {
+            // Sun icon
+            toggleIcon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+        }
+        toggleIcon.style.transform = 'rotate(360deg)';
+        setTimeout(() => toggleIcon.style.transform = 'rotate(0deg)', 500);
+    }
+
+    toggleBtn.addEventListener('click', toggleTheme);
+
+    // Tab Management
+    window.switchTab = function(tabId) {
+        // Hide all sections
+        document.querySelectorAll('.section-view').forEach(el => el.classList.remove('active'));
+        // Deactivate all buttons
+        document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+
+        // Show target
+        document.getElementById(tabId).classList.add('active');
+        // Activate button (rough approximation logic for now)
+        const buttons = document.querySelectorAll('.nav-tab');
+        if(tabId === 'dashboard') buttons[0].classList.add('active');
+        if(tabId === 'studio') buttons[1].classList.add('active');
+        if(tabId === 'seo') buttons[2].classList.add('active');
+        if(tabId === 'relax') buttons[3].classList.add('active');
+    };
+
+    // Spoon Tracker Logic
+    const SPOON_MAX = 12;
+    window.currentSpoons = 12; // Global for access if needed
+
+    function initSpoons() {
+        const saved = localStorage.getItem('spoons');
+        const savedDate = localStorage.getItem('spoons_date');
+        const today = new Date().toDateString();
+
+        // Reset if new day
+        if (savedDate !== today) {
+            window.currentSpoons = SPOON_MAX;
+            localStorage.setItem('spoons_date', today);
+            localStorage.setItem('spoons', SPOON_MAX);
+        } else if (saved !== null) {
+            window.currentSpoons = parseInt(saved, 10);
+        }
+        renderSpoons();
+    }
+
+    window.updateSpoonCount = function(newCount) {
+        window.currentSpoons = newCount;
+        localStorage.setItem('spoons', window.currentSpoons);
+        localStorage.setItem('spoons_date', new Date().toDateString()); // Update date to avoid reset on refresh same day
+        renderSpoons();
+    }
+
+    function renderSpoons() {
+        const container = document.getElementById('spoon-tracker-container');
+        if(!container) return;
+
+        let html = '<div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 10px;">';
+        for (let i = 1; i <= SPOON_MAX; i++) {
+            const isActive = i <= window.currentSpoons;
+            const color = isActive ? 'var(--primary-dark)' : 'var(--text-muted)';
+            const fill = isActive ? 'currentColor' : 'none';
+            const opacity = isActive ? '1' : '0.3';
+
+            // Clicking the current max spoon toggles it off (reduces count), clicking another sets count
+            // Logic: if I click the 5th spoon and I have 5, it goes to 4. If I have 3 and click 5, it goes to 5.
+            const targetCount = (isActive && i === window.currentSpoons) ? i - 1 : i;
+
+            html += `<button onclick="updateSpoonCount(${targetCount})"
+                             style="background: none; border: none; padding: 5px; cursor: pointer; color: ${color}; opacity: ${opacity}; transition: all 0.2s;"
+                             aria-label="${i} cuillères">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="${fill}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-4 4 4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z"></path>
+                            <path d="M12 12v10"></path>
+                        </svg>
+                     </button>`;
+        }
+        html += '</div>';
+        html += `<p style="text-align: center; font-weight: bold; color: var(--primary-dark); margin: 5px 0;">
+                    ${window.currentSpoons} / ${SPOON_MAX} Cuillères
+                 </p>`;
+
+        let advice = "";
+        if(window.currentSpoons > 8) advice = "⚡ Tu as de l'énergie ! Attaque les photos ou les mises en ligne.";
+        else if(window.currentSpoons > 4) advice = "✨ Énergie modérée. Fais des colis ou réponds aux messages.";
+        else advice = "🌙 Batterie faible. Repose-toi ou fais juste de la veille.";
+
+        html += `<p style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">${advice}</p>`;
+
+        container.innerHTML = html;
+    }
+
+    // --- PHOTO STUDIO LOGIC ---
+
+    const photoStudioData = {
+        vetements: {
+            name: "Vêtements",
+            icon: `<svg class="icon" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path></svg>`,
+            steps: [
+                {
+                    id: 'cover',
+                    title: "La Photo de Couverture (Le Hook)",
+                    description: "L'article entier, de face, sur fond neutre (mur blanc ou parquet).",
+                    algoSecret: "L'algorithme privilégie les photos lumineuses et verticales (format portrait). Une photo sur cintre ou mannequin a un CTR (taux de clic) 30% supérieur à un vêtement froissé au sol.",
+                    icon: "camera"
+                },
+                {
+                    id: 'back',
+                    title: "Le Dos",
+                    description: "Photo complète de l'arrière du vêtement.",
+                    algoSecret: "Réduit le taux de retour. Les acheteurs méfiants cherchent les taches ou trous souvent cachés au dos.",
+                    icon: "refresh"
+                },
+                {
+                    id: 'label_brand',
+                    title: "Étiquette de Marque (Col)",
+                    description: "Gros plan net sur la marque et la taille au col.",
+                    algoSecret: "CRUCIAL : L'IA de Vinted lit le texte sur les photos. Une photo nette de l'étiquette confirme la marque et booste le référencement SEO de ton annonce.",
+                    icon: "eye"
+                },
+                {
+                    id: 'label_comp',
+                    title: "Étiquette de Composition",
+                    description: "L'étiquette intérieure indiquant la matière (coton, soie, etc.) et les instructions de lavage.",
+                    algoSecret: "Les filtres 'Matière' sont très utilisés. Prouver que c'est du 100% Soie ou Laine justifie un prix plus élevé.",
+                    icon: "info"
+                },
+                {
+                    id: 'details',
+                    title: "Zoom Texture & Détails",
+                    description: "Gros plan sur le tissu, les boutons, les broderies ou le logo.",
+                    algoSecret: "L'engagement augmente quand l'utilisateur scrolle les photos. Montrer la texture donne une impression 'tactile' qui déclenche l'achat.",
+                    icon: "trending"
+                },
+                {
+                    id: 'defects',
+                    title: "Les Défauts (Transparence)",
+                    description: "Photo zoomée sur le moindre défaut (fil tiré, tache, bouloche) avec ton doigt pointé dessus.",
+                    algoSecret: "Paradoxe de l'honnêteté : Montrer un défaut augmente la confiance. Un acheteur qui voit le défaut n'ouvrira pas de litige (Vinted te donnera raison).",
+                    icon: "alert"
+                }
+            ]
+        },
+        chaussures: {
+            name: "Chaussures & Sneakers",
+            icon: `<svg class="icon" viewBox="0 0 24 24"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 11 3.8 13 5c2.4 1.44 5 1.5 5 5v6H4Z"></path><path d="M20 16v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1"></path></svg>`, // Rough shoe approximation or generic
+            steps: [
+                {
+                    id: 'profile',
+                    title: "Profil Extérieur (La Star)",
+                    description: "Une seule chaussure ou la paire, vue de côté (profil extérieur), posée à plat.",
+                    algoSecret: "C'est l'angle standard des sites e-commerce (Nike, Zalando). Le cerveau humain reconnait la silhouette instantanément.",
+                    icon: "camera"
+                },
+                {
+                    id: 'top',
+                    title: "Vue de Dessus (Toebox)",
+                    description: "Vue plongeante sur le dessus des chaussures pour voir les plis d'usure.",
+                    algoSecret: "C'est là que l'usure se voit le plus (plis sur le cuir). Être transparent ici évite les négociations agressives.",
+                    icon: "eye"
+                },
+                {
+                    id: 'soles',
+                    title: "Les Semelles (Preuve d'état)",
+                    description: "Photo claire du dessous des chaussures.",
+                    algoSecret: "L'état 'Très bon état' vs 'Bon état' se joue ici. Des semelles propres = vente 2x plus rapide.",
+                    icon: "refresh"
+                },
+                {
+                    id: 'size_tag',
+                    title: "L'Étiquette de Taille",
+                    description: "L'étiquette intérieure (souvent sur la languette ou le côté).",
+                    algoSecret: "Indispensable pour les sneakers (Nike/Adidas). L'acheteur vérifie le code SKU sur Google pour s'assurer que ce n'est pas une contrefaçon.",
+                    icon: "ruler"
+                },
+                {
+                    id: 'heels',
+                    title: "Les Talons / L'Arrière",
+                    description: "Vue arrière des deux chaussures côte à côte.",
+                    algoSecret: "Montre si la semelle est usée de travers (pronateur/supinateur).",
+                    icon: "trending"
+                }
+            ]
+        },
+        sacs: {
+            name: "Sacs & Maroquinerie",
+            icon: `<svg class="icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>`,
+            steps: [
+                {
+                    id: 'front_stuffed',
+                    title: "De Face (Rembourré)",
+                    description: "Le sac de face. ASTUCE : Rembourre-le avec du papier/tissu pour qu'il ait une belle forme.",
+                    algoSecret: "Un sac affaissé semble vieux. Un sac rempli semble neuf. La valeur perçue augmente de 20% avec du rembourrage.",
+                    icon: "camera"
+                },
+                {
+                    id: 'corners',
+                    title: "Les 4 Coins (Le Crash Test)",
+                    description: "Gros plan sur les coins inférieurs du sac.",
+                    algoSecret: "C'est la première chose que les experts regardent. C'est là que le cuir s'abîme en premier.",
+                    icon: "alert"
+                },
+                {
+                    id: 'interior',
+                    title: "L'Intérieur & Code",
+                    description: "Photo de la doublure intérieure et du numéro de série/étiquette cuir.",
+                    algoSecret: "Preuve d'authenticité ultime. Sans ça, Vinted peut supprimer ton annonce pour suspicion de contrefaçon.",
+                    icon: "eye"
+                },
+                {
+                    id: 'hardware',
+                    title: "Zoom Métallerie",
+                    description: "Gros plan sur les zips, le logo en métal, les boucles.",
+                    algoSecret: "Les rayures sur le métal font baisser le prix. Les montrer honnêtement rassure.",
+                    icon: "trending"
+                },
+                {
+                    id: 'scale',
+                    title: "Mise à l'échelle (Porté)",
+                    description: "Le sac porté sur l'épaule ou à côté d'un objet connu (téléphone).",
+                    algoSecret: "Évite les retours 'Je pensais qu'il était plus grand'.",
+                    icon: "ruler"
+                }
+            ]
+        }
+    };
+
+    // Helper to get SVG string for step icons
+    function getStepIcon(name) {
+        const icons = {
+            camera: '<svg class="icon" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>',
+            refresh: '<svg class="icon" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>',
+            eye: '<svg class="icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>',
+            info: '<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>',
+            trending: '<svg class="icon" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>',
+            alert: '<svg class="icon" viewBox="0 0 24 24" style="color:var(--secondary-color);"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>',
+            ruler: '<svg class="icon" viewBox="0 0 24 24"><path d="M2 12h20"></path></svg>', // simplified
+            check: '<svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>'
+        };
+        return icons[name] || icons.camera;
+    }
+
+    let studioState = {
+        selectedCategory: null,
+        currentStep: 0,
+        completedSteps: []
+    };
+
+    window.selectCategory = function(catKey) {
+        studioState.selectedCategory = catKey;
+        studioState.currentStep = 0;
+        studioState.completedSteps = [];
+        renderStudio();
+    }
+
+    window.resetStudio = function() {
+        studioState.selectedCategory = null;
+        studioState.currentStep = 0;
+        studioState.completedSteps = [];
+        renderStudio();
+    }
+
+    window.completeStep = function() {
+        if (!studioState.completedSteps.includes(studioState.currentStep)) {
+            studioState.completedSteps.push(studioState.currentStep);
+
+            // Give a spoon if completed a category? Or just simple dopamine logic
+            // We could auto-increment spoons but maybe that's too much
+        }
+
+        const catData = photoStudioData[studioState.selectedCategory];
+        if (studioState.currentStep < catData.steps.length - 1) {
+            setTimeout(() => {
+                studioState.currentStep++;
+                renderStudio();
+            }, 500);
+        }
+        renderStudio(); // Update UI immediately to show checkmark
+    }
+
+    window.goToStep = function(index) {
+        studioState.currentStep = index;
+        renderStudio();
+    }
+
+    function renderStudio() {
+        const root = document.getElementById('studio-app-root');
+        if (!root) return;
+
+        // VIEW 1: SELECTION
+        if (!studioState.selectedCategory) {
+            let html = `<div style="display: grid; gap: 15px; margin-top: 20px;">`;
+            for (const [key, data] of Object.entries(photoStudioData)) {
+                html += `<button onclick="selectCategory('${key}')"
+                                style="display: flex; align-items: center; padding: 20px; background: var(--bg-color); border: 1px solid var(--accent-color); border-radius: var(--border-radius); text-align: left; gap: 15px; font-size: 1.1rem; color: var(--text-main);">
+                            <div style="color: var(--primary-dark);">${data.icon}</div>
+                            <span style="font-weight: 600;">${data.name}</span>
+                            <div style="margin-left: auto; opacity: 0.5;">➜</div>
+                         </button>`;
+            }
+            html += `</div>`;
+
+            // Tip Box
+            html += `<div style="margin-top: 30px; background-color: rgba(66, 153, 225, 0.1); padding: 15px; border-radius: var(--border-radius); border-left: 4px solid #4299e1;">
+                        <h4 style="margin: 0 0 5px 0; color: #2b6cb0; display: flex; align-items: center; gap: 10px;">
+                            ${getStepIcon('info')} Règle d'Or #1 : La Lumière
+                        </h4>
+                        <p style="margin: 0; font-size: 0.9rem; color: #2c5282;">
+                            Ne prends jamais de photos le soir avec une lumière jaune. Mets-toi face à une fenêtre, lumière du jour, sans soleil direct.
+                        </p>
+                     </div>`;
+
+            root.innerHTML = html;
+            return;
+        }
+
+        const catData = photoStudioData[studioState.selectedCategory];
+        const totalSteps = catData.steps.length;
+        const progress = Math.round((studioState.completedSteps.length / totalSteps) * 100);
+        const isFinished = studioState.completedSteps.length === totalSteps;
+
+        // VIEW 2: SUCCESS
+        if (isFinished) {
+            root.innerHTML = `
+                <div style="text-align: center; padding: 40px 20px;">
+                    <div style="background: var(--success-color); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: white;">
+                        <svg class="icon" style="width: 40px; height: 40px;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <h2 style="color: var(--primary-dark);">Photos Parfaites !</h2>
+                    <p>Tu as toutes les photos nécessaires pour maximiser ta vente.</p>
+
+                    <div style="background: var(--bg-color); padding: 20px; border-radius: var(--border-radius); text-align: left; margin: 20px 0;">
+                        <h4 style="margin-top: 0;">Derniers conseils SEO :</h4>
+                        <ul style="padding-left: 20px; color: var(--text-main);">
+                            <li>Utilise <b>tous</b> les mots clés de l'étiquette dans ta description.</li>
+                            <li>Prix psychologique : <b>9.90€</b> vend mieux que 10.00€.</li>
+                            <li>Poste ton annonce le <b>Dimanche soir</b> ou le <b>Mardi soir</b>.</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="resetStudio()" style="background: var(--primary-dark); color: white; padding: 15px 30px; border-radius: 30px; font-weight: bold; width: 100%;">
+                        Nouvelle annonce
+                    </button>
+                </div>
+            `;
+            return;
+        }
+
+        // VIEW 3: STEPS
+        const currentStepData = catData.steps[studioState.currentStep];
+        const isCurrentStepDone = studioState.completedSteps.includes(studioState.currentStep);
+
+        let html = `
+            <!-- Header with Back & Progress -->
+            <div style="margin-bottom: 20px;">
+                <button onclick="resetStudio()" style="background: none; border: none; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">← Retour au choix</button>
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 5px;">
+                    <span style="font-weight: bold; color: var(--primary-dark);">${catData.name}</span>
+                    <span style="color: var(--primary-color); font-weight: bold;">${progress}%</span>
+                </div>
+                <div style="background: var(--bg-color); height: 8px; border-radius: 4px; overflow: hidden;">
+                    <div style="background: var(--primary-dark); height: 100%; width: ${progress}%; transition: width 0.3s;"></div>
+                </div>
+            </div>
+
+            <!-- Steps Nav Bubbles -->
+            <div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 20px;">
+                ${catData.steps.map((s, idx) => {
+                    const isDone = studioState.completedSteps.includes(idx);
+                    const isCurrent = idx === studioState.currentStep;
+                    let bg = 'var(--bg-color)';
+                    let color = 'var(--text-muted)';
+                    let border = '1px solid transparent';
+
+                    if (isCurrent) {
+                        bg = 'var(--primary-dark)';
+                        color = 'white';
+                    } else if (isDone) {
+                        bg = 'var(--success-color)';
+                        color = '#1c4a33'; // darker green text
+                    }
+
+                    return `<button onclick="goToStep(${idx})"
+                                    style="min-width: 32px; height: 32px; border-radius: 50%; background: ${bg}; color: ${color}; border: ${border}; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">
+                                ${isDone ? getStepIcon('check') : idx + 1}
+                            </button>`;
+                }).join('')}
+            </div>
+
+            <!-- Main Step Card -->
+            <div style="display: flex; flex-col; height: 100%;">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="background: var(--bg-color); width: 80px; height: 80px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--primary-dark);">
+                        ${getStepIcon(currentStepData.icon)}
+                    </div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">${currentStepData.title}</h3>
+                    <p style="color: var(--text-main); font-size: 1.1rem;">${currentStepData.description}</p>
+                </div>
+
+                <!-- Secret Box -->
+                <div style="background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%); border: 1px solid #fed7d7; border-radius: 15px; padding: 15px; margin-bottom: 30px; position: relative; overflow: hidden;">
+                     <div style="display: flex; gap: 15px; align-items: start;">
+                        <div style="background: #fff; padding: 8px; border-radius: 10px; color: #e53e3e;">${getStepIcon('trending')}</div>
+                        <div>
+                            <h4 style="margin: 0 0 5px 0; color: #c53030; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Secret de l'Algo</h4>
+                            <p style="margin: 0; font-size: 0.9rem; color: #742a2a;">${currentStepData.algoSecret}</p>
+                        </div>
+                     </div>
+                </div>
+
+                <!-- Action Button -->
+                <button onclick="completeStep()"
+                        style="width: 100%; padding: 20px; border-radius: 15px; font-size: 1.1rem; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.2s;
+                               background: ${isCurrentStepDone ? 'var(--bg-color)' : 'var(--primary-dark)'};
+                               color: ${isCurrentStepDone ? 'var(--text-muted)' : 'white'};
+                               box-shadow: ${isCurrentStepDone ? 'none' : '0 10px 20px -10px var(--primary-dark)'};">
+                    ${isCurrentStepDone ? getStepIcon('check') + ' Photo Validée' : getStepIcon('camera') + " J'ai pris cette photo"}
+                </button>
+
+                ${isCurrentStepDone && studioState.currentStep < totalSteps - 1 ?
+                    `<button onclick="goToStep(${studioState.currentStep + 1})" style="width: 100%; margin-top: 10px; color: var(--primary-dark); background: none;">Passer à la suivante →</button>`
+                    : ''}
+            </div>
+        `;
+
+        root.innerHTML = html;
+    }
+
+    // --- SEO GENERATOR LOGIC ---
+    let selectedTags = [];
+
+    window.updateSeoPreview = function() {
+        const brand = document.getElementById('gen-brand').value;
+        const type = document.getElementById('gen-type').value;
+        const color = document.getElementById('gen-color').value;
+        const material = document.getElementById('gen-material').value;
+        const condition = document.getElementById('gen-condition').value;
+        const vibe = document.getElementById('gen-vibe').value;
+
+        // Title Formula: Brand + Type + Material/Color + Vibe + Condition
+        // We filter Boolean to remove empty strings
+        const titleParts = [brand, type, material, color, vibe, condition].filter(Boolean);
+        const title = titleParts.join(' ');
+
+        document.getElementById('title-preview').innerText = title || "...";
+
+        // Description Formula
+        const details = document.getElementById('gen-desc-details').value;
+
+        // Construct description with emojis and structure
+        let desc = "";
+        if(type || brand) desc += `Bonjour ! 🌸\n\nJe vends ce magnifique ${type || 'article'} de la marque ${brand || '...'}.\n\n`;
+        else desc += "Bonjour ! 🌸\n\n";
+
+        if(condition) desc += `✨ État : ${condition}\n`;
+        if(color) desc += `🎨 Couleur : ${color}\n`;
+        if(material) desc += `🧵 Matière : ${material}\n`;
+        if(vibe) desc += `👗 Style : ${vibe}\n`;
+
+        if(details) desc += `\n📝 Détails : ${details}\n`;
+
+        desc += `\n📦 Envoi rapide et soigné (sous 24-48h). N'hésitez pas si vous avez des questions ou pour faire un lot !\n\n`;
+
+        if(selectedTags.length > 0) {
+            desc += selectedTags.join(' ');
+        }
+
+        document.getElementById('desc-preview').innerText = desc;
+    }
+
+    window.toggleTag = function(btn) {
+        const tag = btn.innerText;
+        if(selectedTags.includes(tag)) {
+            selectedTags = selectedTags.filter(t => t !== tag);
+            btn.style.background = 'var(--surface-color)';
+            btn.style.color = 'var(--text-muted)';
+            btn.style.borderColor = 'var(--primary-color)';
+        } else {
+            if(selectedTags.length >= 5) return; // Limit
+            selectedTags.push(tag);
+            btn.style.background = 'var(--primary-dark)';
+            btn.style.color = 'white';
+            btn.style.borderColor = 'var(--primary-dark)';
+        }
+        updateSeoPreview();
+    }
+
+    window.copyToClipboard = function(elementId) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            // Visual feedback could be a toast, but alert is robust
+            // Let's change the button text temporarily
+            const btn = document.querySelector(`button[onclick="copyToClipboard('${elementId}')"]`);
+            const original = btn.innerHTML;
+            btn.innerHTML = "Copié !";
+            setTimeout(() => btn.innerHTML = original, 2000);
+        });
+    }
+
+    // --- DASHBOARD WIDGETS ---
+
+    function updateChronoWidget() {
+        const container = document.getElementById('chrono-widget');
+        if(!container) return;
+
+        const now = new Date();
+        const day = now.getDay(); // 0 = Sun, 1 = Mon...
+        const hour = now.getHours();
+
+        // Define Prime Slots [Start, End]
+        const slots = {
+            0: [[10, 12], [18, 21]], // Sun
+            1: [[7, 9], [19, 21]],   // Mon
+            2: [[19, 21]],           // Tue
+            3: [[12, 14], [18, 20]], // Wed
+            4: [[19, 21]],           // Thu
+            5: [[13, 16], [20, 23]], // Fri
+            6: [[9, 11], [17, 19]]   // Sat
+        };
+
+        const dayNames = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+        const todaySlots = slots[day] || [];
+
+        let status = "neutral"; // neutral, good, prime
+        let message = "Moment calme. Prépare tes brouillons.";
+
+        // Check if current time is in a slot
+        for(let slot of todaySlots) {
+            if(hour >= slot[0] && hour < slot[1]) {
+                status = "prime";
+                message = "🔥 C'EST LE MOMENT ! Poste maintenant !";
+                break;
+            }
+        }
+
+        // If not prime, check if approaching (within 2 hours)
+        if(status === "neutral") {
+            for(let slot of todaySlots) {
+                 if(hour >= slot[0] - 2 && hour < slot[0]) {
+                     status = "good";
+                     message = `Bientôt le pic (${slot[0]}h). Finis tes photos !`;
+                     break;
+                 }
+            }
+        }
+
+        // Visuals
+        let color = "var(--text-muted)";
+        if(status === "prime") color = "var(--secondary-color)"; // Red/Hot
+        if(status === "good") color = "var(--primary-dark)"; // Purple
+
+        let html = `<div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: bold; color: ${color};">${now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                        <div style="font-weight: bold; margin-bottom: 5px;">${dayNames[day]}</div>
+                        <div style="color: ${color}; font-weight: 600;">${message}</div>
+                    </div>`;
+
+        // Seasonality
+        const month = now.getMonth(); // 0 = Jan
+        let seasonTip = "";
+        if(month >= 7 && month <= 8) seasonTip = "🍂 Prépare les manteaux et la rentrée.";
+        else if(month >= 10) seasonTip = "❄️ Fêtes & Hiver : Robes de soirée et cadeaux.";
+        else if(month >= 0 && month <= 1) seasonTip = "💪 Résolutions : Sport & Détox placard.";
+        else if(month >= 3 && month <= 5) seasonTip = "☀️ Été : Maillots & Robes légères.";
+        else seasonTip = "👗 Mi-saison : Vestes légères et jeans.";
+
+        html += `<div style="margin-top: 15px; font-size: 0.85rem; background: var(--bg-color); padding: 8px; border-radius: 8px;">
+                    💡 Conseil Saison : ${seasonTip}
+                 </div>`;
+
+        container.innerHTML = html;
+    }
+
+    function updateDailyTip() {
+        const tips = [
+            "Ne baisse jamais le prix de plus de 10% d'un coup.",
+            "Un emballage soigné (papier de soie) fidélise à 100%.",
+            "Réponds toujours, même pour dire non.",
+            "Poste tes articles par grappes de 3 ou 5 pour créer du trafic.",
+            "Reliste tes articles invendus depuis 3 semaines.",
+            "La politesse est ton arme fatale contre les négiciateurs.",
+            "Utilise la lumière naturelle, toujours.",
+            "L'algo adore la régularité : 1 article par jour vaut mieux que 7 le dimanche.",
+            "Tes photos sont ta vitrine, soigne le fond."
+        ];
+
+        const container = document.getElementById('daily-tip-container');
+        if(!container) return;
+        // Pick based on day of month to be stable but changing
+        const day = new Date().getDate();
+        const tip = tips[day % tips.length];
+
+        container.innerHTML = `<p style="font-style: italic; color: var(--text-main); margin: 0; font-size: 1.1rem;">"${tip}"</p>`;
+    }
+
+    // --- RELAXATION LOGIC ---
+    const jokes = [
+        "Pourquoi les plongeurs plongent-ils toujours en arrière et jamais en avant ? Parce que sinon ils tombent dans le bateau.",
+        "Que fait une fraise sur un cheval ? Tagada Tagada !",
+        "C'est l'histoire d'un têtard, il croyait qu'il était tôt mais il était tard.",
+        "Quel est le comble pour un électricien ? De ne pas être au courant.",
+        "Pourquoi les livres ont-ils toujours chaud ? Parce qu'ils ont une couverture.",
+        "Que dit une imprimante dans l'eau ? J'ai papier !",
+        "C'est l'histoire de la lettre 'i'. Elle se balade avec un point sur la tête. 'j' la croise et lui dit : 'Tiens, tu as mis ton chapeau ?'",
+        "Tu connais la blague du petit déjeuner ? Pas de bol...",
+        "Que fait un geek quand il a peur ? Il URL.",
+        "Pourquoi les poissons vivent-ils dans l'eau salée ? Parce que le poivre les fait éternuer !"
+    ];
+
+    window.showJoke = function() {
+        const jokeContainer = document.getElementById('joke-text');
+        const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+        jokeContainer.innerText = randomJoke;
+    }
+
+    function initBreathing() {
+        const text = document.getElementById('breath-text');
+        if(!text) return;
+
+        let state = "in";
+        text.innerText = "Inspire";
+
+        // CSS animation is 8s. 0-50% (4s) is expand (Inspire), 50-100% (4s) is contract (Expire)
+        setInterval(() => {
+            if(state === "in") {
+                text.innerText = "Expire";
+                state = "out";
+            } else {
+                text.innerText = "Inspire";
+                state = "in";
+            }
+        }, 4000);
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+        initTheme();
+        initSpoons();
+        renderStudio(); // Init studio view
+        updateChronoWidget();
+        updateDailyTip();
+        showJoke(); // Init joke
+        initBreathing();
+
+        // Update clock every minute
+        setInterval(updateChronoWidget, 60000);
+    });
+
+</script>
+
+</body>
+</html>
