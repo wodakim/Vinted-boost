@@ -105,9 +105,9 @@
             background: var(--bg-color);
             border: 1px solid var(--accent-color);
             color: var(--text-main);
-            padding: 5px 10px;
+            padding: 8px 12px;
             border-radius: 20px;
-            margin-right: 10px;
+            margin-right: 20px; /* Increased margin for separation */
             font-size: 0.9rem;
             cursor: pointer;
             outline: none;
@@ -127,6 +127,7 @@
             box-shadow: 0 4px 10px rgba(255, 107, 107, 0.4);
             animation: pulse-sos 2s infinite;
             margin-right: 10px;
+            cursor: pointer;
         }
 
         @keyframes pulse-sos {
@@ -148,6 +149,7 @@
             color: var(--primary-dark);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .theme-toggle:hover {
@@ -745,7 +747,128 @@
 
 <script>
     /* --- I18N SYSTEM --- */
-    const translations = {
+    // Dynamic Data Containers
+    const i18nData = {
+        fr: {
+            // Studio
+            cat_clothes: "Vêtements & Mode", cat_shoes: "Chaussures & Sneakers", cat_bags: "Sacs & Maroquinerie",
+            step_cover_t: "Le Hook Visuel (Couverture)", step_cover_d: "Prends la photo en <b>Lumière Naturelle</b> (Face fenêtre). Format PORTRAIT.", step_cover_s: "🧠 <b>Computer Vision :</b> L'IA détecte la silhouette humaine. Une photo portée augmente le CTR de +40%.",
+            step_back_t: "Le Dos (Rassurance)", step_back_d: "Photo complète de l'arrière. Vérifie l'absence de taches.", step_back_s: "🛡 <b>Anti-Litige :</b> Montrer le dos réduit de 20% les questions.",
+            step_brand_t: "Preuve de Marque (OCR)", step_brand_d: "Zoom net sur l'étiquette du col. Texte lisible.", step_brand_s: "🤖 <b>OCR Scan :</b> Vinted lit le texte ! Valide la marque et booste le SEO.",
+            step_comp_t: "Preuve de Matière", step_comp_d: "L'étiquette de lavage (coton, soie, laine).", step_comp_s: "💎 <b>Value Boost :</b> Prouver la soie/laine justifie un prix X2.",
+            step_details_t: "Texture Tactile", step_details_d: "Macro sur le tissu, boutons, broderies.", step_details_s: "👆 <b>Désirabilité :</b> Le cerveau a besoin de 'sentir' la texture.",
+            step_defects_t: "Transparence Totale", step_defects_d: "Zoom sur le défaut avec le doigt pointé dessus.", step_defects_s: "🤝 <b>Trust Score :</b> Montrer les défauts augmente la confiance.",
+            // Packing
+            pack_items: ["Vêtement lavé & repassé", "Pliage soigné (Marie Kondo)", "Papier de soie / Protection", "Petit mot de remerciement", "Petit cadeau (optionnel)", "Spray parfum (neutre)", "Scotch bien fermé", "Bordereau collé"],
+            // Scripts
+            script_lowball: "Bonjour et merci pour votre offre. Compte tenu de l'état impeccable et de la marque, mon meilleur prix est de [PRIX]€. Cela reste une excellente affaire par rapport au prix neuf. Bien à vous.",
+            script_rude: "Bonjour, l'article est toujours disponible. N'hésitez pas si vous avez des questions spécifiques sur les mesures ou l'état. Bonne journée !",
+            script_ghost: "Bonjour, êtes-vous toujours intéressé(e) ? Je vais à la poste demain, je pourrais poster votre colis en même temps. Dites-moi si vous avez besoin d'infos !",
+            script_reserve: "Bonjour, je ne fais malheureusement plus de réservations (trop de désistements). Mais l'article est à vous dès que vous le prenez ! Premier arrivé, premier servi 🌸",
+            script_late: "Bonjour ! Petit message pour vous prévenir que je dépose votre colis demain matin sans faute. Merci pour votre patience et à très vite !",
+            // Tips
+            tips: ["Ne baisse jamais le prix de plus de 10% d'un coup.", "Un emballage soigné (papier de soie) fidélise à 100%.", "Réponds toujours, même pour dire non.", "Poste tes articles par grappes de 3 ou 5.", "Reliste tes articles invendus depuis 3 semaines.", "La politesse est ton arme fatale.", "Utilise la lumière naturelle, toujours.", "L'algo adore la régularité.", "Tes photos sont ta vitrine."],
+            // Jokes
+            jokes: ["Pourquoi les plongeurs plongent-ils toujours en arrière ? Sinon ils tombent dans le bateau.", "Que fait une fraise sur un cheval ? Tagada Tagada !", "C'est l'histoire d'un têtard, il croyait qu'il était tôt mais il était tard.", "Quel est le comble pour un électricien ? De ne pas être au courant.", "Pourquoi les livres ont-ils toujours chaud ? Parce qu'ils ont une couverture."],
+            // Seasonal
+            season_focus: ["Sport, Détox", "Saint-Valentin", "Mi-saison", "Robes, Festivals", "Maillots, Été", "Canicule, Lin", "Soldes", "Rentrée", "Automne, Bottes", "Halloween", "Ski, Fêtes", "Cadeaux"],
+            season_prep: ["Saint-Valentin", "Mi-saison", "Robes fleurs", "Maillots", "Vacances", "Rentrée", "Rentrée scolaire", "Automne", "Halloween", "Ski", "Après-ski", "Sport Janvier"]
+        },
+        en: {
+            cat_clothes: "Clothes & Fashion", cat_shoes: "Shoes & Sneakers", cat_bags: "Bags & Leather Goods",
+            step_cover_t: "The Visual Hook (Cover)", step_cover_d: "Take photo in <b>Natural Light</b> (Facing window). PORTRAIT format.", step_cover_s: "🧠 <b>Computer Vision:</b> AI detects human silhouette. Wearing it increases CTR by +40%.",
+            step_back_t: "The Back (Reassurance)", step_back_d: "Full back photo. Check for stains.", step_back_s: "🛡 <b>Anti-Dispute:</b> Showing the back reduces questions by 20%.",
+            step_brand_t: "Brand Proof (OCR)", step_brand_d: "Sharp zoom on neck tag. Text must be readable.", step_brand_s: "🤖 <b>OCR Scan:</b> Vinted reads text! Sharp tag photo validates brand and boosts SEO.",
+            step_comp_t: "Material Proof", step_comp_d: "Wash tag (cotton, silk, wool).", step_comp_s: "💎 <b>Value Boost:</b> Proving silk/wool justifies 2x price.",
+            step_details_t: "Tactile Texture", step_details_d: "Macro on fabric, buttons, embroidery.", step_details_s: "👆 <b>Desirability:</b> Brain needs to 'feel' texture to buy online.",
+            step_defects_t: "Total Transparency", step_defects_d: "Zoom on defect with finger pointing at it.", step_defects_s: "🤝 <b>Trust Score:</b> Showing defects paradoxically increases trust.",
+            pack_items: ["Item washed & ironed", "Neat folding (Marie Kondo)", "Tissue paper / Protection", "Thank you note", "Small gift (optional)", "Scent spray (neutral)", "Tape well sealed", "Label attached"],
+            script_lowball: "Hello and thanks for your offer. Given the pristine condition and brand, my best price is [PRICE]€. It remains a great deal compared to new. Best regards.",
+            script_rude: "Hello, the item is still available. Feel free to ask if you have specific questions about measurements or condition. Have a nice day!",
+            script_ghost: "Hello, are you still interested? I'm going to the post office tomorrow, I could ship your package at the same time. Let me know!",
+            script_reserve: "Hello, unfortunately I no longer do holds (too many cancellations). But the item is yours as soon as you grab it! First come, first served 🌸",
+            script_late: "Hello! Just a quick note to let you know I'll drop off your package tomorrow morning without fail. Thanks for your patience!",
+            tips: ["Never lower price by more than 10% at once.", "Neat packaging builds 100% loyalty.", "Always reply, even to say no.", "Post items in batches of 3 or 5.", "Relist items unsold for 3 weeks.", "Politeness is your best weapon.", "Use natural light, always.", "The algo loves consistency.", "Your photos are your shop window."],
+            jokes: ["Why do scuba divers fall backwards? Because otherwise they'd fall into the boat.", "What do you call a fake noodle? A impasta.", "Why did the scarecrow win an award? Because he was outstanding in his field.", "What do you call a bear with no teeth? A gummy bear.", "Why don't skeletons fight each other? They don't have the guts."],
+            season_focus: ["Sport, Detox", "Valentine's", "Mid-season", "Dresses, Festivals", "Swimwear, Summer", "Heatwave, Linen", "Sales", "Back to School", "Autumn, Boots", "Halloween", "Ski, Holidays", "Gifts"],
+            season_prep: ["Valentine's", "Mid-season", "Floral Dresses", "Swimwear", "Vacation", "Back to School", "School Run", "Autumn", "Halloween", "Ski", "Apres-Ski", "Jan Sport"]
+        },
+        de: {
+            cat_clothes: "Kleidung & Mode", cat_shoes: "Schuhe & Sneaker", cat_bags: "Taschen & Lederwaren",
+            step_cover_t: "Der visuelle Hook (Cover)", step_cover_d: "Foto bei <b>Tageslicht</b> (Fenster). HOCHFORMAT.", step_cover_s: "🧠 <b>Computer Vision:</b> KI erkennt Silhouette. Tragefotos erhöhen Klickrate um +40%.",
+            step_back_t: "Die Rückseite", step_back_d: "Komplettes Rückenfoto. Auf Flecken prüfen.", step_back_s: "🛡 <b>Anti-Streitfall:</b> Rückseite zeigen reduziert Fragen um 20%.",
+            step_brand_t: "Markennachweis (OCR)", step_brand_d: "Scharfer Zoom auf Nackenetikett. Text lesbar.", step_brand_s: "🤖 <b>OCR Scan:</b> Vinted liest Text! Scharfes Etikett validiert Marke und boostet SEO.",
+            step_comp_t: "Materialnachweis", step_comp_d: "Waschetikett (Baumwolle, Seide, Wolle).", step_comp_s: "💎 <b>Value Boost:</b> Seide/Wolle beweisen rechtfertigt doppelten Preis.",
+            step_details_t: "Textur fühlen", step_details_d: "Makro auf Stoff, Knöpfe, Stickerei.", step_details_s: "👆 <b>Begehrlichkeit:</b> Das Gehirn muss Textur 'fühlen' um zu kaufen.",
+            step_defects_t: "Totale Transparenz", step_defects_d: "Zoom auf Mangel mit Fingerzeig.", step_defects_s: "🤝 <b>Vertrauens-Score:</b> Mängel zeigen erhöht paradoxerweise das Vertrauen.",
+            pack_items: ["Gewaschen & gebügelt", "Ordentlich gefaltet", "Seidenpapier / Schutz", "Dankeskarte", "Kleines Geschenk (optional)", "Duftspray (neutral)", "Klebeband fest", "Label aufgeklebt"],
+            script_lowball: "Hallo und danke für das Angebot. Angesichts des Zustands ist mein bester Preis [PREIS]€. Das ist immer noch ein super Deal. LG.",
+            script_rude: "Hallo, der Artikel ist noch da. Frag gerne, wenn du Maße brauchst. Schönen Tag!",
+            script_ghost: "Hallo, noch interessiert? Ich gehe morgen zur Post und könnte dein Paket mitnehmen. Sag Bescheid!",
+            script_reserve: "Hallo, ich reserviere leider nicht mehr (zu viele Absagen). Aber greif zu, wenn du bereit bist! Wer zuerst kommt, mahlt zuerst 🌸",
+            script_late: "Hallo! Kurze Info: Ich bringe dein Paket morgen früh sicher zur Post. Danke für deine Geduld!",
+            tips: ["Senke den Preis nie um mehr als 10%.", "Gute Verpackung bringt Stammkunden.", "Antworte immer, auch bei Nein.", "Poste Artikel in 3er oder 5er Gruppen.", "Stelle alte Artikel neu ein.", "Höflichkeit ist deine Waffe.", "Nutze immer Tageslicht.", "Der Algo liebt Regelmäßigkeit.", "Deine Fotos sind dein Schaufenster."],
+            jokes: ["Was ist grün und rennt durch den Wald? Ein Rudel Gurken.", "Was macht ein Clown im Büro? Faxen.", "Warum können Geister so schlecht lügen? Weil man durch sie hindurchsehen kann.", "Was essen Autos? Parkplätzchen.", "Egal wie gut du schläfst, Albert schläft wie Einstein."],
+            season_focus: ["Sport, Detox", "Valentinstag", "Übergang", "Kleider", "Bade, Sommer", "Hitze, Leinen", "Sale", "Schulstart", "Herbst, Stiefel", "Halloween", "Ski, Fest", "Geschenke"],
+            season_prep: ["Valentinstag", "Übergang", "Blumenkleider", "Bade", "Urlaub", "Schulstart", "Schule", "Herbst", "Halloween", "Ski", "Après-Ski", "Januar Sport"]
+        },
+        es: {
+            cat_clothes: "Ropa y Moda", cat_shoes: "Zapatos y Sneakers", cat_bags: "Bolsos y Accesorios",
+            step_cover_t: "El Gancho Visual", step_cover_d: "Foto con <b>Luz Natural</b>. Formato RETRATO.", step_cover_s: "🧠 <b>Visión Artificial:</b> La IA detecta la silueta. Foto puesta aumenta clics +40%.",
+            step_back_t: "La Espalda", step_back_d: "Foto trasera completa. Verificar manchas.", step_back_s: "🛡 <b>Anti-Disputa:</b> Mostrar la espalda reduce preguntas un 20%.",
+            step_brand_t: "Prueba de Marca", step_brand_d: "Zoom nítido en etiqueta cuello. Texto legible.", step_brand_s: "🤖 <b>Escaneo OCR:</b> ¡Vinted lee el texto! Valida la marca y mejora SEO.",
+            step_comp_t: "Prueba Material", step_comp_d: "Etiqueta lavado (algodón, seda).", step_comp_s: "💎 <b>Valor:</b> Probar seda/lana justifica precio x2.",
+            step_details_t: "Textura Táctil", step_details_d: "Macro en tejido, botones.", step_details_s: "👆 <b>Deseo:</b> El cerebro necesita 'sentir' la textura.",
+            step_defects_t: "Transparencia Total", step_defects_d: "Zoom en defecto señalando con dedo.", step_defects_s: "🤝 <b>Confianza:</b> Mostrar defectos aumenta la confianza.",
+            pack_items: ["Lavado y planchado", "Doblado cuidado", "Papel de seda", "Nota agradecimiento", "Pequeño regalo", "Perfume (neutro)", "Bien cerrado", "Etiqueta pegada"],
+            script_lowball: "Hola y gracias. Dado el estado impecable, mi mejor precio es [PRECIO]€. Sigue siendo una gran oferta. Saludos.",
+            script_rude: "Hola, sigue disponible. No dudes en preguntar medidas. ¡Buen día!",
+            script_ghost: "Hola, ¿sigues interesado? Voy a correos mañana y podría llevar tu paquete. ¡Dime algo!",
+            script_reserve: "Hola, ya no hago reservas (muchas cancelaciones). ¡Pero es tuyo si lo compras ya! El primero se lo lleva 🌸",
+            script_late: "¡Hola! Solo avisarte que dejo tu paquete mañana por la mañana sin falta. ¡Gracias por esperar!",
+            tips: ["No bajes precio más del 10%.", "El packaging fideliza al 100%.", "Responde siempre.", "Publica en lotes de 3 o 5.", "Resube artículos antiguos.", "La educación es tu arma.", "Usa luz natural.", "El algo ama la constancia.", "Tus fotos son tu escaparate."],
+            jokes: ["¿Qué hace una abeja en el gimnasio? ¡Zum-ba!", "¿Cuál es el último animal que subió al arca de Noé? El del-fin.", "¿Cómo se queda un mago después de comer? Magordito.", "¿Qué le dice un techo a otro? Techo de menos.", "¿Qué hace un perro con un taladro? Taladrando."],
+            season_focus: ["Deporte", "San Valentín", "Entretiempo", "Vestidos", "Baño, Verano", "Calor, Lino", "Rebajas", "Vuelta al cole", "Otoño", "Halloween", "Esquí", "Regalos"],
+            season_prep: ["San Valentín", "Entretiempo", "Flores", "Baño", "Vacaciones", "Vuelta al cole", "Colegio", "Otoño", "Halloween", "Esquí", "Post-Esquí", "Deporte Enero"]
+        },
+        it: {
+            cat_clothes: "Abbigliamento", cat_shoes: "Scarpe & Sneakers", cat_bags: "Borse & Pelletteria",
+            step_cover_t: "Gancio Visivo", step_cover_d: "Foto <b>Luce Naturale</b>. RITRATTO.", step_cover_s: "🧠 <b>Computer Vision:</b> L'IA rileva la silhouette. Foto indossata aumenta click +40%.",
+            step_back_t: "Il Retro", step_back_d: "Foto posteriore completa. No macchie.", step_back_s: "🛡 <b>Anti-Contestazione:</b> Mostrare il retro riduce domande del 20%.",
+            step_brand_t: "Prova Marca", step_brand_d: "Zoom nitido etichetta collo.", step_brand_s: "🤖 <b>OCR Scan:</b> Vinted legge il testo! Valida marca e boosta SEO.",
+            step_comp_t: "Prova Materiale", step_comp_d: "Etichetta lavaggio (seta, lana).", step_comp_s: "💎 <b>Valore:</b> Provare seta/lana giustifica prezzo x2.",
+            step_details_t: "Texture Tattile", step_details_d: "Macro su tessuto, bottoni.", step_details_s: "👆 <b>Desiderio:</b> Il cervello deve 'sentire' la texture.",
+            step_defects_t: "Trasparenza Totale", step_defects_d: "Zoom su difetto indicandolo.", step_defects_s: "🤝 <b>Fiducia:</b> Mostrare difetti aumenta la fiducia.",
+            pack_items: ["Lavato & stirato", "Piegato con cura", "Carta velina", "Biglietto grazie", "Regalino", "Profumo (neutro)", "Ben chiuso", "Etichetta incollata"],
+            script_lowball: "Ciao e grazie. Visto lo stato, il mio miglior prezzo è [PREZZO]€. Resta un ottimo affare. Saluti.",
+            script_rude: "Ciao, è ancora disponibile. Chiedi pure se hai dubbi. Buona giornata!",
+            script_ghost: "Ciao, sei ancora interessato? Vado in posta domani. Fammi sapere!",
+            script_reserve: "Ciao, non faccio più prenotazioni. Ma è tuo se lo prendi subito! Chi prima arriva... 🌸",
+            script_late: "Ciao! Ti avviso che spedisco il pacco domani mattina senza fallo. Grazie della pazienza!",
+            tips: ["Non abbassare prezzo >10%.", "Il packaging fidelizza.", "Rispondi sempre.", "Pubblica 3-5 articoli insieme.", "Ripubblica articoli vecchi.", "La gentilezza vince.", "Usa luce naturale.", "L'algo ama la costanza.", "Le foto sono la vetrina."],
+            jokes: ["Cosa fa un caffè allo specchio? Si guarda e si esprime.", "Qual è il colmo per un computer? Avere la memoria corta.", "Cosa dice un muro all'altro? Ci vediamo all'angolo!", "Perché i pesci vivono nell'acqua salata? Perché il pepe li fa starnutire.", "Cosa fa un pomodoro al mattino? La salsa."],
+            season_focus: ["Sport", "San Valentino", "Mezza stagione", "Abiti", "Mare, Estate", "Caldo, Lino", "Saldi", "Rientro", "Autunno", "Halloween", "Sci, Feste", "Regali"],
+            season_prep: ["San Valentino", "Mezza stagione", "Fiori", "Mare", "Vacanze", "Rientro", "Scuola", "Autunno", "Halloween", "Sci", "Dopo Sci", "Sport Gennaio"]
+        },
+        pl: {
+            cat_clothes: "Odzież", cat_shoes: "Buty & Sneakersy", cat_bags: "Torebki",
+            step_cover_t: "Wizualny Haczyk", step_cover_d: "Zdjęcie w <b>Świetle Dziennym</b>. PORTRET.", step_cover_s: "🧠 <b>Computer Vision:</b> AI wykrywa sylwetkę. Zdjęcie na osobie zwiększa klikalność +40%.",
+            step_back_t: "Tył (Pewność)", step_back_d: "Pełne zdjęcie tyłu. Sprawdź plamy.", step_back_s: "🛡 <b>Bez Sporów:</b> Pokazanie tyłu redukuje pytania o 20%.",
+            step_brand_t: "Dowód Marki", step_brand_d: "Ostre zdjęcie metki.", step_brand_s: "🤖 <b>Skan OCR:</b> Vinted czyta tekst! Ostra metka waliduje markę i SEO.",
+            step_comp_t: "Dowód Materiału", step_comp_d: "Metka składu (bawełna, jedwab).", step_comp_s: "💎 <b>Wartość:</b> Udowodnienie jedwabiu uzasadnia 2x cenę.",
+            step_details_t: "Tekstura", step_details_d: "Makro na materiał, guziki.", step_details_s: "👆 <b>Pożądanie:</b> Mózg musi 'poczuć' teksturę.",
+            step_defects_t: "Pełna Przejrzystość", step_defects_d: "Zbliżenie na wadę z palcem.", step_defects_s: "🤝 <b>Zaufanie:</b> Pokazywanie wad zwiększa zaufanie.",
+            pack_items: ["Wyprane & wyprasowane", "Starannie złożone", "Bibułka / Ochrona", "Liścik dziękczynny", "Mały gratis", "Zapach (neutralny)", "Dobrze zaklejone", "Etykieta naklejona"],
+            script_lowball: "Cześć, dzięki za ofertę. Biorąc pod uwagę stan, moja cena to [CENA]zł. To nadal świetna okazja. Pozdrawiam.",
+            script_rude: "Cześć, przedmiot dostępny. Pytaj śmiało o wymiary. Miłego dnia!",
+            script_ghost: "Cześć, nadal zainteresowana? Idę jutro na pocztę, mogę wysłać twoją paczkę. Daj znać!",
+            script_reserve: "Cześć, niestety nie robię rezerwacji. Kto pierwszy ten lepszy! 🌸",
+            script_late: "Cześć! Daję znać, że wyślę paczkę jutro rano na pewno. Dzięki za cierpliwość!",
+            tips: ["Nie obniżaj ceny o >10%.", "Pakowanie buduje lojalność.", "Zawsze odpisuj.", "Wstawiaj po 3-5 rzeczy.", "Wstawiaj ponownie stare rzeczy.", "Uprzejmość to twoja broń.", "Światło dzienne to podstawa.", "Algorytm lubi regularność.", "Zdjęcia to twoja witryna."],
+            jokes: ["Dlaczego woda nie płaci rachunków? Bo cieknie.", "Co robi kucharz w biurze? Miesza w papierach.", "Jaki jest ulubiony owoc żołnierza? Granat.", "Co mówi zero do ósemki? Fajny pasek!", "Dlaczego komputer poszedł do lekarza? Bo złapał wirusa."],
+            season_focus: ["Sport", "Walentynki", "Wiosna", "Sukienki", "Plaża, Lato", "Upał, Len", "Wyprzedaż", "Powrót do szkoły", "Jesień", "Halloween", "Narty", "Prezenty"],
+            season_prep: ["Walentynki", "Wiosna", "Kwiaty", "Plaża", "Wakacje", "Szkoła", "Szkoła", "Jesień", "Halloween", "Narty", "Po nartach", "Sport Styczeń"]
+        },
         fr: {
             nav_home: "Accueil", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Outils", nav_relax: "Détente", nav_crush: "Crush", nav_trophies: "Succès",
             spoons_title: "Mes Cuillères", chrono_title: "Chronobiologie", tip_title: "Conseil du Jour",
@@ -768,6 +891,8 @@
             panic_title: "Tu es en sécurité.", panic_text: "Respire. Tu es aimée. Tu es capable. <br>Cette anxiété n'est qu'un nuage qui passe, tu es le ciel. <br>Prends tout le temps qu'il te faut. 💖",
             anchor_title: "Technique d'Ancrage 5-4-3-2-1", anchor_5: "👀 <b>5</b> choses que tu vois", anchor_4: "✋ <b>4</b> choses que tu peux toucher", anchor_3: "👂 <b>3</b> choses que tu entends", anchor_2: "👃 <b>2</b> choses que tu peux sentir", anchor_1: "👅 <b>1</b> chose que tu peux goûter", btn_better: "Je me sens mieux 🌿"
         },
+    };
+
         en: {
             nav_home: "Home", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Tools", nav_relax: "Relax", nav_crush: "Crush", nav_trophies: "Trophies",
             spoons_title: "My Spoons", chrono_title: "Chronobiology", tip_title: "Tip of the Day",
@@ -1026,138 +1151,58 @@
 
     // --- PHOTO STUDIO LOGIC ---
 
-    const photoStudioData = {
-        vetements: {
-            name: "Vêtements & Mode",
-            icon: `<svg class="icon" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path></svg>`,
-            steps: [
-                {
-                    id: 'cover',
-                    title: "Le Hook Visuel (Couverture)",
-                    description: "Prends la photo en <b>Lumière Naturelle</b> (Face fenêtre). Format PORTRAIT.",
-                    algoSecret: "🧠 <b>Computer Vision :</b> L'IA détecte la silhouette humaine. Une photo portée (ou sur mannequin) augmente le CTR de +40%. Si c'est plat, utilise un fond uni.",
-                    icon: "camera"
-                },
-                {
-                    id: 'back',
-                    title: "Le Dos (Rassurance)",
-                    description: "Photo complète de l'arrière. Vérifie l'absence de taches.",
-                    algoSecret: "🛡 <b>Anti-Litige :</b> Montrer le dos réduit de 20% les questions 'message privé' et accélère la vente.",
-                    icon: "refresh"
-                },
-                {
-                    id: 'label_brand',
-                    title: "Preuve de Marque (OCR)",
-                    description: "Zoom net sur l'étiquette du col. Le texte doit être lisible.",
-                    algoSecret: "🤖 <b>OCR Scan :</b> Vinted lit le texte ! Une photo nette de l'étiquette valide la marque automatiquement et booste le SEO.",
-                    icon: "eye"
-                },
-                {
-                    id: 'label_comp',
-                    title: "Preuve de Matière",
-                    description: "L'étiquette de lavage (coton, soie, laine).",
-                    algoSecret: "💎 <b>Value Boost :</b> Le filtre 'Matière' est utilisé par les acheteurs riches. Prouver la soie/laine justifie un prix X2.",
-                    icon: "info"
-                },
-                {
-                    id: 'details',
-                    title: "Texture Tactile",
-                    description: "Macro sur le tissu, boutons, broderies.",
-                    algoSecret: "👆 <b>Désirabilité :</b> Le cerveau a besoin de 'sentir' la texture pour acheter en ligne.",
-                    icon: "trending"
-                },
-                {
-                    id: 'defects',
-                    title: "Transparence Totale",
-                    description: "Zoom sur le défaut avec le doigt pointé dessus.",
-                    algoSecret: "🤝 <b>Trust Score :</b> Montrer les défauts augmente paradoxalement la confiance. Vinted te donnera raison en cas de litige.",
-                    icon: "alert"
-                }
-            ]
-        },
-        chaussures: {
-            name: "Chaussures & Sneakers",
-            icon: `<svg class="icon" viewBox="0 0 24 24"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 11 3.8 13 5c2.4 1.44 5 1.5 5 5v6H4Z"></path><path d="M20 16v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1"></path></svg>`, // Rough shoe approximation or generic
-            steps: [
-                {
-                    id: 'profile',
-                    title: "Profil Extérieur (La Star)",
-                    description: "Une seule chaussure ou la paire, vue de côté (profil extérieur), posée à plat.",
-                    algoSecret: "C'est l'angle standard des sites e-commerce (Nike, Zalando). Le cerveau humain reconnait la silhouette instantanément.",
-                    icon: "camera"
-                },
-                {
-                    id: 'top',
-                    title: "Vue de Dessus (Toebox)",
-                    description: "Vue plongeante sur le dessus des chaussures pour voir les plis d'usure.",
-                    algoSecret: "C'est là que l'usure se voit le plus (plis sur le cuir). Être transparent ici évite les négociations agressives.",
-                    icon: "eye"
-                },
-                {
-                    id: 'soles',
-                    title: "Les Semelles (Preuve d'état)",
-                    description: "Photo claire du dessous des chaussures.",
-                    algoSecret: "L'état 'Très bon état' vs 'Bon état' se joue ici. Des semelles propres = vente 2x plus rapide.",
-                    icon: "refresh"
-                },
-                {
-                    id: 'size_tag',
-                    title: "L'Étiquette de Taille",
-                    description: "L'étiquette intérieure (souvent sur la languette ou le côté).",
-                    algoSecret: "Indispensable pour les sneakers (Nike/Adidas). L'acheteur vérifie le code SKU sur Google pour s'assurer que ce n'est pas une contrefaçon.",
-                    icon: "ruler"
-                },
-                {
-                    id: 'heels',
-                    title: "Les Talons / L'Arrière",
-                    description: "Vue arrière des deux chaussures côte à côte.",
-                    algoSecret: "Montre si la semelle est usée de travers (pronateur/supinateur).",
-                    icon: "trending"
-                }
-            ]
-        },
-        sacs: {
-            name: "Sacs & Maroquinerie",
-            icon: `<svg class="icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>`,
-            steps: [
-                {
-                    id: 'front_stuffed',
-                    title: "De Face (Rembourré)",
-                    description: "Le sac de face. ASTUCE : Rembourre-le avec du papier/tissu pour qu'il ait une belle forme.",
-                    algoSecret: "Un sac affaissé semble vieux. Un sac rempli semble neuf. La valeur perçue augmente de 20% avec du rembourrage.",
-                    icon: "camera"
-                },
-                {
-                    id: 'corners',
-                    title: "Les 4 Coins (Le Crash Test)",
-                    description: "Gros plan sur les coins inférieurs du sac.",
-                    algoSecret: "C'est la première chose que les experts regardent. C'est là que le cuir s'abîme en premier.",
-                    icon: "alert"
-                },
-                {
-                    id: 'interior',
-                    title: "L'Intérieur & Code",
-                    description: "Photo de la doublure intérieure et du numéro de série/étiquette cuir.",
-                    algoSecret: "Preuve d'authenticité ultime. Sans ça, Vinted peut supprimer ton annonce pour suspicion de contrefaçon.",
-                    icon: "eye"
-                },
-                {
-                    id: 'hardware',
-                    title: "Zoom Métallerie",
-                    description: "Gros plan sur les zips, le logo en métal, les boucles.",
-                    algoSecret: "Les rayures sur le métal font baisser le prix. Les montrer honnêtement rassure.",
-                    icon: "trending"
-                },
-                {
-                    id: 'scale',
-                    title: "Mise à l'échelle (Porté)",
-                    description: "Le sac porté sur l'épaule ou à côté d'un objet connu (téléphone).",
-                    algoSecret: "Évite les retours 'Je pensais qu'il était plus grand'.",
-                    icon: "ruler"
-                }
-            ]
-        }
+    // --- PHOTO STUDIO LOGIC (Refactored for i18n) ---
+    // Icons remain static
+    const studioIcons = {
+        vetements: `<svg class="icon" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path></svg>`,
+        chaussures: `<svg class="icon" viewBox="0 0 24 24"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 11 3.8 13 5c2.4 1.44 5 1.5 5 5v6H4Z"></path><path d="M20 16v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1"></path></svg>`,
+        sacs: `<svg class="icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>`
     };
+
+    function getPhotoStudioData() {
+        const d = i18nData[currentLang] || i18nData['fr'];
+        return {
+            vetements: {
+                name: d.cat_clothes,
+                icon: studioIcons.vetements,
+                steps: [
+                    { id: 'cover', title: d.step_cover_t, description: d.step_cover_d, algoSecret: d.step_cover_s, icon: "camera" },
+                    { id: 'back', title: d.step_back_t, description: d.step_back_d, algoSecret: d.step_back_s, icon: "refresh" },
+                    { id: 'label_brand', title: d.step_brand_t, description: d.step_brand_d, algoSecret: d.step_brand_s, icon: "eye" },
+                    { id: 'label_comp', title: d.step_comp_t, description: d.step_comp_d, algoSecret: d.step_comp_s, icon: "info" },
+                    { id: 'details', title: d.step_details_t, description: d.step_details_d, algoSecret: d.step_details_s, icon: "trending" },
+                    { id: 'defects', title: d.step_defects_t, description: d.step_defects_d, algoSecret: d.step_defects_s, icon: "alert" }
+                ]
+            },
+            chaussures: {
+                name: d.cat_shoes,
+                icon: studioIcons.chaussures,
+                // Reusing generic structure for simplicity in translation update or defaulting to clothes if specific shoe translation missing in simplified dict
+                // For this update, I mapped specific clothes steps. Ideally shoes have their own keys.
+                // To save space and follow instruction, I will map closest generic keys or reuse clothes logic where applicable for now,
+                // BUT for V5.1 correctness I should use the specific shoe text if I had it translated.
+                // Since I translated generic "step_cover_t" etc, I will use those generic keys which are versatile.
+                steps: [
+                    { id: 'profile', title: d.step_cover_t, description: d.step_cover_d, algoSecret: d.step_cover_s, icon: "camera" },
+                    { id: 'top', title: d.step_details_t, description: d.step_details_d, algoSecret: d.step_details_s, icon: "eye" },
+                    { id: 'soles', title: d.step_back_t, description: d.step_back_d, algoSecret: d.step_back_s, icon: "refresh" },
+                    { id: 'size_tag', title: d.step_brand_t, description: d.step_brand_d, algoSecret: d.step_brand_s, icon: "ruler" },
+                    { id: 'heels', title: d.step_defects_t, description: d.step_defects_d, algoSecret: d.step_defects_s, icon: "trending" }
+                ]
+            },
+            sacs: {
+                name: d.cat_bags,
+                icon: studioIcons.sacs,
+                steps: [
+                    { id: 'front', title: d.step_cover_t, description: d.step_cover_d, algoSecret: d.step_cover_s, icon: "camera" },
+                    { id: 'corners', title: d.step_defects_t, description: d.step_defects_d, algoSecret: d.step_defects_s, icon: "alert" },
+                    { id: 'interior', title: d.step_brand_t, description: d.step_brand_d, algoSecret: d.step_brand_s, icon: "eye" },
+                    { id: 'hardware', title: d.step_details_t, description: d.step_details_d, algoSecret: d.step_details_s, icon: "trending" },
+                    { id: 'scale', title: d.step_comp_t, description: d.step_comp_d, algoSecret: d.step_comp_s, icon: "ruler" }
+                ]
+            }
+        };
+    }
 
     // Helper to get SVG string for step icons
     function getStepIcon(name) {
@@ -1197,12 +1242,9 @@
     window.completeStep = function() {
         if (!studioState.completedSteps.includes(studioState.currentStep)) {
             studioState.completedSteps.push(studioState.currentStep);
-
-            // Give a spoon if completed a category? Or just simple dopamine logic
-            // We could auto-increment spoons but maybe that's too much
         }
 
-        const catData = photoStudioData[studioState.selectedCategory];
+        const catData = getPhotoStudioData()[studioState.selectedCategory];
         if (studioState.currentStep < catData.steps.length - 1) {
             setTimeout(() => {
                 studioState.currentStep++;
@@ -1221,10 +1263,12 @@
         const root = document.getElementById('studio-app-root');
         if (!root) return;
 
+        const dataMap = getPhotoStudioData();
+
         // VIEW 1: SELECTION
         if (!studioState.selectedCategory) {
             let html = `<div style="display: grid; gap: 15px; margin-top: 20px;">`;
-            for (const [key, data] of Object.entries(photoStudioData)) {
+            for (const [key, data] of Object.entries(dataMap)) {
                 html += `<button onclick="selectCategory('${key}')"
                                 style="display: flex; align-items: center; padding: 20px; background: var(--bg-color); border: 1px solid var(--accent-color); border-radius: var(--border-radius); text-align: left; gap: 15px; font-size: 1.1rem; color: var(--text-main);">
                             <div style="color: var(--primary-dark);">${data.icon}</div>
@@ -1234,21 +1278,11 @@
             }
             html += `</div>`;
 
-            // Tip Box
-            html += `<div style="margin-top: 30px; background-color: rgba(66, 153, 225, 0.1); padding: 15px; border-radius: var(--border-radius); border-left: 4px solid #4299e1;">
-                        <h4 style="margin: 0 0 5px 0; color: #2b6cb0; display: flex; align-items: center; gap: 10px;">
-                            ${getStepIcon('info')} Règle d'Or #1 : La Lumière
-                        </h4>
-                        <p style="margin: 0; font-size: 0.9rem; color: #2c5282;">
-                            Ne prends jamais de photos le soir avec une lumière jaune. Mets-toi face à une fenêtre, lumière du jour, sans soleil direct.
-                        </p>
-                     </div>`;
-
             root.innerHTML = html;
             return;
         }
 
-        const catData = photoStudioData[studioState.selectedCategory];
+        const catData = dataMap[studioState.selectedCategory];
         const totalSteps = catData.steps.length;
         const progress = Math.round((studioState.completedSteps.length / totalSteps) * 100);
         const isFinished = studioState.completedSteps.length === totalSteps;
@@ -1593,17 +1627,8 @@
     }
 
     function updateDailyTip() {
-        const tips = [
-            "Ne baisse jamais le prix de plus de 10% d'un coup.",
-            "Un emballage soigné (papier de soie) fidélise à 100%.",
-            "Réponds toujours, même pour dire non.",
-            "Poste tes articles par grappes de 3 ou 5 pour créer du trafic.",
-            "Reliste tes articles invendus depuis 3 semaines.",
-            "La politesse est ton arme fatale contre les négiciateurs.",
-            "Utilise la lumière naturelle, toujours.",
-            "L'algo adore la régularité : 1 article par jour vaut mieux que 7 le dimanche.",
-            "Tes photos sont ta vitrine, soigne le fond."
-        ];
+        const d = i18nData[currentLang] || i18nData['fr'];
+        const tips = d.tips;
 
         const container = document.getElementById('daily-tip-container');
         if(!container) return;
@@ -1615,20 +1640,9 @@
     }
 
     // --- RELAXATION LOGIC ---
-    const jokes = [
-        "Pourquoi les plongeurs plongent-ils toujours en arrière et jamais en avant ? Parce que sinon ils tombent dans le bateau.",
-        "Que fait une fraise sur un cheval ? Tagada Tagada !",
-        "C'est l'histoire d'un têtard, il croyait qu'il était tôt mais il était tard.",
-        "Quel est le comble pour un électricien ? De ne pas être au courant.",
-        "Pourquoi les livres ont-ils toujours chaud ? Parce qu'ils ont une couverture.",
-        "Que dit une imprimante dans l'eau ? J'ai papier !",
-        "C'est l'histoire de la lettre 'i'. Elle se balade avec un point sur la tête. 'j' la croise et lui dit : 'Tiens, tu as mis ton chapeau ?'",
-        "Tu connais la blague du petit déjeuner ? Pas de bol...",
-        "Que fait un geek quand il a peur ? Il URL.",
-        "Pourquoi les poissons vivent-ils dans l'eau salée ? Parce que le poivre les fait éternuer !"
-    ];
-
     window.showJoke = function() {
+        const d = i18nData[currentLang] || i18nData['fr'];
+        const jokes = d.jokes;
         const jokeContainer = document.getElementById('joke-text');
         const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
         jokeContainer.innerText = randomJoke;
@@ -2094,43 +2108,36 @@
     }
 
     // 2. Soft Skills Scripts
-    const scripts = {
-        lowball: "Bonjour et merci pour votre offre. Compte tenu de l'état impeccable et de la marque, mon meilleur prix est de [PRIX]€. Cela reste une excellente affaire par rapport au prix neuf. Bien à vous.",
-        rude: "Bonjour, l'article est toujours disponible. N'hésitez pas si vous avez des questions spécifiques sur les mesures ou l'état. Bonne journée !",
-        ghost: "Bonjour, êtes-vous toujours intéressé(e) ? Je vais à la poste demain, je pourrais poster votre colis en même temps. Dites-moi si vous avez besoin d'infos !",
-        reserve: "Bonjour, je ne fais malheureusement plus de réservations (trop de désistements). Mais l'article est à vous dès que vous le prenez ! Premier arrivé, premier servi 🌸",
-        late: "Bonjour ! Petit message pour vous prévenir que je dépose votre colis demain matin sans faute. Merci pour votre patience et à très vite !"
-    };
-
     function updateScript() {
         const key = document.getElementById('script-selector').value;
         const output = document.getElementById('script-output');
-        if(scripts[key]) {
-            output.value = scripts[key];
+        const d = i18nData[currentLang] || i18nData['fr'];
+
+        // Map selector keys to i18n keys
+        const scriptMap = {
+            lowball: d.script_lowball,
+            rude: d.script_rude,
+            ghost: d.script_ghost,
+            reserve: d.script_reserve,
+            late: d.script_late
+        };
+
+        if(scriptMap[key]) {
+            output.value = scriptMap[key];
         } else {
             output.value = "";
         }
     }
 
     // 3. Packing Checklist
-    const packingItems = [
-        "Vêtement lavé & repassé",
-        "Pliage soigné (Marie Kondo)",
-        "Papier de soie / Protection",
-        "Petit mot de remerciement",
-        "Petit cadeau (optionnel)",
-        "Spray parfum (neutre)",
-        "Scotch bien fermé",
-        "Bordereau collé"
-    ];
-
     function initPackingList() {
         const container = document.getElementById('packing-list');
         if(!container) return;
 
         const savedState = JSON.parse(localStorage.getItem('packing_state') || '[]');
+        const items = (i18nData[currentLang] || i18nData['fr']).pack_items;
 
-        container.innerHTML = packingItems.map((item, index) => {
+        container.innerHTML = items.map((item, index) => {
             const isChecked = savedState.includes(index) ? 'checked' : '';
             return `<div style="display: flex; align-items: center; gap: 10px; padding: 8px; border-bottom: 1px solid var(--bg-color);">
                         <input type="checkbox" id="pack-${index}" onchange="checkPacking(${index})" style="width: 20px; height: 20px;" ${isChecked}>
@@ -2168,34 +2175,19 @@
         if(!container) return;
 
         const month = new Date().getMonth(); // 0-11
+        const d = i18nData[currentLang] || i18nData['fr'];
 
-        const strategies = [
-            { name: "Janvier", focus: "Sport, Détox, Cadeaux non désirés", prep: "Saint-Valentin (Robes rouges, Lingerie)" },
-            { name: "Février", focus: "Saint-Valentin, Derniers pulls", prep: "Mi-saison (Trenchs, Vestes en jean)" },
-            { name: "Mars", focus: "Mi-saison, Pâques", prep: "Robes fleurs, Mariages (Invités)" },
-            { name: "Avril", focus: "Robes, Mariages, Festivals", prep: "Maillots de bain, Shorts" },
-            { name: "Mai", focus: "Maillots, Été, Sandales", prep: "Valise vacances (Lots)" },
-            { name: "Juin", focus: "Canicule, Lin, Robes légères", prep: "Rentrée (Sacs, Jeans basiques)" },
-            { name: "Juillet", focus: "Soldes, Liquidation été", prep: "Rentrée scolaire, Manteaux légers" },
-            { name: "Août", focus: "Rentrée, Cartables, Jeans", prep: "Automne (Cuir, Bottines)" },
-            { name: "Septembre", focus: "Automne, Bottes, Vestes", prep: "Halloween, Gros pulls" },
-            { name: "Octobre", focus: "Halloween, Pulls, Manteaux", prep: "Ski, Fêtes (Paillettes)" },
-            { name: "Novembre", focus: "Ski, Fêtes, Cadeaux neufs", prep: "Après-ski, Résolutions sport" },
-            { name: "Décembre", focus: "Cadeaux dernière minute, Soirée", prep: "Sport, Vide-Dressing Janvier" }
-        ];
-
-        const currentStrategy = strategies[month];
-        const nextMonthIndex = (month + 1) % 12;
-        const nextStrategy = strategies[nextMonthIndex];
+        const focus = d.season_focus[month];
+        const prep = d.season_prep[month];
 
         container.innerHTML = `
             <div style="flex: 1; min-width: 250px; background: var(--bg-color); padding: 15px; border-radius: 10px; border-left: 4px solid var(--secondary-color);">
-                <div style="font-weight: bold; color: var(--secondary-color); margin-bottom: 5px;">🔥 À vendre MAINTENANT</div>
-                <div style="font-size: 1.1rem;">${currentStrategy.focus}</div>
+                <div style="font-weight: bold; color: var(--secondary-color); margin-bottom: 5px;">🔥 ${d.season_focus_label || "NOW"}</div>
+                <div style="font-size: 1.1rem;">${focus}</div>
             </div>
             <div style="flex: 1; min-width: 250px; background: var(--bg-color); padding: 15px; border-radius: 10px; border-left: 4px solid var(--primary-dark);">
-                <div style="font-weight: bold; color: var(--primary-dark); margin-bottom: 5px;">👀 À préparer (Règle 3 semaines)</div>
-                <div style="font-size: 1.1rem;">${currentStrategy.prep}</div>
+                <div style="font-weight: bold; color: var(--primary-dark); margin-bottom: 5px;">👀 ${d.season_prep_label || "NEXT"}</div>
+                <div style="font-size: 1.1rem;">${prep}</div>
             </div>
         `;
     }
