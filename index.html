@@ -200,15 +200,19 @@
         /* --- CONTENT SECTIONS --- */
         .section-view {
             display: none;
-            animation: fadeIn 0.4s ease;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
         .section-view.active {
             display: block;
+            /* Small delay to allow display:block to apply before opacity transition */
+            animation: fadeIn 0.5s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -259,6 +263,9 @@
         .tag-btn:hover {
             border-color: var(--primary-dark);
             color: var(--primary-dark);
+            background-color: var(--bg-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
     </style>
@@ -1685,7 +1692,21 @@
         const profit = sell - buy - fees;
         const resultEl = document.getElementById('calc-result');
 
-        resultEl.innerText = profit.toFixed(2) + " €";
+        // ROI Calculation
+        let roi = 0;
+        if (buy > 0) {
+            roi = (profit / buy) * 100;
+        } else if (profit > 0) {
+            roi = 100; // Infinite technically, but 100% pure profit
+        }
+
+        resultEl.innerHTML = `
+            <div>${profit.toFixed(2)} €</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
+                Marge: ${roi.toFixed(0)}%
+            </div>
+        `;
+
         if(profit > 0) resultEl.style.color = "var(--success-color)";
         else if(profit < 0) resultEl.style.color = "var(--secondary-color)";
         else resultEl.style.color = "var(--text-muted)";
@@ -1726,20 +1747,30 @@
         const container = document.getElementById('packing-list');
         if(!container) return;
 
+        const savedState = JSON.parse(localStorage.getItem('packing_state') || '[]');
+
         container.innerHTML = packingItems.map((item, index) => {
+            const isChecked = savedState.includes(index) ? 'checked' : '';
             return `<div style="display: flex; align-items: center; gap: 10px; padding: 8px; border-bottom: 1px solid var(--bg-color);">
-                        <input type="checkbox" id="pack-${index}" onchange="checkPacking(${index})" style="width: 20px; height: 20px;">
+                        <input type="checkbox" id="pack-${index}" onchange="checkPacking(${index})" style="width: 20px; height: 20px;" ${isChecked}>
                         <label for="pack-${index}" style="cursor: pointer; flex: 1;">${item}</label>
                     </div>`;
         }).join('');
     }
 
     function checkPacking(index) {
-        // Check if all checked
         const all = document.querySelectorAll('#packing-list input[type="checkbox"]');
         const checked = document.querySelectorAll('#packing-list input[type="checkbox"]:checked');
-        if(all.length === checked.length) {
-            unlockTrophy('photo_pro'); // Re-using photo trophy or maybe create a 'packing' one? Let's assume we add packing trophy later or reuse logic.
+
+        // Save state
+        const savedState = [];
+        all.forEach((input, idx) => {
+            if(input.checked) savedState.push(idx);
+        });
+        localStorage.setItem('packing_state', JSON.stringify(savedState));
+
+        if(all.length === checked.length && all.length > 0) {
+            // Only trigger if not already triggered recently to avoid spam on reload
             showNotification("📦 Colis Prêt ! Beau travail.");
             triggerConfetti();
         }
@@ -1747,6 +1778,7 @@
 
     function resetPackingList() {
         document.querySelectorAll('#packing-list input').forEach(i => i.checked = false);
+        localStorage.setItem('packing_state', '[]');
     }
 
     // 4. Seasonal Calendar
