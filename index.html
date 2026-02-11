@@ -100,6 +100,19 @@
             color: var(--text-muted);
         }
 
+        /* --- LANG SELECTOR --- */
+        .lang-select {
+            background: var(--bg-color);
+            border: 1px solid var(--accent-color);
+            color: var(--text-main);
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+        }
+
         /* --- SOS BUTTON --- */
         .sos-btn {
             background: #ff6b6b;
@@ -301,6 +314,14 @@
             <p>Ton assistante personnelle de vente</p>
         </div>
         <div style="display: flex; align-items: center;">
+            <select id="langSelect" class="lang-select" onchange="changeLanguage(this.value)">
+                <option value="fr">🇫🇷 FR</option>
+                <option value="en">🇬🇧 EN</option>
+                <option value="de">🇩🇪 DE</option>
+                <option value="es">🇪🇸 ES</option>
+                <option value="it">🇮🇹 IT</option>
+                <option value="pl">🇵🇱 PL</option>
+            </select>
             <button class="sos-btn" onclick="triggerPanic()" aria-label="SOS Hypersensibilité">
                 <svg class="icon" viewBox="0 0 24 24" style="fill: white; stroke: none;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
             </button>
@@ -315,31 +336,31 @@
     <nav class="nav-tabs">
         <button class="nav-tab active" onclick="switchTab('dashboard')" aria-label="Tableau de bord">
             <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-            <span>Accueil</span>
+            <span data-i18n="nav_home">Accueil</span>
         </button>
         <button class="nav-tab" onclick="switchTab('studio')" aria-label="Guide Photo">
             <svg class="icon" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-            <span>Studio</span>
+            <span data-i18n="nav_studio">Studio</span>
         </button>
         <button class="nav-tab" onclick="switchTab('seo')" aria-label="Générateur de texte">
             <svg class="icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-            <span>SEO</span>
+            <span data-i18n="nav_seo">SEO</span>
         </button>
         <button class="nav-tab" onclick="switchTab('tools')" aria-label="Outils Pratiques">
            <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.95l-3.77 3.78Z"></path></svg>
-            <span>Outils</span>
+            <span data-i18n="nav_tools">Outils</span>
         </button>
         <button class="nav-tab" onclick="switchTab('relax')" aria-label="Détente">
             <svg class="icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            <span>Détente</span>
+            <span data-i18n="nav_relax">Détente</span>
         </button>
         <button class="nav-tab" onclick="switchTab('crush')" aria-label="Jeu">
             <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
-            <span>Crush</span>
+            <span data-i18n="nav_crush">Crush</span>
         </button>
         <button class="nav-tab" onclick="switchTab('trophies')" aria-label="Succès">
             <svg class="icon" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
-            <span>Succès</span>
+            <span data-i18n="nav_trophies">Succès</span>
         </button>
     </nav>
 
@@ -352,11 +373,11 @@
                 <div class="card">
                     <h3>
                         <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                        Mes Cuillères
+                        <span data-i18n="spoons_title">Mes Cuillères</span>
                     </h3>
                     <div id="spoon-tracker-container">
                         <!-- Spoons will be injected here -->
-                        <p>Chargement de l'énergie...</p>
+                        <p>...</p>
                     </div>
                 </div>
 
@@ -364,11 +385,11 @@
                 <div class="card">
                     <h3>
                         <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                        Chronobiologie
+                        <span data-i18n="chrono_title">Chronobiologie</span>
                     </h3>
                     <div id="chrono-widget">
                         <!-- Time analysis here -->
-                        <p>Analyse temporelle...</p>
+                        <p>...</p>
                     </div>
                 </div>
 
@@ -376,10 +397,10 @@
                 <div class="card" style="grid-column: 1 / -1;">
                     <h3>
                         <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        Conseil du Jour
+                        <span data-i18n="tip_title">Conseil du Jour</span>
                     </h3>
                     <div id="daily-tip-container">
-                        <p>Chargement du conseil...</p>
+                        <p>...</p>
                     </div>
                 </div>
             </div>
@@ -388,8 +409,8 @@
         <!-- STUDIO PHOTO VIEW -->
         <section id="studio" class="section-view">
             <div class="card">
-                <h2>Studio Virtuel</h2>
-                <p>Sélectionne une catégorie pour commencer ton shooting guidé.</p>
+                <h2 data-i18n="studio_title">Studio Virtuel</h2>
+                <p data-i18n="studio_subtitle">Sélectionne une catégorie pour commencer ton shooting guidé.</p>
                 <div id="studio-app-root">
                     <!-- The Vanilla JS port of the React App will go here -->
                 </div>
@@ -402,7 +423,7 @@
 
                 <!-- Seasonal Calendar -->
                 <div class="card" style="grid-column: 1 / -1;">
-                    <h3 style="margin-bottom: 20px;">📅 Calendrier Stratégique (Règle des 3 Semaines)</h3>
+                    <h3 style="margin-bottom: 20px;" data-i18n="seasonal_title">📅 Calendrier Stratégique</h3>
                     <div id="seasonal-widget" style="display: flex; flex-wrap: wrap; gap: 20px;">
                         <!-- Injected JS -->
                     </div>
@@ -410,40 +431,40 @@
 
                 <!-- Profit Calculator -->
                 <div class="card">
-                    <h3 style="margin-bottom: 20px;">💰 Calculatrice de Profit</h3>
+                    <h3 style="margin-bottom: 20px;" data-i18n="calc_title">💰 Calculatrice de Profit</h3>
                     <div style="display: grid; gap: 10px;">
-                        <input type="number" id="calc-buy" placeholder="Prix d'Achat (€)" oninput="updateProfit()">
-                        <input type="number" id="calc-sell" placeholder="Prix de Vente (€)" oninput="updateProfit()">
-                        <input type="number" id="calc-fees" placeholder="Emballage/Divers (€)" value="0" oninput="updateProfit()">
+                        <input type="number" id="calc-buy" data-placeholder-i18n="calc_buy_ph" placeholder="Prix d'Achat (€)" oninput="updateProfit()">
+                        <input type="number" id="calc-sell" data-placeholder-i18n="calc_sell_ph" placeholder="Prix de Vente (€)" oninput="updateProfit()">
+                        <input type="number" id="calc-fees" data-placeholder-i18n="calc_fees_ph" placeholder="Emballage/Divers (€)" value="0" oninput="updateProfit()">
                     </div>
                     <div style="margin-top: 20px; background: var(--bg-color); padding: 15px; border-radius: 10px; text-align: center;">
-                        <div style="font-size: 0.9rem; color: var(--text-muted);">Bénéfice Net</div>
+                        <div style="font-size: 0.9rem; color: var(--text-muted);" data-i18n="calc_result_label">Bénéfice Net</div>
                         <div id="calc-result" style="font-size: 1.5rem; font-weight: bold; color: var(--success-color);">0.00 €</div>
                     </div>
                 </div>
 
                 <!-- Soft Skills Scripts -->
                 <div class="card">
-                    <h3 style="margin-bottom: 20px;">💬 Réponses Magiques</h3>
+                    <h3 style="margin-bottom: 20px;" data-i18n="scripts_title">💬 Réponses Magiques</h3>
                     <select id="script-selector" onchange="updateScript()" style="margin-bottom: 15px;">
-                        <option value="">Choisir une situation...</option>
-                        <option value="lowball">Offre ridicule (-50%)</option>
-                        <option value="rude">Pas de "Bonjour"</option>
-                        <option value="ghost">Plus de réponse</option>
-                        <option value="reserve">Demande de réservation</option>
-                        <option value="late">Retard d'envoi</option>
+                        <option value="" data-i18n="script_select_ph">Choisir une situation...</option>
+                        <option value="lowball" data-i18n="script_lowball">Offre ridicule (-50%)</option>
+                        <option value="rude" data-i18n="script_rude">Pas de "Bonjour"</option>
+                        <option value="ghost" data-i18n="script_ghost">Plus de réponse</option>
+                        <option value="reserve" data-i18n="script_reserve">Demande de réservation</option>
+                        <option value="late" data-i18n="script_late">Retard d'envoi</option>
                     </select>
                     <textarea id="script-output" readonly style="height: 120px; font-size: 0.9rem; color: var(--text-muted); background: var(--bg-color);"></textarea>
-                    <button onclick="copyToClipboard('script-output')" style="margin-top: 10px; width: 100%; background: var(--primary-dark); color: white; padding: 10px; border-radius: 10px;">Copier la réponse</button>
+                    <button onclick="copyToClipboard('script-output')" style="margin-top: 10px; width: 100%; background: var(--primary-dark); color: white; padding: 10px; border-radius: 10px;" data-i18n="copy_response">Copier la réponse</button>
                 </div>
 
                 <!-- Packing Checklist -->
                 <div class="card" style="grid-column: 1 / -1;">
-                    <h3 style="margin-bottom: 20px;">📦 Checklist Colis Parfait</h3>
+                    <h3 style="margin-bottom: 20px;" data-i18n="packing_title">📦 Checklist Colis Parfait</h3>
                     <div class="checklist-container" id="packing-list">
                         <!-- Injected JS -->
                     </div>
-                    <button onclick="resetPackingList()" style="margin-top: 15px; background: none; color: var(--text-muted); font-size: 0.9rem; text-decoration: underline;">Réinitialiser la liste</button>
+                    <button onclick="resetPackingList()" style="margin-top: 15px; background: none; color: var(--text-muted); font-size: 0.9rem; text-decoration: underline;" data-i18n="reset_list">Réinitialiser la liste</button>
                 </div>
 
             </div>
@@ -452,34 +473,34 @@
         <!-- SEO GENERATOR VIEW -->
         <section id="seo" class="section-view">
             <div class="card">
-                <h2 style="color: var(--primary-dark);">Générateur d'Annonce</h2>
-                <p>Remplis les champs pour créer une annonce optimisée pour l'algorithme Vinted.</p>
+                <h2 style="color: var(--primary-dark);" data-i18n="seo_title">Générateur d'Annonce</h2>
+                <p data-i18n="seo_subtitle">Remplis les champs pour créer une annonce optimisée pour l'algorithme Vinted.</p>
 
                 <div class="generator-container" style="display: grid; gap: 30px;">
                     <!-- Title Form -->
                     <div>
                         <h3 style="font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
                             <svg class="icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-                            Le Titre Parfait
+                            <span data-i18n="title_perfect">Le Titre Parfait</span>
                         </h3>
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px;">
-                            <input type="text" id="gen-brand" placeholder="Marque (ex: Zara)" oninput="updateSeoPreview()">
-                            <input type="text" id="gen-type" placeholder="Type (ex: Robe Midi)" oninput="updateSeoPreview()">
-                            <input type="text" id="gen-color" placeholder="Couleur (ex: Vert)" oninput="updateSeoPreview()">
-                            <input type="text" id="gen-material" placeholder="Matière (ex: Satin)" oninput="updateSeoPreview()">
+                            <input type="text" id="gen-brand" data-placeholder-i18n="ph_brand" placeholder="Marque" oninput="updateSeoPreview()">
+                            <input type="text" id="gen-type" data-placeholder-i18n="ph_type" placeholder="Type" oninput="updateSeoPreview()">
+                            <input type="text" id="gen-color" data-placeholder-i18n="ph_color" placeholder="Couleur" oninput="updateSeoPreview()">
+                            <input type="text" id="gen-material" data-placeholder-i18n="ph_material" placeholder="Matière" oninput="updateSeoPreview()">
                             <select id="gen-condition" oninput="updateSeoPreview()">
-                                <option value="">-- État --</option>
-                                <option value="Neuf avec étiquette">Neuf avec étiquette</option>
-                                <option value="Très bon état">Très bon état</option>
-                                <option value="Bon état">Bon état</option>
-                                <option value="Satisfaisant">Satisfaisant</option>
+                                <option value="" data-i18n="ph_condition">-- État --</option>
+                                <option value="Neuf avec étiquette" data-i18n="cond_new">Neuf avec étiquette</option>
+                                <option value="Très bon état" data-i18n="cond_vgood">Très bon état</option>
+                                <option value="Bon état" data-i18n="cond_good">Bon état</option>
+                                <option value="Satisfaisant" data-i18n="cond_fair">Satisfaisant</option>
                             </select>
-                            <input type="text" id="gen-vibe" placeholder="Style (ex: Y2K, Bohème)" oninput="updateSeoPreview()">
+                            <input type="text" id="gen-vibe" data-placeholder-i18n="ph_vibe" placeholder="Style" oninput="updateSeoPreview()">
                         </div>
 
                         <div style="margin-top: 15px; background: var(--bg-color); padding: 15px; border-radius: 10px; border: 1px dashed var(--primary-dark); position: relative;">
                             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
-                                <label style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Aperçu du Titre</label>
+                                <label style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);" data-i18n="label_preview">Aperçu</label>
                                 <span id="title-score-label" style="font-size: 0.8rem; font-weight: bold;">Score SEO: 0/100</span>
                             </div>
 
@@ -493,7 +514,7 @@
                             <div id="title-feedback" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 8px; font-style: italic;"></div>
 
                             <button onclick="copyToClipboard('title-preview')" style="position: absolute; right: 10px; top: 35px; font-size: 0.8rem; color: var(--primary-dark); background: none; display: flex; align-items: center; gap: 5px;">
-                                <svg class="icon" style="width:14px; height:14px;" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copier
+                                <svg class="icon" style="width:14px; height:14px;" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> <span data-i18n="btn_copy">Copier</span>
                             </button>
                         </div>
                     </div>
@@ -502,22 +523,22 @@
                     <div>
                         <h3 style="font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
                             <svg class="icon" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
-                            Description Magique
+                            <span data-i18n="desc_magic">Description Magique</span>
                         </h3>
-                        <textarea id="gen-desc-details" placeholder="Détails supplémentaires (mesures, raison de la vente, défauts éventuels...)" style="width: 100%; height: 100px; padding: 10px; border-radius: 10px; border: 1px solid var(--accent-color);" oninput="updateSeoPreview()"></textarea>
+                        <textarea id="gen-desc-details" data-placeholder-i18n="ph_details" placeholder="Détails..." style="width: 100%; height: 100px; padding: 10px; border-radius: 10px; border: 1px solid var(--accent-color);" oninput="updateSeoPreview()"></textarea>
 
                         <div style="margin-top: 15px;">
-                            <label style="font-size: 0.9rem; font-weight: bold; color: var(--text-muted);">Hashtags & Tendances</label>
+                            <label style="font-size: 0.9rem; font-weight: bold; color: var(--text-muted);" data-i18n="tags_title">Hashtags & Tendances</label>
 
                             <!-- Manual Input -->
                             <div style="display:flex; gap:10px; margin-top:8px;">
-                                <input type="text" id="manual-tag-input" placeholder="#HashtagManuel" style="flex:1;">
-                                <button onclick="addManualTag()" style="background:var(--primary-dark); color:white; padding:0 15px; border-radius:10px;">Ajouter</button>
+                                <input type="text" id="manual-tag-input" data-placeholder-i18n="ph_manual_tag" placeholder="#HashtagManuel" style="flex:1;">
+                                <button onclick="addManualTag()" style="background:var(--primary-dark); color:white; padding:0 15px; border-radius:10px;" data-i18n="btn_add">Ajouter</button>
                             </div>
 
                             <!-- Packs -->
                             <select id="trend-pack-selector" onchange="applyTrendPack()" style="margin-top: 8px; width: 100%;">
-                                <option value="">-- Packs Experts (Clusters) --</option>
+                                <option value="" data-i18n="pack_select">-- Packs Experts --</option>
                                 <option value="gorpcore">🏔 Gorpcore 2026</option>
                                 <option value="officesiren">💼 Office Siren</option>
                                 <option value="coquette">🎀 Coquette / Balletcore</option>
@@ -546,10 +567,10 @@
                         </div>
 
                         <div style="margin-top: 15px; background: var(--bg-color); padding: 15px; border-radius: 10px; border: 1px dashed var(--primary-dark); position: relative;">
-                             <label style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Aperçu Description</label>
+                             <label style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);" data-i18n="label_preview">Aperçu</label>
                              <div id="desc-preview" style="white-space: pre-wrap; margin: 5px 0; font-size: 0.9rem; color: var(--text-main);">...</div>
                              <button onclick="copyToClipboard('desc-preview')" style="position: absolute; right: 10px; top: 10px; font-size: 0.8rem; color: var(--primary-dark); background: none; display: flex; align-items: center; gap: 5px;">
-                                <svg class="icon" style="width:14px; height:14px;" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copier
+                                <svg class="icon" style="width:14px; height:14px;" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> <span data-i18n="btn_copy">Copier</span>
                             </button>
                         </div>
                     </div>
@@ -560,8 +581,8 @@
         <!-- TROPHIES VIEW -->
         <section id="trophies" class="section-view">
             <div class="card">
-                <h2 style="color: var(--primary-dark);">Salle des Trophées</h2>
-                <p>Débloque des succès en utilisant l'application.</p>
+                <h2 style="color: var(--primary-dark);" data-i18n="trophy_title">Salle des Trophées</h2>
+                <p data-i18n="trophy_subtitle">Débloque des succès en utilisant l'application.</p>
                 <div id="trophy-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 15px; margin-top: 20px;">
                     <!-- Trophies injected by JS -->
                 </div>
@@ -595,13 +616,13 @@
         <!-- CRUSH GAME VIEW -->
         <section id="crush" class="section-view">
             <div class="card" style="text-align: center;">
-                <h2 style="color: var(--primary-dark);">Vinted Crush Infini</h2>
+                <h2 style="color: var(--primary-dark);" data-i18n="game_title">Vinted Crush Infini</h2>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 0 20px;">
-                    <div>Score: <span id="score">0</span></div>
-                    <div>Record: <span id="high-score">0</span></div>
+                    <div><span data-i18n="score">Score</span>: <span id="score">0</span></div>
+                    <div><span data-i18n="high_score">Record</span>: <span id="high-score">0</span></div>
                 </div>
                 <div id="grid-container"></div>
-                <button onclick="initGame()" style="margin-top: 15px; background: var(--secondary-color); color: white; padding: 10px 20px; border-radius: 20px;">Nouvelle Partie</button>
+                <button onclick="initGame()" style="margin-top: 15px; background: var(--secondary-color); color: white; padding: 10px 20px; border-radius: 20px;" data-i18n="btn_new_game">Nouvelle Partie</button>
                 <style>
                     #grid-container {
                         display: grid;
@@ -641,25 +662,25 @@
         <!-- RELAX VIEW -->
         <section id="relax" class="section-view">
             <div class="card">
-                <h2 style="color: var(--primary-dark);">Zone de Décompression</h2>
-                <p>Prends un moment pour respirer et recharger tes cuillères.</p>
+                <h2 style="color: var(--primary-dark);" data-i18n="relax_title">Zone de Décompression</h2>
+                <p data-i18n="relax_subtitle">Prends un moment pour respirer et recharger tes cuillères.</p>
 
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 20px;">
 
                     <!-- Breathing Circle -->
                     <div style="text-align: center;">
-                        <h3 style="color: var(--primary-dark); margin-bottom: 30px;">Cohérence Cardiaque</h3>
+                        <h3 style="color: var(--primary-dark); margin-bottom: 30px;" data-i18n="breath_title">Cohérence Cardiaque</h3>
                         <div class="breathing-circle">
-                            <span id="breath-text" style="position: relative; z-index:2; color: white; font-weight: bold; font-size: 1.2rem;">Inspire</span>
+                            <span id="breath-text" style="position: relative; z-index:2; color: white; font-weight: bold; font-size: 1.2rem;">...</span>
                         </div>
-                        <p style="margin-top: 30px; color: var(--text-muted); font-size: 0.9rem;">Suit le rythme pour calmer ton anxiété.</p>
+                        <p style="margin-top: 30px; color: var(--text-muted); font-size: 0.9rem;" data-i18n="breath_instruction">Suit le rythme pour calmer ton anxiété.</p>
                     </div>
 
                     <!-- Joke Section -->
                     <div style="text-align: center; width: 100%; max-width: 400px; background: var(--bg-color); padding: 20px; border-radius: 20px; border: 1px dashed var(--secondary-color);">
-                        <h3 style="color: var(--secondary-color); margin-top: 0;">Minute Sourire</h3>
-                        <p id="joke-text" style="min-height: 60px; display: flex; align-items: center; justify-content: center; font-style: italic; color: var(--text-main);">Clique pour une blague !</p>
-                        <button onclick="showJoke()" style="background: var(--secondary-color); color: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <h3 style="color: var(--secondary-color); margin-top: 0;" data-i18n="joke_title">Minute Sourire</h3>
+                        <p id="joke-text" style="min-height: 60px; display: flex; align-items: center; justify-content: center; font-style: italic; color: var(--text-main);">...</p>
+                        <button onclick="showJoke()" style="background: var(--secondary-color); color: white; padding: 10px 20px; border-radius: 20px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" data-i18n="btn_next_joke">
                             Une autre ! 🎭
                         </button>
                     </div>
@@ -699,30 +720,194 @@
 
 <!-- PANIC OVERLAY -->
 <div id="panic-room" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%); color: white; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;">
-    <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Tu es en sécurité.</h2>
-    <p style="font-size: 1.2rem; max-width: 600px; margin-bottom: 30px; line-height: 1.6;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 10px;" data-i18n="panic_title">Tu es en sécurité.</h2>
+    <p style="font-size: 1.2rem; max-width: 600px; margin-bottom: 30px; line-height: 1.6;" data-i18n="panic_text">
         Respire. Tu es aimée. Tu es capable. <br>
         Cette anxiété n'est qu'un nuage qui passe, tu es le ciel. <br>
         Prends tout le temps qu'il te faut. 💖
     </p>
 
     <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 20px; margin-bottom: 30px; backdrop-filter: blur(10px);">
-        <h3 style="margin-top: 0;">Technique d'Ancrage 5-4-3-2-1</h3>
+        <h3 style="margin-top: 0;" data-i18n="anchor_title">Technique d'Ancrage 5-4-3-2-1</h3>
         <ul style="text-align: left; list-style: none; padding: 0;">
-            <li style="margin-bottom: 10px;">👀 <b>5</b> choses que tu vois</li>
-            <li style="margin-bottom: 10px;">✋ <b>4</b> choses que tu peux toucher</li>
-            <li style="margin-bottom: 10px;">👂 <b>3</b> choses que tu entends</li>
-            <li style="margin-bottom: 10px;">👃 <b>2</b> choses que tu peux sentir</li>
-            <li style="margin-bottom: 10px;">👅 <b>1</b> chose que tu peux goûter (ou une émotion positive)</li>
+            <li style="margin-bottom: 10px;" data-i18n="anchor_5">👀 <b>5</b> choses que tu vois</li>
+            <li style="margin-bottom: 10px;" data-i18n="anchor_4">✋ <b>4</b> choses que tu peux toucher</li>
+            <li style="margin-bottom: 10px;" data-i18n="anchor_3">👂 <b>3</b> choses que tu entends</li>
+            <li style="margin-bottom: 10px;" data-i18n="anchor_2">👃 <b>2</b> choses que tu peux sentir</li>
+            <li style="margin-bottom: 10px;" data-i18n="anchor_1">👅 <b>1</b> chose que tu peux goûter</li>
         </ul>
     </div>
 
-    <button onclick="closePanic()" style="background: white; color: #3f2b96; padding: 15px 40px; border-radius: 30px; font-size: 1.2rem; font-weight: bold; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+    <button onclick="closePanic()" style="background: white; color: #3f2b96; padding: 15px 40px; border-radius: 30px; font-size: 1.2rem; font-weight: bold; box-shadow: 0 10px 20px rgba(0,0,0,0.2);" data-i18n="btn_better">
         Je me sens mieux 🌿
     </button>
 </div>
 
 <script>
+    /* --- I18N SYSTEM --- */
+    const translations = {
+        fr: {
+            nav_home: "Accueil", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Outils", nav_relax: "Détente", nav_crush: "Crush", nav_trophies: "Succès",
+            spoons_title: "Mes Cuillères", chrono_title: "Chronobiologie", tip_title: "Conseil du Jour",
+            studio_title: "Studio Virtuel", studio_subtitle: "Sélectionne une catégorie pour commencer ton shooting guidé.",
+            seasonal_title: "📅 Calendrier Stratégique", calc_title: "💰 Calculatrice de Profit", calc_result_label: "Bénéfice Net",
+            calc_buy_ph: "Prix d'Achat (€)", calc_sell_ph: "Prix de Vente (€)", calc_fees_ph: "Emballage/Divers (€)",
+            scripts_title: "💬 Réponses Magiques", script_select_ph: "Choisir une situation...",
+            script_lowball: "Offre ridicule (-50%)", script_rude: "Pas de \"Bonjour\"", script_ghost: "Plus de réponse", script_reserve: "Demande de réservation", script_late: "Retard d'envoi",
+            copy_response: "Copier la réponse", packing_title: "📦 Checklist Colis Parfait", reset_list: "Réinitialiser la liste",
+            seo_title: "Générateur d'Annonce", seo_subtitle: "Remplis les champs pour créer une annonce optimisée pour l'algorithme Vinted.",
+            title_perfect: "Le Titre Parfait", label_preview: "Aperçu", btn_copy: "Copier", desc_magic: "Description Magique", tags_title: "Hashtags & Tendances",
+            ph_brand: "Marque", ph_type: "Type", ph_color: "Couleur", ph_material: "Matière", ph_condition: "-- État --", ph_vibe: "Style", ph_details: "Détails...", ph_manual_tag: "#HashtagManuel",
+            cond_new: "Neuf avec étiquette", cond_vgood: "Très bon état", cond_good: "Bon état", cond_fair: "Satisfaisant",
+            btn_add: "Ajouter", pack_select: "-- Packs Experts --",
+            trophy_title: "Salle des Trophées", trophy_subtitle: "Débloque des succès en utilisant l'application.",
+            game_title: "Vinted Crush Infini", score: "Score", high_score: "Record", btn_new_game: "Nouvelle Partie",
+            relax_title: "Zone de Décompression", relax_subtitle: "Prends un moment pour respirer et recharger tes cuillères.",
+            breath_title: "Cohérence Cardiaque", breath_instruction: "Suit le rythme pour calmer ton anxiété.",
+            joke_title: "Minute Sourire", btn_next_joke: "Une autre ! 🎭",
+            panic_title: "Tu es en sécurité.", panic_text: "Respire. Tu es aimée. Tu es capable. <br>Cette anxiété n'est qu'un nuage qui passe, tu es le ciel. <br>Prends tout le temps qu'il te faut. 💖",
+            anchor_title: "Technique d'Ancrage 5-4-3-2-1", anchor_5: "👀 <b>5</b> choses que tu vois", anchor_4: "✋ <b>4</b> choses que tu peux toucher", anchor_3: "👂 <b>3</b> choses que tu entends", anchor_2: "👃 <b>2</b> choses que tu peux sentir", anchor_1: "👅 <b>1</b> chose que tu peux goûter", btn_better: "Je me sens mieux 🌿"
+        },
+        en: {
+            nav_home: "Home", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Tools", nav_relax: "Relax", nav_crush: "Crush", nav_trophies: "Trophies",
+            spoons_title: "My Spoons", chrono_title: "Chronobiology", tip_title: "Tip of the Day",
+            studio_title: "Virtual Studio", studio_subtitle: "Select a category to start your guided shoot.",
+            seasonal_title: "📅 Strategic Calendar", calc_title: "💰 Profit Calculator", calc_result_label: "Net Profit",
+            calc_buy_ph: "Buy Price (€)", calc_sell_ph: "Sell Price (€)", calc_fees_ph: "Fees/Packing (€)",
+            scripts_title: "💬 Magic Replies", script_select_ph: "Choose a scenario...",
+            script_lowball: "Lowball offer (-50%)", script_rude: "No \"Hello\"", script_ghost: "Ghosting", script_reserve: "Hold request", script_late: "Shipping delay",
+            copy_response: "Copy Reply", packing_title: "📦 Perfect Package Checklist", reset_list: "Reset List",
+            seo_title: "Listing Generator", seo_subtitle: "Fill in the fields to create an algorithm-optimized Vinted listing.",
+            title_perfect: "The Perfect Title", label_preview: "Preview", btn_copy: "Copy", desc_magic: "Magic Description", tags_title: "Hashtags & Trends",
+            ph_brand: "Brand", ph_type: "Type", ph_color: "Color", ph_material: "Material", ph_condition: "-- Condition --", ph_vibe: "Style", ph_details: "Details...", ph_manual_tag: "#ManualTag",
+            cond_new: "New with tags", cond_vgood: "Very good", cond_good: "Good", cond_fair: "Satisfactory",
+            btn_add: "Add", pack_select: "-- Expert Packs --",
+            trophy_title: "Trophy Room", trophy_subtitle: "Unlock achievements by using the app.",
+            game_title: "Infinite Vinted Crush", score: "Score", high_score: "Record", btn_new_game: "New Game",
+            relax_title: "Decompression Zone", relax_subtitle: "Take a moment to breathe and recharge your spoons.",
+            breath_title: "Cardiac Coherence", breath_instruction: "Follow the rhythm to calm your anxiety.",
+            joke_title: "Smile Minute", btn_next_joke: "Another one! 🎭",
+            panic_title: "You are safe.", panic_text: "Breathe. You are loved. You are capable. <br>This anxiety is just a passing cloud, you are the sky. <br>Take all the time you need. 💖",
+            anchor_title: "Grounding Technique 5-4-3-2-1", anchor_5: "👀 <b>5</b> things you see", anchor_4: "✋ <b>4</b> things you can touch", anchor_3: "👂 <b>3</b> things you hear", anchor_2: "👃 <b>2</b> things you can smell", anchor_1: "👅 <b>1</b> thing you can taste", btn_better: "I feel better 🌿"
+        },
+        de: {
+            nav_home: "Start", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Tools", nav_relax: "Entspannung", nav_crush: "Crush", nav_trophies: "Erfolge",
+            spoons_title: "Meine Löffel", chrono_title: "Chronobiologie", tip_title: "Tipp des Tages",
+            studio_title: "Virtuelles Studio", studio_subtitle: "Wähle eine Kategorie, um dein geführtes Shooting zu starten.",
+            seasonal_title: "📅 Strategischer Kalender", calc_title: "💰 Gewinnrechner", calc_result_label: "Nettogewinn",
+            calc_buy_ph: "Einkaufspreis (€)", calc_sell_ph: "Verkaufspreis (€)", calc_fees_ph: "Gebühren/Verpackung (€)",
+            scripts_title: "💬 Magische Antworten", script_select_ph: "Szenario wählen...",
+            script_lowball: "Unverschämtes Angebot", script_rude: "Kein \"Hallo\"", script_ghost: "Keine Antwort mehr", script_reserve: "Reservierungsanfrage", script_late: "Versandverzögerung",
+            copy_response: "Antwort kopieren", packing_title: "📦 Perfektes Paket Checkliste", reset_list: "Liste zurücksetzen",
+            seo_title: "Anzeigengenerator", seo_subtitle: "Fülle die Felder aus, um eine für den Vinted-Algorithmus optimierte Anzeige zu erstellen.",
+            title_perfect: "Der perfekte Titel", label_preview: "Vorschau", btn_copy: "Kopieren", desc_magic: "Magische Beschreibung", tags_title: "Hashtags & Trends",
+            ph_brand: "Marke", ph_type: "Typ", ph_color: "Farbe", ph_material: "Material", ph_condition: "-- Zustand --", ph_vibe: "Stil", ph_details: "Details...", ph_manual_tag: "#ManuellerTag",
+            cond_new: "Neu mit Etikett", cond_vgood: "Sehr gut", cond_good: "Gut", cond_fair: "Zufriedenstellend",
+            btn_add: "Hinzufügen", pack_select: "-- Experten-Packs --",
+            trophy_title: "Trophäenraum", trophy_subtitle: "Schalte Erfolge frei, indem du die App nutzt.",
+            game_title: "Unendlicher Vinted Crush", score: "Punktzahl", high_score: "Rekord", btn_new_game: "Neues Spiel",
+            relax_title: "Entspannungszone", relax_subtitle: "Nimm dir einen Moment zum Atmen und lade deine Löffel auf.",
+            breath_title: "Herzkohärenz", breath_instruction: "Folge dem Rhythmus, um deine Angst zu beruhigen.",
+            joke_title: "Lächel-Minute", btn_next_joke: "Noch einer! 🎭",
+            panic_title: "Du bist in Sicherheit.", panic_text: "Atme. Du wirst geliebt. Du schaffst das. <br>Diese Angst ist nur eine Wolke, die vorbeizieht, du bist der Himmel. <br>Nimm dir alle Zeit, die du brauchst. 💖",
+            anchor_title: "Erdungstechnik 5-4-3-2-1", anchor_5: "👀 <b>5</b> Dinge, die du siehst", anchor_4: "✋ <b>4</b> Dinge, die du berühren kannst", anchor_3: "👂 <b>3</b> Dinge, die du hörst", anchor_2: "👃 <b>2</b> Dinge, die du riechen kannst", anchor_1: "👅 <b>1</b> Sache, die du schmecken kannst", btn_better: "Ich fühle mich besser 🌿"
+        },
+        es: {
+            nav_home: "Inicio", nav_studio: "Estudio", nav_seo: "SEO", nav_tools: "Herramientas", nav_relax: "Relax", nav_crush: "Crush", nav_trophies: "Trofeos",
+            spoons_title: "Mis Cucharas", chrono_title: "Cronobiología", tip_title: "Consejo del Día",
+            studio_title: "Estudio Virtual", studio_subtitle: "Selecciona una categoría para comenzar tu sesión guiada.",
+            seasonal_title: "📅 Calendario Estratégico", calc_title: "💰 Calculadora de Ganancias", calc_result_label: "Beneficio Neto",
+            calc_buy_ph: "Precio Compra (€)", calc_sell_ph: "Precio Venta (€)", calc_fees_ph: "Tasas/Embalaje (€)",
+            scripts_title: "💬 Respuestas Mágicas", script_select_ph: "Elige un escenario...",
+            script_lowball: "Oferta ridícula (-50%)", script_rude: "Sin \"Hola\"", script_ghost: "Sin respuesta", script_reserve: "Solicitud de reserva", script_late: "Retraso envío",
+            copy_response: "Copiar respuesta", packing_title: "📦 Checklist Paquete Perfecto", reset_list: "Reiniciar lista",
+            seo_title: "Generador de Anuncios", seo_subtitle: "Rellena los campos para crear un anuncio optimizado para el algoritmo Vinted.",
+            title_perfect: "El Título Perfecto", label_preview: "Vista previa", btn_copy: "Copiar", desc_magic: "Descripción Mágica", tags_title: "Hashtags & Tendencias",
+            ph_brand: "Marca", ph_type: "Tipo", ph_color: "Color", ph_material: "Material", ph_condition: "-- Estado --", ph_vibe: "Estilo", ph_details: "Detalles...", ph_manual_tag: "#TagManual",
+            cond_new: "Nuevo con etiqueta", cond_vgood: "Muy bueno", cond_good: "Bueno", cond_fair: "Satisfactorio",
+            btn_add: "Añadir", pack_select: "-- Packs Expertos --",
+            trophy_title: "Sala de Trofeos", trophy_subtitle: "Desbloquea logros usando la aplicación.",
+            game_title: "Vinted Crush Infinito", score: "Puntuación", high_score: "Récord", btn_new_game: "Nueva Partida",
+            relax_title: "Zona de Descompresión", relax_subtitle: "Tómate un momento para respirar y recargar tus cucharas.",
+            breath_title: "Coherencia Cardíaca", breath_instruction: "Sigue el ritmo para calmar tu ansiedad.",
+            joke_title: "Minuto Sonrisa", btn_next_joke: "¡Otro! 🎭",
+            panic_title: "Estás a salvo.", panic_text: "Respira. Eres amada. Eres capaz. <br>Esta ansiedad es solo una nube que pasa, tú eres el cielo. <br>Tómate todo el tiempo que necesites. 💖",
+            anchor_title: "Técnica de Anclaje 5-4-3-2-1", anchor_5: "👀 <b>5</b> cosas que ves", anchor_4: "✋ <b>4</b> cosas que puedes tocar", anchor_3: "👂 <b>3</b> cosas que oyes", anchor_2: "👃 <b>2</b> cosas que puedes oler", anchor_1: "👅 <b>1</b> cosa que puedes saborear", btn_better: "Me siento mejor 🌿"
+        },
+        it: {
+            nav_home: "Home", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Strumenti", nav_relax: "Relax", nav_crush: "Crush", nav_trophies: "Trofei",
+            spoons_title: "I Miei Cucchiai", chrono_title: "Cronobiologia", tip_title: "Consiglio del Giorno",
+            studio_title: "Studio Virtuale", studio_subtitle: "Seleziona una categoria per iniziare lo shooting guidato.",
+            seasonal_title: "📅 Calendario Strategico", calc_title: "💰 Calcolatore di Profitto", calc_result_label: "Profitto Netto",
+            calc_buy_ph: "Prezzo Acquisto (€)", calc_sell_ph: "Prezzo Vendita (€)", calc_fees_ph: "Spese/Imballaggio (€)",
+            scripts_title: "💬 Risposte Magiche", script_select_ph: "Scegli uno scenario...",
+            script_lowball: "Offerta ridicola (-50%)", script_rude: "Niente \"Ciao\"", script_ghost: "Nessuna risposta", script_reserve: "Richiesta prenotazione", script_late: "Ritardo spedizione",
+            copy_response: "Copia Risposta", packing_title: "📦 Checklist Pacco Perfetto", reset_list: "Resetta lista",
+            seo_title: "Generatore di Annunci", seo_subtitle: "Compila i campi per creare un annuncio ottimizzato per l'algoritmo Vinted.",
+            title_perfect: "Il Titolo Perfetto", label_preview: "Anteprima", btn_copy: "Copia", desc_magic: "Descrizione Magica", tags_title: "Hashtag & Tendenze",
+            ph_brand: "Marca", ph_type: "Tipo", ph_color: "Colore", ph_material: "Materiale", ph_condition: "-- Condizione --", ph_vibe: "Stile", ph_details: "Dettagli...", ph_manual_tag: "#TagManuale",
+            cond_new: "Nuovo con cartellino", cond_vgood: "Ottimo", cond_good: "Buono", cond_fair: "Soddisfacente",
+            btn_add: "Aggiungi", pack_select: "-- Pacchetti Esperti --",
+            trophy_title: "Sala dei Trofei", trophy_subtitle: "Sblocca obiettivi usando l'app.",
+            game_title: "Vinted Crush Infinito", score: "Punteggio", high_score: "Record", btn_new_game: "Nuova Partita",
+            relax_title: "Zona Decompressione", relax_subtitle: "Prenditi un momento per respirare e ricaricare i tuoi cucchiai.",
+            breath_title: "Coerenza Cardiaca", breath_instruction: "Segui il ritmo per calmare la tua ansia.",
+            joke_title: "Minuto Sorriso", btn_next_joke: "Un'altra! 🎭",
+            panic_title: "Sei al sicuro.", panic_text: "Respira. Sei amata. Sei capace. <br>Questa ansia è solo una nuvola che passa, tu sei il cielo. <br>Prenditi tutto il tempo di cui hai bisogno. 💖",
+            anchor_title: "Tecnica di Ancoraggio 5-4-3-2-1", anchor_5: "👀 <b>5</b> cose che vedi", anchor_4: "✋ <b>4</b> cose che puoi toccare", anchor_3: "👂 <b>3</b> cose che senti", anchor_2: "👃 <b>2</b> cose che puoi annusare", anchor_1: "👅 <b>1</b> cosa che puoi gustare", btn_better: "Mi sento meglio 🌿"
+        },
+        pl: {
+            nav_home: "Start", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Narzędzia", nav_relax: "Relaks", nav_crush: "Crush", nav_trophies: "Trofea",
+            spoons_title: "Moje Łyżki", chrono_title: "Chronobiologia", tip_title: "Porada Dnia",
+            studio_title: "Wirtualne Studio", studio_subtitle: "Wybierz kategorię, aby rozpocząć sesję zdjęciową.",
+            seasonal_title: "📅 Kalendarz Strategiczny", calc_title: "💰 Kalkulator Zysku", calc_result_label: "Zysk Netto",
+            calc_buy_ph: "Cena Zakupu (€)", calc_sell_ph: "Cena Sprzedaży (€)", calc_fees_ph: "Opłaty/Pakowanie (€)",
+            scripts_title: "💬 Magiczne Odpowiedzi", script_select_ph: "Wybierz scenariusz...",
+            script_lowball: "Śmieszna oferta (-50%)", script_rude: "Brak \"Cześć\"", script_ghost: "Brak odpowiedzi", script_reserve: "Prośba o rezerwację", script_late: "Opóźnienie wysyłki",
+            copy_response: "Kopiuj odpowiedź", packing_title: "📦 Idealna Paczka", reset_list: "Resetuj listę",
+            seo_title: "Generator Ogłoszeń", seo_subtitle: "Wypełnij pola, aby stworzyć ogłoszenie zoptymalizowane pod algorytm Vinted.",
+            title_perfect: "Idealny Tytuł", label_preview: "Podgląd", btn_copy: "Kopiuj", desc_magic: "Magiczny Opis", tags_title: "Hasztagi i Trendy",
+            ph_brand: "Marka", ph_type: "Typ", ph_color: "Kolor", ph_material: "Materiał", ph_condition: "-- Stan --", ph_vibe: "Styl", ph_details: "Szczegóły...", ph_manual_tag: "#RęcznyTag",
+            cond_new: "Nowy z metką", cond_vgood: "Bardzo dobry", cond_good: "Dobry", cond_fair: "Zadowalający",
+            btn_add: "Dodaj", pack_select: "-- Pakiety Eksperta --",
+            trophy_title: "Sala Trofeów", trophy_subtitle: "Odblokuj osiągnięcia, korzystając z aplikacji.",
+            game_title: "Nieskończony Vinted Crush", score: "Wynik", high_score: "Rekord", btn_new_game: "Nowa Gra",
+            relax_title: "Strefa Dekompresji", relax_subtitle: "Poświęć chwilę na oddech i naładowanie łyżek.",
+            breath_title: "Koherencja Serca", breath_instruction: "Podążaj za rytmem, aby uspokoić lęk.",
+            joke_title: "Minuta Uśmiechu", btn_next_joke: "Jeszcze jeden! 🎭",
+            panic_title: "Jesteś bezpieczna.", panic_text: "Oddychaj. Jesteś kochana. Jesteś zdolna. <br>Ten lęk to tylko chmura, która mija, ty jesteś niebem. <br>Weź tyle czasu, ile potrzebujesz. 💖",
+            anchor_title: "Technika Uziemienia 5-4-3-2-1", anchor_5: "👀 <b>5</b> rzeczy, które widzisz", anchor_4: "✋ <b>4</b> rzeczy, które możesz dotknąć", anchor_3: "👂 <b>3</b> rzeczy, które słyszysz", anchor_2: "👃 <b>2</b> rzeczy, które czujesz", anchor_1: "👅 <b>1</b> rzecz, którą możesz posmakować", btn_better: "Czuję się lepiej 🌿"
+        }
+    };
+
+    let currentLang = localStorage.getItem('app_lang') || 'fr';
+
+    window.changeLanguage = function(lang) {
+        currentLang = lang;
+        localStorage.setItem('app_lang', lang);
+
+        // Update Static UI
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang][key]) el.innerHTML = translations[lang][key];
+        });
+
+        document.querySelectorAll('[data-placeholder-i18n]').forEach(el => {
+            const key = el.getAttribute('data-placeholder-i18n');
+            if (translations[lang][key]) el.placeholder = translations[lang][key];
+        });
+
+        document.getElementById('langSelect').value = lang;
+
+        // Refresh Dynamic Components
+        renderStudio(); // Need to update studio data accessor
+        initSeasonalCalendar();
+        initPackingList(); // Need translation for items
+        updateDailyTip(); // Need translated tips
+        showJoke(); // Need translated jokes
+        updateSeoPreview(); // Need translated copy
+    }
+
     /* --- STATE MANAGEMENT & UTILS --- */
 
     // Theme Management
@@ -2063,18 +2248,19 @@
     document.addEventListener('DOMContentLoaded', () => {
         // Robust initialization
         try { initTheme(); } catch(e) { console.error("Theme init failed", e); }
+        try { changeLanguage(currentLang); } catch(e) { console.error("Lang init failed", e); } // INIT LANG FIRST
         try { initSpoons(); } catch(e) { console.error("Spoons init failed", e); }
-        try { renderStudio(); } catch(e) { console.error("Studio init failed", e); }
+        // renderStudio called by changeLanguage
         try { updateChronoWidget(); } catch(e) { console.error("Chrono init failed", e); }
-        try { updateDailyTip(); } catch(e) { console.error("Tip init failed", e); }
-        try { showJoke(); } catch(e) { console.error("Joke init failed", e); }
+        // updateDailyTip called by changeLanguage
+        // showJoke called by changeLanguage
         try { initBreathing(); } catch(e) { console.error("Breath init failed", e); }
 
         // Critical Features Init
         try { initTrophies(); } catch(e) { console.error("Trophies init failed", e); }
         try { unlockTrophy('first_visit'); } catch(e) { console.error("Unlock failed", e); }
-        try { initPackingList(); } catch(e) { console.error("Packing init failed", e); }
-        try { initSeasonalCalendar(); } catch(e) { console.error("Seasonal init failed", e); }
+        // initPackingList called by changeLanguage
+        // initSeasonalCalendar called by changeLanguage
 
         // Game Init (Moved to end to prevent blocking other features if it fails)
         try { initGame(); } catch(e) { console.error("Game init failed", e); }
