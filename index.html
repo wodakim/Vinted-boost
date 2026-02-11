@@ -100,6 +100,28 @@
             color: var(--text-muted);
         }
 
+        /* --- SOS BUTTON --- */
+        .sos-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.4);
+            animation: pulse-sos 2s infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes pulse-sos {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+        }
+
         /* --- DARK MODE TOGGLE --- */
         .theme-toggle {
             background: none;
@@ -278,10 +300,15 @@
             <h1>L'IMPÉRATRICE</h1>
             <p>Ton assistante personnelle de vente</p>
         </div>
-        <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">
-            <!-- Icon will be injected by JS -->
-            <svg class="icon toggle-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        </button>
+        <div style="display: flex; align-items: center;">
+            <button class="sos-btn" onclick="triggerPanic()" aria-label="SOS Hypersensibilité">
+                <svg class="icon" viewBox="0 0 24 24" style="fill: white; stroke: none;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </button>
+            <button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">
+                <!-- Icon will be injected by JS -->
+                <svg class="icon toggle-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            </button>
+        </div>
     </header>
 
     <!-- NAVIGATION -->
@@ -468,18 +495,19 @@
                         <textarea id="gen-desc-details" placeholder="Détails supplémentaires (mesures, raison de la vente, défauts éventuels...)" style="width: 100%; height: 100px; padding: 10px; border-radius: 10px; border: 1px solid var(--accent-color);" oninput="updateSeoPreview()"></textarea>
 
                         <div style="margin-top: 15px;">
-                            <label style="font-size: 0.9rem; font-weight: bold; color: var(--text-muted);">Hashtags Tendances (Max 5)</label>
-                            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
-                                <button class="tag-btn" onclick="toggleTag(this)">#y2k</button>
-                                <button class="tag-btn" onclick="toggleTag(this)">#vintage</button>
-                                <button class="tag-btn" onclick="toggleTag(this)">#oldmoney</button>
-                                <button class="tag-btn" onclick="toggleTag(this)">#coquette</button>
-                                <button class="tag-btn" onclick="toggleTag(this)">#gorpcore</button>
-                                <button class="tag-btn" onclick="toggleTag(this)">#office</button>
-                                <button class="tag-btn" onclick="toggleTag(this)">#streetwear</button>
-                                <button class="tag-btn" onclick="toggleTag(this)">#boheme</button>
-                                <button class="tag-btn" onclick="toggleTag(this)">#casual</button>
-                                <button class="tag-btn" onclick="toggleTag(this)">#chic</button>
+                            <label style="font-size: 0.9rem; font-weight: bold; color: var(--text-muted);">Packs Hashtags 2026 (Max 5)</label>
+                            <select id="trend-pack-selector" onchange="applyTrendPack()" style="margin-top: 8px; margin-bottom: 8px;">
+                                <option value="">-- Choisir un Pack Tendance --</option>
+                                <option value="gorpcore">🏔 Gorpcore 2026 (Arc'teryx, Salomon)</option>
+                                <option value="officesiren">💼 Office Siren (Miu Miu, Lunettes)</option>
+                                <option value="coquette">🎀 Coquette / Balletcore (Nœuds)</option>
+                                <option value="oldmoney">💸 Old Money / Quiet Luxury</option>
+                                <option value="y2k">💿 Y2K / Cyber (2000s)</option>
+                                <option value="darkacademia">📚 Dark Academia / Preppy</option>
+                            </select>
+
+                            <div id="active-tags" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                                <!-- Tags injected here -->
                             </div>
                         </div>
 
@@ -635,6 +663,31 @@
     </footer>
 </div>
 
+<!-- PANIC OVERLAY -->
+<div id="panic-room" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%); color: white; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Tu es en sécurité.</h2>
+    <p style="font-size: 1.2rem; max-width: 600px; margin-bottom: 30px; line-height: 1.6;">
+        Respire. Tu es aimée. Tu es capable. <br>
+        Cette anxiété n'est qu'un nuage qui passe, tu es le ciel. <br>
+        Prends tout le temps qu'il te faut. 💖
+    </p>
+
+    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 20px; margin-bottom: 30px; backdrop-filter: blur(10px);">
+        <h3 style="margin-top: 0;">Technique d'Ancrage 5-4-3-2-1</h3>
+        <ul style="text-align: left; list-style: none; padding: 0;">
+            <li style="margin-bottom: 10px;">👀 <b>5</b> choses que tu vois</li>
+            <li style="margin-bottom: 10px;">✋ <b>4</b> choses que tu peux toucher</li>
+            <li style="margin-bottom: 10px;">👂 <b>3</b> choses que tu entends</li>
+            <li style="margin-bottom: 10px;">👃 <b>2</b> choses que tu peux sentir</li>
+            <li style="margin-bottom: 10px;">👅 <b>1</b> chose que tu peux goûter (ou une émotion positive)</li>
+        </ul>
+    </div>
+
+    <button onclick="closePanic()" style="background: white; color: #3f2b96; padding: 15px 40px; border-radius: 30px; font-size: 1.2rem; font-weight: bold; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+        Je me sens mieux 🌿
+    </button>
+</div>
+
 <script>
     /* --- STATE MANAGEMENT & UTILS --- */
 
@@ -756,49 +809,49 @@
 
     const photoStudioData = {
         vetements: {
-            name: "Vêtements",
+            name: "Vêtements & Mode",
             icon: `<svg class="icon" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path></svg>`,
             steps: [
                 {
                     id: 'cover',
-                    title: "La Photo de Couverture (Le Hook)",
-                    description: "L'article entier, de face, sur fond neutre (mur blanc ou parquet).",
-                    algoSecret: "L'algorithme privilégie les photos lumineuses et verticales (format portrait). Une photo sur cintre ou mannequin a un CTR (taux de clic) 30% supérieur à un vêtement froissé au sol.",
+                    title: "Le Hook Visuel (Couverture)",
+                    description: "Prends la photo en <b>Lumière Naturelle</b> (Face fenêtre). Format PORTRAIT.",
+                    algoSecret: "🧠 <b>Computer Vision :</b> L'IA détecte la silhouette humaine. Une photo portée (ou sur mannequin) augmente le CTR de +40%. Si c'est plat, utilise un fond uni.",
                     icon: "camera"
                 },
                 {
                     id: 'back',
-                    title: "Le Dos",
-                    description: "Photo complète de l'arrière du vêtement.",
-                    algoSecret: "Réduit le taux de retour. Les acheteurs méfiants cherchent les taches ou trous souvent cachés au dos.",
+                    title: "Le Dos (Rassurance)",
+                    description: "Photo complète de l'arrière. Vérifie l'absence de taches.",
+                    algoSecret: "🛡 <b>Anti-Litige :</b> Montrer le dos réduit de 20% les questions 'message privé' et accélère la vente.",
                     icon: "refresh"
                 },
                 {
                     id: 'label_brand',
-                    title: "Étiquette de Marque (Col)",
-                    description: "Gros plan net sur la marque et la taille au col.",
-                    algoSecret: "CRUCIAL : L'IA de Vinted lit le texte sur les photos. Une photo nette de l'étiquette confirme la marque et booste le référencement SEO de ton annonce.",
+                    title: "Preuve de Marque (OCR)",
+                    description: "Zoom net sur l'étiquette du col. Le texte doit être lisible.",
+                    algoSecret: "🤖 <b>OCR Scan :</b> Vinted lit le texte ! Une photo nette de l'étiquette valide la marque automatiquement et booste le SEO.",
                     icon: "eye"
                 },
                 {
                     id: 'label_comp',
-                    title: "Étiquette de Composition",
-                    description: "L'étiquette intérieure indiquant la matière (coton, soie, etc.) et les instructions de lavage.",
-                    algoSecret: "Les filtres 'Matière' sont très utilisés. Prouver que c'est du 100% Soie ou Laine justifie un prix plus élevé.",
+                    title: "Preuve de Matière",
+                    description: "L'étiquette de lavage (coton, soie, laine).",
+                    algoSecret: "💎 <b>Value Boost :</b> Le filtre 'Matière' est utilisé par les acheteurs riches. Prouver la soie/laine justifie un prix X2.",
                     icon: "info"
                 },
                 {
                     id: 'details',
-                    title: "Zoom Texture & Détails",
-                    description: "Gros plan sur le tissu, les boutons, les broderies ou le logo.",
-                    algoSecret: "L'engagement augmente quand l'utilisateur scrolle les photos. Montrer la texture donne une impression 'tactile' qui déclenche l'achat.",
+                    title: "Texture Tactile",
+                    description: "Macro sur le tissu, boutons, broderies.",
+                    algoSecret: "👆 <b>Désirabilité :</b> Le cerveau a besoin de 'sentir' la texture pour acheter en ligne.",
                     icon: "trending"
                 },
                 {
                     id: 'defects',
-                    title: "Les Défauts (Transparence)",
-                    description: "Photo zoomée sur le moindre défaut (fil tiré, tache, bouloche) avec ton doigt pointé dessus.",
-                    algoSecret: "Paradoxe de l'honnêteté : Montrer un défaut augmente la confiance. Un acheteur qui voit le défaut n'ouvrira pas de litige (Vinted te donnera raison).",
+                    title: "Transparence Totale",
+                    description: "Zoom sur le défaut avec le doigt pointé dessus.",
+                    algoSecret: "🤝 <b>Trust Score :</b> Montrer les défauts augmente paradoxalement la confiance. Vinted te donnera raison en cas de litige.",
                     icon: "alert"
                 }
             ]
@@ -1008,80 +1061,68 @@
             return;
         }
 
-        // VIEW 3: STEPS
+        // VIEW 3: STEPS (REDESIGNED PRO MODE)
         const currentStepData = catData.steps[studioState.currentStep];
         const isCurrentStepDone = studioState.completedSteps.includes(studioState.currentStep);
 
         let html = `
-            <!-- Header with Back & Progress -->
-            <div style="margin-bottom: 20px;">
-                <button onclick="resetStudio()" style="background: none; border: none; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">← Retour au choix</button>
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 5px;">
-                    <span style="font-weight: bold; color: var(--primary-dark);">${catData.name}</span>
-                    <span style="color: var(--primary-color); font-weight: bold;">${progress}%</span>
-                </div>
-                <div style="background: var(--bg-color); height: 8px; border-radius: 4px; overflow: hidden;">
-                    <div style="background: var(--primary-dark); height: 100%; width: ${progress}%; transition: width 0.3s;"></div>
-                </div>
+            <!-- Pro Header -->
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                <button onclick="resetStudio()" style="font-size: 0.9rem; color: var(--text-muted);">← Quitter</button>
+                <div style="font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-dark);">Studio Mode</div>
+                <div style="font-size: 0.9rem; font-weight: bold;">${studioState.currentStep + 1}/${totalSteps}</div>
             </div>
 
-            <!-- Steps Nav Bubbles -->
-            <div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 20px;">
-                ${catData.steps.map((s, idx) => {
-                    const isDone = studioState.completedSteps.includes(idx);
-                    const isCurrent = idx === studioState.currentStep;
-                    let bg = 'var(--bg-color)';
-                    let color = 'var(--text-muted)';
-                    let border = '1px solid transparent';
+            <!-- Immersive Step Card -->
+            <div style="position: relative; background: var(--surface-color); border-radius: 25px; overflow: hidden; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15); border: 1px solid var(--bg-color);">
 
-                    if (isCurrent) {
-                        bg = 'var(--primary-dark)';
-                        color = 'white';
-                    } else if (isDone) {
-                        bg = 'var(--success-color)';
-                        color = '#1c4a33'; // darker green text
-                    }
-
-                    return `<button onclick="goToStep(${idx})"
-                                    style="min-width: 32px; height: 32px; border-radius: 50%; background: ${bg}; color: ${color}; border: ${border}; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">
-                                ${isDone ? getStepIcon('check') : idx + 1}
-                            </button>`;
-                }).join('')}
-            </div>
-
-            <!-- Main Step Card -->
-            <div style="display: flex; flex-col; height: 100%;">
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <div style="background: var(--bg-color); width: 80px; height: 80px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--primary-dark);">
+                <!-- Visual Indicator (Top Half) -->
+                <div style="background: linear-gradient(135deg, var(--bg-color) 0%, var(--surface-color) 100%); padding: 30px; text-align: center; position: relative;">
+                    <div style="position: absolute; top: 10px; right: 10px; opacity: 0.2;">
+                        <svg width="100" height="100" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary-color);">${getStepIcon(currentStepData.icon)}</svg>
+                    </div>
+                    <div style="background: white; width: 80px; height: 80px; border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(0,0,0,0.05); color: var(--primary-dark);">
                         ${getStepIcon(currentStepData.icon)}
                     </div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">${currentStepData.title}</h3>
-                    <p style="color: var(--text-main); font-size: 1.1rem;">${currentStepData.description}</p>
+                    <h3 style="font-size: 1.6rem; margin: 15px 0 5px 0; color: var(--text-main);">${currentStepData.title}</h3>
+                    <div style="height: 4px; width: 40px; background: var(--secondary-color); margin: 0 auto 15px auto; border-radius: 2px;"></div>
+                    <p style="font-size: 1rem; line-height: 1.5; color: var(--text-main); margin-bottom: 0;">${currentStepData.description}</p>
                 </div>
 
-                <!-- Secret Box -->
-                <div style="background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%); border: 1px solid #fed7d7; border-radius: 15px; padding: 15px; margin-bottom: 30px; position: relative; overflow: hidden;">
-                     <div style="display: flex; gap: 15px; align-items: start;">
-                        <div style="background: #fff; padding: 8px; border-radius: 10px; color: #e53e3e;">${getStepIcon('trending')}</div>
-                        <div>
-                            <h4 style="margin: 0 0 5px 0; color: #c53030; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Secret de l'Algo</h4>
-                            <p style="margin: 0; font-size: 0.9rem; color: #742a2a;">${currentStepData.algoSecret}</p>
-                        </div>
-                     </div>
+                <!-- Algorithmic Secret (Dark Overlay style) -->
+                <div style="background: #2D2D3A; color: #E0E0E0; padding: 20px;">
+                    <div style="display: flex; gap: 12px;">
+                        <div style="min-width: 24px; color: #FFD700;">⚡</div>
+                        <div style="font-size: 0.9rem; line-height: 1.5;">${currentStepData.algoSecret}</div>
+                    </div>
                 </div>
 
-                <!-- Action Button -->
-                <button onclick="completeStep()"
-                        style="width: 100%; padding: 20px; border-radius: 15px; font-size: 1.1rem; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.2s;
-                               background: ${isCurrentStepDone ? 'var(--bg-color)' : 'var(--primary-dark)'};
-                               color: ${isCurrentStepDone ? 'var(--text-muted)' : 'white'};
-                               box-shadow: ${isCurrentStepDone ? 'none' : '0 10px 20px -10px var(--primary-dark)'};">
-                    ${isCurrentStepDone ? getStepIcon('check') + ' Photo Validée' : getStepIcon('camera') + " J'ai pris cette photo"}
-                </button>
+                <!-- Interactive Action Area -->
+                <div style="padding: 20px;">
+                    <button onclick="completeStep()"
+                            style="width: 100%; padding: 18px; border-radius: 18px; font-size: 1.1rem; font-weight: bold; border: none; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px;
+                                   background: ${isCurrentStepDone ? 'var(--success-color)' : 'var(--primary-dark)'};
+                                   color: white;
+                                   transform: ${isCurrentStepDone ? 'scale(0.98)' : 'scale(1)'};
+                                   box-shadow: 0 8px 20px -5px ${isCurrentStepDone ? 'rgba(0,0,0,0)' : 'var(--accent-color)'};">
+                        ${isCurrentStepDone ? '✅ Photo Validée !' : '📸 Je valide cette étape'}
+                    </button>
 
-                ${isCurrentStepDone && studioState.currentStep < totalSteps - 1 ?
-                    `<button onclick="goToStep(${studioState.currentStep + 1})" style="width: 100%; margin-top: 10px; color: var(--primary-dark); background: none;">Passer à la suivante →</button>`
-                    : ''}
+                    ${isCurrentStepDone && studioState.currentStep < totalSteps - 1 ?
+                        `<div onclick="goToStep(${studioState.currentStep + 1})" style="text-align: center; margin-top: 15px; color: var(--text-muted); cursor: pointer; padding: 10px; font-size: 0.9rem;">
+                            Étape suivante <span style="display: inline-block; transform: translateY(1px);">▼</span>
+                         </div>`
+                        : ''}
+                </div>
+            </div>
+
+            <!-- Progress Dots -->
+            <div style="display: flex; justify-content: center; gap: 6px; margin-top: 20px;">
+                ${catData.steps.map((s, idx) => `
+                    <div style="width: 8px; height: 8px; border-radius: 50%; transition: all 0.3s;
+                                background: ${idx === studioState.currentStep ? 'var(--primary-dark)' : (studioState.completedSteps.includes(idx) ? 'var(--success-color)' : 'var(--accent-color)')};
+                                transform: ${idx === studioState.currentStep ? 'scale(1.5)' : 'scale(1)'};"></div>
+                `).join('')}
             </div>
         `;
 
@@ -1091,6 +1132,49 @@
     // --- SEO GENERATOR LOGIC ---
     let selectedTags = [];
 
+    const trendPacks = {
+        gorpcore: ["#gorpcore", "#trekking", "#arcteryxstyle", "#techwear", "#outdoor"],
+        officesiren: ["#officesiren", "#corpcore", "#bayonetta", "#miumiu", "#90sminimalism"],
+        coquette: ["#coquette", "#balletcore", "#ribbons", "#lanadelrey", "#softgirl"],
+        oldmoney: ["#oldmoney", "#quietluxury", "#cashmere", "#ralphlauren", "#classy"],
+        y2k: ["#y2k", "#2000s", "#cyber", "#bimbo", "#bratz"],
+        darkacademia: ["#darkacademia", "#preppy", "#vintage", "#wool", "#classic"]
+    };
+
+    window.applyTrendPack = function() {
+        const selector = document.getElementById('trend-pack-selector');
+        const packKey = selector.value;
+        if(!packKey) return;
+
+        // Add unique tags from pack
+        const newTags = trendPacks[packKey];
+        newTags.forEach(tag => {
+            if(!selectedTags.includes(tag) && selectedTags.length < 15) { // Limit total tags
+                selectedTags.push(tag);
+            }
+        });
+
+        renderTags();
+        updateSeoPreview();
+        selector.value = ""; // Reset
+        unlockTrophy('trend_setter');
+    }
+
+    function renderTags() {
+        const container = document.getElementById('active-tags');
+        container.innerHTML = selectedTags.map(tag =>
+            `<button class="tag-btn" onclick="removeTag('${tag}')" style="background: var(--primary-dark); color: white; border-color: var(--primary-dark); padding: 4px 10px; font-size: 0.8rem;">
+                ${tag} ✕
+             </button>`
+        ).join('');
+    }
+
+    window.removeTag = function(tag) {
+        selectedTags = selectedTags.filter(t => t !== tag);
+        renderTags();
+        updateSeoPreview();
+    }
+
     window.updateSeoPreview = function() {
         const brand = document.getElementById('gen-brand').value;
         const type = document.getElementById('gen-type').value;
@@ -1098,53 +1182,48 @@
         const material = document.getElementById('gen-material').value;
         const condition = document.getElementById('gen-condition').value;
         const vibe = document.getElementById('gen-vibe').value;
-
-        // Title Formula: Brand + Type + Material/Color + Vibe + Condition
-        // We filter Boolean to remove empty strings
-        const titleParts = [brand, type, material, color, vibe, condition].filter(Boolean);
-        const title = titleParts.join(' ');
-
-        document.getElementById('title-preview').innerText = title || "...";
-
-        // Description Formula
         const details = document.getElementById('gen-desc-details').value;
 
-        // Construct description with emojis and structure
+        // Title Formula
+        const titleParts = [brand, type, material, color, vibe, condition].filter(Boolean);
+        const title = titleParts.join(' ');
+        document.getElementById('title-preview').innerText = title || "...";
+
+        // SALES COPY DESCRIPTION
         let desc = "";
-        if(type || brand) desc += `Bonjour ! 🌸\n\nJe vends ce magnifique ${type || 'article'} de la marque ${brand || '...'}.\n\n`;
-        else desc += "Bonjour ! 🌸\n\n";
 
-        if(condition) desc += `✨ État : ${condition}\n`;
-        if(color) desc += `🎨 Couleur : ${color}\n`;
-        if(material) desc += `🧵 Matière : ${material}\n`;
-        if(vibe) desc += `👗 Style : ${vibe}\n`;
+        // Hook
+        if(brand) desc += `🔥 RARE : ${brand} ${type || 'Pièce'} - ${vibe || 'Tendance'} !\n\n`;
+        else desc += `✨ PÉPITE À SAISIR : ${type || 'Article'} ${vibe || ''}\n\n`;
 
-        if(details) desc += `\n📝 Détails : ${details}\n`;
+        // Emotional/Descriptive Body
+        desc += `Je me sépare de cette merveille car je fais du tri dans mon dressing (trop de vêtements !). \n`;
+        desc += `C'est une pièce idéale pour la saison, très agréable à porter et qui fait son petit effet. ✨\n\n`;
 
-        desc += `\n📦 Envoi rapide et soigné (sous 24-48h). N'hésitez pas si vous avez des questions ou pour faire un lot !\n\n`;
+        // Technical Specs
+        desc += `📏 TAILLE & ÉTAT :\n`;
+        if(condition) desc += `• État : ${condition} (Vérifié avec soin)\n`;
+        if(color) desc += `• Couleur : ${color}\n`;
+        if(material) desc += `• Matière : ${material}\n`;
+        if(details) desc += `• Info + : ${details}\n`;
+
+        // Urgency & CTA
+        desc += `\n🚀 ENVOI RAPIDE :\n`;
+        desc += `• J'envoie sous 24h (Mondial Relay / Chrono préférés).\n`;
+        desc += `• Emballage soigné et protégé 🎁\n`;
+        desc += `• Maison non-fumeur.\n\n`;
+
+        desc += `💡 Premier arrivé, premier servi ! N'hésitez pas à faire une offre ou un lot pour économiser les frais de port. 😉\n\n`;
 
         if(selectedTags.length > 0) {
             desc += selectedTags.join(' ');
         }
 
         document.getElementById('desc-preview').innerText = desc;
-    }
 
-    window.toggleTag = function(btn) {
-        const tag = btn.innerText;
-        if(selectedTags.includes(tag)) {
-            selectedTags = selectedTags.filter(t => t !== tag);
-            btn.style.background = 'var(--surface-color)';
-            btn.style.color = 'var(--text-muted)';
-            btn.style.borderColor = 'var(--primary-color)';
-        } else {
-            if(selectedTags.length >= 5) return; // Limit
-            selectedTags.push(tag);
-            btn.style.background = 'var(--primary-dark)';
-            btn.style.color = 'white';
-            btn.style.borderColor = 'var(--primary-dark)';
+        if(document.getElementById('title-preview').innerText.length > 10) {
+            unlockTrophy('seo_master');
         }
-        updateSeoPreview();
     }
 
     window.copyToClipboard = function(elementId) {
@@ -1458,6 +1537,7 @@
             document.getElementById('high-score').innerText = highScore;
         }
         if(score >= 100) unlockTrophy('high_score_100');
+        if(score >= 500) unlockTrophy('score_500');
     }
 
     function checkRowForThree() {
@@ -1545,7 +1625,28 @@
         { id: 'relax_master', name: 'Zen', icon: '🧘‍♀️', desc: 'Utiliser la zone détente.' },
         { id: 'copy_paste', name: 'Presse-Papier', icon: '📋', desc: 'Copier un texte généré.' },
         { id: 'explorer', name: 'Curieuse', icon: '🧭', desc: 'Visiter tous les onglets.' },
-        // ... extendable
+
+        // Expanded List
+        { id: 'panic_button', name: 'SOS', icon: '💖', desc: 'Utiliser le bouton SOS.' },
+        { id: 'trend_setter', name: 'Trend Setter', icon: '👗', desc: 'Utiliser un pack de hashtags.' },
+        { id: 'profit_calc', name: 'Comptable', icon: '💰', desc: 'Calculer un profit.' },
+        { id: 'packing_done', name: 'Colis Ready', icon: '📦', desc: 'Compléter la checklist colis.' },
+        { id: 'diplomat', name: 'Diplomate', icon: '🤝', desc: 'Copier une réponse type.' },
+        { id: 'night_owl', name: 'Oiseau de Nuit', icon: '🦉', desc: 'Utiliser l\'app après 22h.' },
+        { id: 'early_bird', name: 'Lève-tôt', icon: '🐦', desc: 'Utiliser l\'app avant 8h.' },
+        { id: 'weekend_warrior', name: 'Weekend', icon: '🎉', desc: 'Utiliser l\'app un Samedi ou Dimanche.' },
+        { id: 'score_500', name: 'Pro du Crush', icon: '🏆', desc: 'Atteindre 500 points au Crush.' },
+        { id: 'combo_master', name: 'Combo', icon: '🔥', desc: 'Faire un combo au jeu.' }, // Needs hook
+        { id: 'seasonal_check', name: 'Stratège', icon: '📅', desc: 'Consulter le calendrier.' },
+        { id: 'breath_deep', name: 'Respiration', icon: '🌬', desc: 'Rester 10s sur la zone détente.' },
+        { id: 'joke_lover', name: 'Humour', icon: '😂', desc: 'Lire 5 blagues.' },
+        { id: 'full_battery', name: 'Pleine Forme', icon: '⚡', desc: 'Avoir 12 cuillères.' },
+        { id: 'low_battery', name: 'Mode Éco', icon: '🪫', desc: 'Avoir moins de 3 cuillères.' },
+        { id: 'studio_master', name: 'Studio Pro', icon: '🎬', desc: 'Visiter le studio 3 fois.' },
+        { id: 'tag_collector', name: 'Tagueuse', icon: '🏷', desc: 'Ajouter 10 tags.' },
+        { id: 'share_love', name: 'Amour', icon: '💌', desc: 'Ouvrir la section SOS.' },
+        { id: 'expert_seller', name: 'Experte', icon: '🎓', desc: 'Débloquer 10 succès.' },
+        { id: 'imperatrice', name: 'L\'Impératrice', icon: '👑', desc: 'Débloquer 20 succès.' }
     ];
 
     let unlockedTrophies = JSON.parse(localStorage.getItem('unlocked_trophies') || '[]');
@@ -1843,6 +1944,24 @@
     window.switchTab = function(tabId) {
         originalSwitchBoost(tabId);
         randomBoost();
+    }
+
+    // --- PANIC MODE LOGIC ---
+    window.triggerPanic = function() {
+        document.getElementById('panic-room').style.display = 'flex';
+        unlockTrophy('panic_button'); // Unlock SOS trophy
+        unlockTrophy('share_love');
+    }
+
+    window.closePanic = function() {
+        const overlay = document.getElementById('panic-room');
+        overlay.style.opacity = '0';
+        overlay.style.transition = 'opacity 1s ease';
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            overlay.style.opacity = '1';
+        }, 1000);
+        showNotification("Douceur sur toi 🌸");
     }
 
     // Init
