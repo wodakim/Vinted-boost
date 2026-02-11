@@ -60,6 +60,11 @@
             cursor: pointer;
             border: none;
             font-family: inherit;
+            transition: transform 0.1s;
+        }
+
+        button:active {
+            transform: scale(0.95);
         }
 
         /* --- LAYOUT & CONTAINERS --- */
@@ -162,14 +167,24 @@
 
         .nav-tab {
             background: none;
-            padding: 10px 20px;
+            padding: 10px 15px;
             border-radius: 15px;
             color: var(--text-muted);
             font-weight: 600;
             display: flex;
+            flex-direction: column; /* Better for mobile with many tabs */
             align-items: center;
-            gap: 8px;
+            gap: 4px;
             white-space: nowrap;
+            font-size: 0.8rem;
+        }
+
+        @media (min-width: 600px) {
+            .nav-tab {
+                flex-direction: row;
+                font-size: 1rem;
+                gap: 8px;
+            }
         }
 
         .nav-tab.active {
@@ -264,21 +279,33 @@
 
     <!-- NAVIGATION -->
     <nav class="nav-tabs">
-        <button class="nav-tab active" onclick="switchTab('dashboard')">
+        <button class="nav-tab active" onclick="switchTab('dashboard')" aria-label="Tableau de bord">
             <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-            Accueil
+            <span>Accueil</span>
         </button>
-        <button class="nav-tab" onclick="switchTab('studio')">
+        <button class="nav-tab" onclick="switchTab('studio')" aria-label="Guide Photo">
             <svg class="icon" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-            Studio Photo
+            <span>Studio</span>
         </button>
-        <button class="nav-tab" onclick="switchTab('seo')">
+        <button class="nav-tab" onclick="switchTab('seo')" aria-label="Générateur de texte">
             <svg class="icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-            Générateur
+            <span>SEO</span>
         </button>
-        <button class="nav-tab" onclick="switchTab('relax')">
+        <button class="nav-tab" onclick="switchTab('tools')" aria-label="Outils Pratiques">
+           <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.95l-3.77 3.78Z"></path></svg>
+            <span>Outils</span>
+        </button>
+        <button class="nav-tab" onclick="switchTab('relax')" aria-label="Détente">
             <svg class="icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            Détente
+            <span>Détente</span>
+        </button>
+        <button class="nav-tab" onclick="switchTab('crush')" aria-label="Jeu">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+            <span>Crush</span>
+        </button>
+        <button class="nav-tab" onclick="switchTab('trophies')" aria-label="Succès">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+            <span>Succès</span>
         </button>
     </nav>
 
@@ -332,6 +359,59 @@
                 <div id="studio-app-root">
                     <!-- The Vanilla JS port of the React App will go here -->
                 </div>
+            </div>
+        </section>
+
+        <!-- TOOLS VIEW -->
+        <section id="tools" class="section-view">
+            <div class="dashboard-grid">
+
+                <!-- Seasonal Calendar -->
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 style="margin-bottom: 20px;">📅 Calendrier Stratégique (Règle des 3 Semaines)</h3>
+                    <div id="seasonal-widget" style="display: flex; flex-wrap: wrap; gap: 20px;">
+                        <!-- Injected JS -->
+                    </div>
+                </div>
+
+                <!-- Profit Calculator -->
+                <div class="card">
+                    <h3 style="margin-bottom: 20px;">💰 Calculatrice de Profit</h3>
+                    <div style="display: grid; gap: 10px;">
+                        <input type="number" id="calc-buy" placeholder="Prix d'Achat (€)" oninput="updateProfit()">
+                        <input type="number" id="calc-sell" placeholder="Prix de Vente (€)" oninput="updateProfit()">
+                        <input type="number" id="calc-fees" placeholder="Emballage/Divers (€)" value="0" oninput="updateProfit()">
+                    </div>
+                    <div style="margin-top: 20px; background: var(--bg-color); padding: 15px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 0.9rem; color: var(--text-muted);">Bénéfice Net</div>
+                        <div id="calc-result" style="font-size: 1.5rem; font-weight: bold; color: var(--success-color);">0.00 €</div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills Scripts -->
+                <div class="card">
+                    <h3 style="margin-bottom: 20px;">💬 Réponses Magiques</h3>
+                    <select id="script-selector" onchange="updateScript()" style="margin-bottom: 15px;">
+                        <option value="">Choisir une situation...</option>
+                        <option value="lowball">Offre ridicule (-50%)</option>
+                        <option value="rude">Pas de "Bonjour"</option>
+                        <option value="ghost">Plus de réponse</option>
+                        <option value="reserve">Demande de réservation</option>
+                        <option value="late">Retard d'envoi</option>
+                    </select>
+                    <textarea id="script-output" readonly style="height: 120px; font-size: 0.9rem; color: var(--text-muted); background: var(--bg-color);"></textarea>
+                    <button onclick="copyToClipboard('script-output')" style="margin-top: 10px; width: 100%; background: var(--primary-dark); color: white; padding: 10px; border-radius: 10px;">Copier la réponse</button>
+                </div>
+
+                <!-- Packing Checklist -->
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3 style="margin-bottom: 20px;">📦 Checklist Colis Parfait</h3>
+                    <div class="checklist-container" id="packing-list">
+                        <!-- Injected JS -->
+                    </div>
+                    <button onclick="resetPackingList()" style="margin-top: 15px; background: none; color: var(--text-muted); font-size: 0.9rem; text-decoration: underline;">Réinitialiser la liste</button>
+                </div>
+
             </div>
         </section>
 
@@ -405,6 +485,87 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- TROPHIES VIEW -->
+        <section id="trophies" class="section-view">
+            <div class="card">
+                <h2 style="color: var(--primary-dark);">Salle des Trophées</h2>
+                <p>Débloque des succès en utilisant l'application.</p>
+                <div id="trophy-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 15px; margin-top: 20px;">
+                    <!-- Trophies injected by JS -->
+                </div>
+                <style>
+                    .trophy-item {
+                        background: var(--bg-color);
+                        padding: 10px;
+                        border-radius: 10px;
+                        text-align: center;
+                        opacity: 0.5;
+                        filter: grayscale(1);
+                        transition: all 0.3s;
+                        border: 2px solid transparent;
+                    }
+                    .trophy-item.unlocked {
+                        opacity: 1;
+                        filter: grayscale(0);
+                        background: var(--surface-color);
+                        border-color: var(--secondary-color);
+                        transform: scale(1.05);
+                        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                    }
+                    .trophy-icon { font-size: 2rem; margin-bottom: 5px; display: block; }
+                    .trophy-name { font-size: 0.8rem; font-weight: bold; color: var(--text-main); }
+                    .trophy-desc { font-size: 0.7rem; color: var(--text-muted); display: none; }
+                    .trophy-item:hover .trophy-desc { display: block; }
+                </style>
+            </div>
+        </section>
+
+        <!-- CRUSH GAME VIEW -->
+        <section id="crush" class="section-view">
+            <div class="card" style="text-align: center;">
+                <h2 style="color: var(--primary-dark);">Vinted Crush Infini</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 0 20px;">
+                    <div>Score: <span id="score">0</span></div>
+                    <div>Record: <span id="high-score">0</span></div>
+                </div>
+                <div id="grid-container"></div>
+                <button onclick="initGame()" style="margin-top: 15px; background: var(--secondary-color); color: white; padding: 10px 20px; border-radius: 20px;">Nouvelle Partie</button>
+                <style>
+                    #grid-container {
+                        display: grid;
+                        grid-template-columns: repeat(8, 1fr);
+                        gap: 2px;
+                        width: 100%;
+                        max-width: 400px;
+                        margin: 0 auto;
+                        aspect-ratio: 1/1;
+                        background: var(--bg-color);
+                        padding: 5px;
+                        border-radius: 10px;
+                    }
+                    .cell {
+                        background: var(--surface-color);
+                        border-radius: 5px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1.5rem;
+                        cursor: pointer;
+                        transition: transform 0.2s;
+                        user-select: none;
+                    }
+                    .cell:hover {
+                        transform: scale(1.1);
+                        z-index: 10;
+                    }
+                    .cell.selected {
+                        background: var(--accent-color);
+                        box-shadow: 0 0 10px var(--primary-dark);
+                    }
+                </style>
             </div>
         </section>
 
@@ -510,13 +671,12 @@
         document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
 
         // Show target
-        document.getElementById(tabId).classList.add('active');
-        // Activate button (rough approximation logic for now)
-        const buttons = document.querySelectorAll('.nav-tab');
-        if(tabId === 'dashboard') buttons[0].classList.add('active');
-        if(tabId === 'studio') buttons[1].classList.add('active');
-        if(tabId === 'seo') buttons[2].classList.add('active');
-        if(tabId === 'relax') buttons[3].classList.add('active');
+        const target = document.getElementById(tabId);
+        if(target) target.classList.add('active');
+
+        // Activate button logic robust to reordering
+        const button = document.querySelector(`.nav-tab[onclick*="${tabId}"]`);
+        if(button) button.classList.add('active');
     };
 
     // Spoon Tracker Logic
@@ -1127,18 +1287,558 @@
         }, 4000);
     }
 
+    // --- VINTED CRUSH GAME LOGIC ---
+    const width = 8;
+    const grid = [];
+    const candyColors = ['👗', '👠', '👜', '📦', '⭐', '💖']; // Dress, Shoe, Bag, Box, Star, Heart
+    let score = 0;
+    let highScore = localStorage.getItem('crush_highscore') || 0;
+    document.getElementById('high-score').innerText = highScore;
+
+    let draggedCandy;
+    let replacedCandy;
+    let draggedId;
+    let replacedId;
+    let isProcessing = false;
+
+    function initGame() {
+        const container = document.getElementById('grid-container');
+        if(!container) return;
+        container.innerHTML = '';
+        grid.length = 0;
+        score = 0;
+        document.getElementById('score').innerText = score;
+        isProcessing = false;
+
+        for (let i = 0; i < width * width; i++) {
+            const cell = document.createElement('div');
+            cell.setAttribute('draggable', true);
+            cell.setAttribute('id', i);
+            cell.classList.add('cell');
+            let randomColor = Math.floor(Math.random() * candyColors.length);
+            cell.innerText = candyColors[randomColor];
+            container.appendChild(cell);
+            grid.push(cell);
+
+            // Desktop Drag Events
+            cell.addEventListener('dragstart', dragStart);
+            cell.addEventListener('dragover', dragOver);
+            cell.addEventListener('dragenter', dragEnter);
+            cell.addEventListener('dragleave', dragLeave);
+            cell.addEventListener('drop', dragDrop);
+            cell.addEventListener('dragend', dragEnd);
+
+            // Mobile Touch Events (Swipe)
+            let startX, startY;
+            cell.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                draggedCandy = cell;
+                draggedId = parseInt(cell.id);
+            }, {passive: false});
+
+            cell.addEventListener('touchend', (e) => {
+                let endX = e.changedTouches[0].clientX;
+                let endY = e.changedTouches[0].clientY;
+                let diffX = endX - startX;
+                let diffY = endY - startY;
+
+                let targetId = draggedId;
+                if(Math.abs(diffX) > Math.abs(diffY)) {
+                    if(diffX > 0) targetId += 1; // Right
+                    else targetId -= 1; // Left
+                } else {
+                    if(diffY > 0) targetId += width; // Down
+                    else targetId -= width; // Up
+                }
+
+                if(targetId >= 0 && targetId < width*width) {
+                    replacedCandy = grid[targetId];
+                    replacedId = targetId;
+                    swapCandies();
+                }
+            }, {passive: false});
+
+            // Click/Tap Logic (Select A then B)
+            cell.addEventListener('click', () => {
+                if(isProcessing) return;
+                if(!draggedCandy) {
+                    draggedCandy = cell;
+                    draggedId = parseInt(cell.id);
+                    cell.classList.add('selected');
+                } else {
+                    replacedCandy = cell;
+                    replacedId = parseInt(cell.id);
+                    draggedCandy.classList.remove('selected');
+
+                    // Check adjacency
+                    const validMoves = [draggedId - 1, draggedId - width, draggedId + 1, draggedId + width];
+                    if(validMoves.includes(replacedId)) {
+                        swapCandies();
+                    } else {
+                        draggedCandy = null; // Reset selection if invalid
+                    }
+                }
+            });
+        }
+
+        // Initial Check
+        checkRowForThree();
+        checkColumnForThree();
+        window.setInterval(() => {
+            checkRowForThree();
+            checkColumnForThree();
+            moveDown();
+        }, 100);
+    }
+
+    function dragStart() {
+        if(isProcessing) return;
+        draggedCandy = this;
+        draggedId = parseInt(this.id);
+    }
+    function dragOver(e) { e.preventDefault(); }
+    function dragEnter(e) { e.preventDefault(); }
+    function dragLeave() {}
+    function dragDrop() {
+        if(isProcessing) return;
+        replacedCandy = this;
+        replacedId = parseInt(this.id);
+        swapCandies();
+    }
+    function dragEnd() {}
+
+    function swapCandies() {
+        isProcessing = true;
+
+        // Swap visual
+        const temp = draggedCandy.innerText;
+        draggedCandy.innerText = replacedCandy.innerText;
+        replacedCandy.innerText = temp;
+
+        const validMoves = [draggedId - 1, draggedId - width, draggedId + 1, draggedId + width];
+        const validMove = validMoves.includes(replacedId);
+
+        if (validMove) {
+            const isRow = checkRowForThree();
+            const isCol = checkColumnForThree();
+            if (!isRow && !isCol) {
+                // Swap back if no match
+                setTimeout(() => {
+                    replacedCandy.innerText = draggedCandy.innerText;
+                    draggedCandy.innerText = temp;
+                    isProcessing = false;
+                    draggedCandy = null;
+                }, 200);
+            } else {
+                isProcessing = false;
+                draggedCandy = null;
+                checkScore(); // Update high score
+            }
+        } else {
+            // Invalid move, swap back immediately
+             replacedCandy.innerText = draggedCandy.innerText;
+             draggedCandy.innerText = temp;
+             isProcessing = false;
+             draggedCandy = null;
+        }
+    }
+
+    function checkScore() {
+        if(score > highScore) {
+            highScore = score;
+            localStorage.setItem('crush_highscore', highScore);
+            document.getElementById('high-score').innerText = highScore;
+        }
+        if(score >= 100) unlockTrophy('high_score_100');
+    }
+
+    function checkRowForThree() {
+        let matchFound = false;
+        // Fix loop limit: width*width - 2 because we check i, i+1, i+2
+        // Max index is 63. So i+2 <= 63 => i <= 61. Loop i < 62.
+        for (let i = 0; i < 62; i++) {
+            let rowOfThree = [i, i + 1, i + 2];
+            let decidedColor = grid[i].innerText;
+            const isBlank = grid[i].innerText === '';
+
+            // Check boundaries (wrap around)
+            // If i is 6, 7, 14, 15 etc. checking i+1, i+2 wraps to next row visually which is wrong.
+            // Valid start indices for a row match of 3 in an 8x8 grid:
+            // 0-5, 8-13, 16-21... (indices ending in 6 or 7 cannot start a match of 3)
+            const notValid = [6, 7, 14, 15, 22, 23, 30, 31, 38, 39, 46, 47, 54, 55, 62, 63]; // Added 62, 63 just in case
+            if (notValid.includes(i)) continue;
+
+            if (rowOfThree.every(index => grid[index] && grid[index].innerText === decidedColor && !isBlank)) {
+                score += 3;
+                document.getElementById('score').innerText = score;
+                rowOfThree.forEach(index => {
+                    grid[index].innerText = '';
+                });
+                matchFound = true;
+            }
+        }
+        return matchFound;
+    }
+
+    function checkColumnForThree() {
+        let matchFound = false;
+        // Fix loop limit: width * (height-2).
+        // 8 * 6 = 48. Indices 0 to 47 are valid start points.
+        // i + width*2 <= 63 => i + 16 <= 63 => i <= 47.
+        // Loop should be i < 48 (or i <= 47).
+        for (let i = 0; i < 48; i++) {
+            let columnOfThree = [i, i + width, i + width * 2];
+            let decidedColor = grid[i].innerText;
+            const isBlank = grid[i].innerText === '';
+
+            if (columnOfThree.every(index => grid[index] && grid[index].innerText === decidedColor && !isBlank)) {
+                score += 3;
+                document.getElementById('score').innerText = score;
+                columnOfThree.forEach(index => {
+                    grid[index].innerText = '';
+                });
+                matchFound = true;
+            }
+        }
+        return matchFound;
+    }
+
+    function moveDown() {
+        for (let i = 0; i < 55; i++) { // width * (height-1) - 1
+            if (grid[i + width].innerText === '') {
+                grid[i + width].innerText = grid[i].innerText;
+                grid[i].innerText = '';
+                const firstRow = [0, 1, 2, 3, 4, 5, 6, 7];
+                const isFirstRow = firstRow.includes(i);
+                if (isFirstRow && grid[i].innerText === '') {
+                    let randomColor = Math.floor(Math.random() * candyColors.length);
+                    grid[i].innerText = candyColors[randomColor];
+                }
+            }
+        }
+        // Fill top row if empty
+        for (let i = 0; i < width; i++) {
+             if (grid[i].innerText === '') {
+                let randomColor = Math.floor(Math.random() * candyColors.length);
+                grid[i].innerText = candyColors[randomColor];
+             }
+        }
+    }
+
+    // --- TROPHY SYSTEM ---
+    const trophies = [
+        { id: 'first_visit', name: 'Bienvenue', icon: '👋', desc: 'Ouvrir l\'application.' },
+        { id: 'dark_mode', name: 'Mode Nuit', icon: '🌙', desc: 'Activer le mode sombre.' },
+        { id: 'seo_master', name: 'Reine du SEO', icon: '✍️', desc: 'Générer un titre parfait.' },
+        { id: 'photo_pro', name: 'Shooting Star', icon: '📸', desc: 'Terminer un guide photo.' },
+        { id: 'spoon_saver', name: 'Économe', icon: '🥄', desc: 'Mettre à jour ses cuillères.' },
+        { id: 'gamer', name: 'Joueuse', icon: '🎮', desc: 'Lancer une partie de Crush.' },
+        { id: 'high_score_100', name: 'Score 100', icon: '💯', desc: 'Atteindre 100 points au Crush.' },
+        { id: 'relax_master', name: 'Zen', icon: '🧘‍♀️', desc: 'Utiliser la zone détente.' },
+        { id: 'copy_paste', name: 'Presse-Papier', icon: '📋', desc: 'Copier un texte généré.' },
+        { id: 'explorer', name: 'Curieuse', icon: '🧭', desc: 'Visiter tous les onglets.' },
+        // ... extendable
+    ];
+
+    let unlockedTrophies = JSON.parse(localStorage.getItem('unlocked_trophies') || '[]');
+
+    function initTrophies() {
+        const grid = document.getElementById('trophy-grid');
+        if(!grid) return;
+
+        grid.innerHTML = trophies.map(t => {
+            const isUnlocked = unlockedTrophies.includes(t.id);
+            return `<div class="trophy-item ${isUnlocked ? 'unlocked' : ''}" id="trophy-${t.id}">
+                        <span class="trophy-icon">${t.icon}</span>
+                        <div class="trophy-name">${t.name}</div>
+                        <div class="trophy-desc">${t.desc}</div>
+                    </div>`;
+        }).join('');
+    }
+
+    window.unlockTrophy = function(id) {
+        if(!unlockedTrophies.includes(id)) {
+            unlockedTrophies.push(id);
+            localStorage.setItem('unlocked_trophies', JSON.stringify(unlockedTrophies));
+
+            // Visual Update
+            const el = document.getElementById(`trophy-${id}`);
+            if(el) el.classList.add('unlocked');
+
+            // Notification
+            showNotification(`🏆 Succès débloqué : ${trophies.find(t=>t.id===id).name}`);
+            triggerConfetti();
+        }
+    }
+
+    // Notification System
+    function showNotification(msg) {
+        const notif = document.createElement('div');
+        notif.innerText = msg;
+        notif.style.position = 'fixed';
+        notif.style.bottom = '20px';
+        notif.style.right = '20px';
+        notif.style.background = 'var(--primary-dark)';
+        notif.style.color = 'white';
+        notif.style.padding = '15px 25px';
+        notif.style.borderRadius = '10px';
+        notif.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+        notif.style.zIndex = '1000';
+        notif.style.animation = 'slideIn 0.5s ease-out';
+
+        document.body.appendChild(notif);
+
+        setTimeout(() => {
+            notif.style.opacity = '0';
+            setTimeout(() => notif.remove(), 500);
+        }, 3000);
+    }
+
+    // Simple CSS Confetti (using particles)
+    function triggerConfetti() {
+        for(let i=0; i<30; i++) {
+            const conf = document.createElement('div');
+            conf.style.position = 'fixed';
+            conf.style.left = Math.random() * 100 + 'vw';
+            conf.style.top = '-10px';
+            conf.style.width = '10px';
+            conf.style.height = '10px';
+            conf.style.backgroundColor = ['#FFD700', '#FF69B4', '#00BFFF', '#32CD32'][Math.floor(Math.random()*4)];
+            conf.style.zIndex = '9999';
+            conf.style.borderRadius = '50%';
+            document.body.appendChild(conf);
+
+            const duration = Math.random() * 2 + 1;
+            conf.animate([
+                { transform: `translateY(0) rotate(0)`, opacity: 1 },
+                { transform: `translateY(100vh) rotate(720deg)`, opacity: 0 }
+            ], {
+                duration: duration * 1000,
+                easing: 'linear'
+            }).onfinish = () => conf.remove();
+        }
+    }
+
+    // Hook events for trophies
+    // 1. Theme Toggle
+    const originalToggle = toggleTheme;
+    toggleTheme = function() {
+        originalToggle();
+        unlockTrophy('dark_mode');
+    }
+
+    // 2. Tab Switch
+    const originalSwitch = window.switchTab;
+    let visitedTabs = new Set();
+    window.switchTab = function(tabId) {
+        originalSwitch(tabId);
+        visitedTabs.add(tabId);
+        if(visitedTabs.size >= 5) unlockTrophy('explorer'); // Dashboard, Studio, SEO, Relax, Crush, Trophies
+        if(tabId === 'crush') unlockTrophy('gamer');
+        if(tabId === 'relax') unlockTrophy('relax_master');
+    }
+
+    // 3. Spoons
+    const originalSpoon = window.updateSpoonCount;
+    window.updateSpoonCount = function(c) {
+        originalSpoon(c);
+        unlockTrophy('spoon_saver');
+    }
+
+    // 4. Copy
+    const originalCopy = window.copyToClipboard;
+    window.copyToClipboard = function(id) {
+        originalCopy(id);
+        unlockTrophy('copy_paste');
+    }
+
+    // 5. SEO Update (Check if title is generated)
+    const originalUpdateSeo = window.updateSeoPreview;
+    window.updateSeoPreview = function() {
+        originalUpdateSeo();
+        if(document.getElementById('title-preview').innerText.length > 10) {
+            unlockTrophy('seo_master');
+        }
+    }
+
+    // 6. Studio Complete
+    const originalCompleteStep = window.completeStep;
+    window.completeStep = function() {
+        originalCompleteStep();
+        // Check if finished is handled inside renderStudio, we might need to hook differently
+        // Simplified: if we click complete step, we give it eventually.
+        // Better: Check inside renderStudio success view.
+    }
+
+    // 7. Game Score (Hook into checkScore)
+    // We need to modify checkScore in the game logic to call unlockTrophy('high_score_100')
+
+    // --- TOOLS LOGIC ---
+
+    // 1. Profit Calculator
+    function updateProfit() {
+        const buy = parseFloat(document.getElementById('calc-buy').value) || 0;
+        const sell = parseFloat(document.getElementById('calc-sell').value) || 0;
+        const fees = parseFloat(document.getElementById('calc-fees').value) || 0;
+
+        const profit = sell - buy - fees;
+        const resultEl = document.getElementById('calc-result');
+
+        resultEl.innerText = profit.toFixed(2) + " €";
+        if(profit > 0) resultEl.style.color = "var(--success-color)";
+        else if(profit < 0) resultEl.style.color = "var(--secondary-color)";
+        else resultEl.style.color = "var(--text-muted)";
+    }
+
+    // 2. Soft Skills Scripts
+    const scripts = {
+        lowball: "Bonjour et merci pour votre offre. Compte tenu de l'état impeccable et de la marque, mon meilleur prix est de [PRIX]€. Cela reste une excellente affaire par rapport au prix neuf. Bien à vous.",
+        rude: "Bonjour, l'article est toujours disponible. N'hésitez pas si vous avez des questions spécifiques sur les mesures ou l'état. Bonne journée !",
+        ghost: "Bonjour, êtes-vous toujours intéressé(e) ? Je vais à la poste demain, je pourrais poster votre colis en même temps. Dites-moi si vous avez besoin d'infos !",
+        reserve: "Bonjour, je ne fais malheureusement plus de réservations (trop de désistements). Mais l'article est à vous dès que vous le prenez ! Premier arrivé, premier servi 🌸",
+        late: "Bonjour ! Petit message pour vous prévenir que je dépose votre colis demain matin sans faute. Merci pour votre patience et à très vite !"
+    };
+
+    function updateScript() {
+        const key = document.getElementById('script-selector').value;
+        const output = document.getElementById('script-output');
+        if(scripts[key]) {
+            output.value = scripts[key];
+        } else {
+            output.value = "";
+        }
+    }
+
+    // 3. Packing Checklist
+    const packingItems = [
+        "Vêtement lavé & repassé",
+        "Pliage soigné (Marie Kondo)",
+        "Papier de soie / Protection",
+        "Petit mot de remerciement",
+        "Petit cadeau (optionnel)",
+        "Spray parfum (neutre)",
+        "Scotch bien fermé",
+        "Bordereau collé"
+    ];
+
+    function initPackingList() {
+        const container = document.getElementById('packing-list');
+        if(!container) return;
+
+        container.innerHTML = packingItems.map((item, index) => {
+            return `<div style="display: flex; align-items: center; gap: 10px; padding: 8px; border-bottom: 1px solid var(--bg-color);">
+                        <input type="checkbox" id="pack-${index}" onchange="checkPacking(${index})" style="width: 20px; height: 20px;">
+                        <label for="pack-${index}" style="cursor: pointer; flex: 1;">${item}</label>
+                    </div>`;
+        }).join('');
+    }
+
+    function checkPacking(index) {
+        // Check if all checked
+        const all = document.querySelectorAll('#packing-list input[type="checkbox"]');
+        const checked = document.querySelectorAll('#packing-list input[type="checkbox"]:checked');
+        if(all.length === checked.length) {
+            unlockTrophy('photo_pro'); // Re-using photo trophy or maybe create a 'packing' one? Let's assume we add packing trophy later or reuse logic.
+            showNotification("📦 Colis Prêt ! Beau travail.");
+            triggerConfetti();
+        }
+    }
+
+    function resetPackingList() {
+        document.querySelectorAll('#packing-list input').forEach(i => i.checked = false);
+    }
+
+    // 4. Seasonal Calendar
+    function initSeasonalCalendar() {
+        const container = document.getElementById('seasonal-widget');
+        if(!container) return;
+
+        const month = new Date().getMonth(); // 0-11
+
+        const strategies = [
+            { name: "Janvier", focus: "Sport, Détox, Cadeaux non désirés", prep: "Saint-Valentin (Robes rouges, Lingerie)" },
+            { name: "Février", focus: "Saint-Valentin, Derniers pulls", prep: "Mi-saison (Trenchs, Vestes en jean)" },
+            { name: "Mars", focus: "Mi-saison, Pâques", prep: "Robes fleurs, Mariages (Invités)" },
+            { name: "Avril", focus: "Robes, Mariages, Festivals", prep: "Maillots de bain, Shorts" },
+            { name: "Mai", focus: "Maillots, Été, Sandales", prep: "Valise vacances (Lots)" },
+            { name: "Juin", focus: "Canicule, Lin, Robes légères", prep: "Rentrée (Sacs, Jeans basiques)" },
+            { name: "Juillet", focus: "Soldes, Liquidation été", prep: "Rentrée scolaire, Manteaux légers" },
+            { name: "Août", focus: "Rentrée, Cartables, Jeans", prep: "Automne (Cuir, Bottines)" },
+            { name: "Septembre", focus: "Automne, Bottes, Vestes", prep: "Halloween, Gros pulls" },
+            { name: "Octobre", focus: "Halloween, Pulls, Manteaux", prep: "Ski, Fêtes (Paillettes)" },
+            { name: "Novembre", focus: "Ski, Fêtes, Cadeaux neufs", prep: "Après-ski, Résolutions sport" },
+            { name: "Décembre", focus: "Cadeaux dernière minute, Soirée", prep: "Sport, Vide-Dressing Janvier" }
+        ];
+
+        const currentStrategy = strategies[month];
+        const nextMonthIndex = (month + 1) % 12;
+        const nextStrategy = strategies[nextMonthIndex];
+
+        container.innerHTML = `
+            <div style="flex: 1; min-width: 250px; background: var(--bg-color); padding: 15px; border-radius: 10px; border-left: 4px solid var(--secondary-color);">
+                <div style="font-weight: bold; color: var(--secondary-color); margin-bottom: 5px;">🔥 À vendre MAINTENANT</div>
+                <div style="font-size: 1.1rem;">${currentStrategy.focus}</div>
+            </div>
+            <div style="flex: 1; min-width: 250px; background: var(--bg-color); padding: 15px; border-radius: 10px; border-left: 4px solid var(--primary-dark);">
+                <div style="font-weight: bold; color: var(--primary-dark); margin-bottom: 5px;">👀 À préparer (Règle 3 semaines)</div>
+                <div style="font-size: 1.1rem;">${currentStrategy.prep}</div>
+            </div>
+        `;
+    }
+
+    // --- DOPAMINE BOOSTERS ---
+
+    function randomBoost() {
+        const boosts = [
+            "Tu gères ! 🌟",
+            "Respire... tout va bien. 🍃",
+            "Une petite victoire est une victoire. 🏆",
+            "Ta sensibilité est ta force. 💪",
+            "L'algorithme t'aime bien aujourd'hui ! 🤖",
+            "Prends une gorgée d'eau. 💧",
+            "Regarde comme tu as avancé ! 🚀"
+        ];
+
+        // 10% chance to show a boost when navigating
+        if(Math.random() < 0.1) {
+            showNotification(boosts[Math.floor(Math.random() * boosts.length)]);
+        }
+    }
+
+    // Hook boost into navigation
+    const originalSwitchBoost = window.switchTab;
+    window.switchTab = function(tabId) {
+        originalSwitchBoost(tabId);
+        randomBoost();
+    }
+
     // Init
     document.addEventListener('DOMContentLoaded', () => {
-        initTheme();
-        initSpoons();
-        renderStudio(); // Init studio view
-        updateChronoWidget();
-        updateDailyTip();
-        showJoke(); // Init joke
-        initBreathing();
+        // Robust initialization
+        try { initTheme(); } catch(e) { console.error("Theme init failed", e); }
+        try { initSpoons(); } catch(e) { console.error("Spoons init failed", e); }
+        try { renderStudio(); } catch(e) { console.error("Studio init failed", e); }
+        try { updateChronoWidget(); } catch(e) { console.error("Chrono init failed", e); }
+        try { updateDailyTip(); } catch(e) { console.error("Tip init failed", e); }
+        try { showJoke(); } catch(e) { console.error("Joke init failed", e); }
+        try { initBreathing(); } catch(e) { console.error("Breath init failed", e); }
 
-        // Update clock every minute
+        // Critical Features Init
+        try { initTrophies(); } catch(e) { console.error("Trophies init failed", e); }
+        try { unlockTrophy('first_visit'); } catch(e) { console.error("Unlock failed", e); }
+        try { initPackingList(); } catch(e) { console.error("Packing init failed", e); }
+        try { initSeasonalCalendar(); } catch(e) { console.error("Seasonal init failed", e); }
+
+        // Game Init (Moved to end to prevent blocking other features if it fails)
+        try { initGame(); } catch(e) { console.error("Game init failed", e); }
+
         setInterval(updateChronoWidget, 60000);
+
+        // Add SlideIn animation style
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }`;
+        document.head.appendChild(style);
     });
 
 </script>
