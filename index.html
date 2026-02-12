@@ -168,7 +168,7 @@
         /* --- DASHBOARD GRID --- */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
@@ -176,6 +176,21 @@
         @media (max-width: 600px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .app-container {
+                padding: 10px;
+                padding-bottom: 80px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .logo-area {
+                margin-bottom: 5px;
             }
         }
 
@@ -198,13 +213,20 @@
         /* --- NAVIGATION TABS --- */
         .nav-tabs {
             display: flex;
-            justify-content: space-around;
+            justify-content: flex-start; /* Align start to allow scroll without spacing issues */
+            gap: 10px; /* Consistent gap */
             background-color: var(--surface-color);
             border-radius: var(--border-radius);
             padding: 10px;
             margin-bottom: 20px;
             box-shadow: var(--shadow-soft);
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+        }
+
+        .nav-tabs::-webkit-scrollbar {
+            display: none; /* Hide scrollbar Chrome/Safari */
         }
 
         .nav-tab {
@@ -214,19 +236,12 @@
             color: var(--text-muted);
             font-weight: 600;
             display: flex;
-            flex-direction: column; /* Better for mobile with many tabs */
+            flex-direction: row; /* Always row for icon + text */
             align-items: center;
-            gap: 4px;
+            gap: 8px;
             white-space: nowrap;
-            font-size: 0.8rem;
-        }
-
-        @media (min-width: 600px) {
-            .nav-tab {
-                flex-direction: row;
-                font-size: 1rem;
-                gap: 8px;
-            }
+            font-size: 0.9rem;
+            flex-shrink: 0; /* Prevent shrinking */
         }
 
         .nav-tab.active {
@@ -378,13 +393,26 @@
             <div class="dashboard-grid">
                 <!-- Spoons Card -->
                 <div class="card">
-                    <h3>
-                        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                        <span data-i18n="spoons_title">Mes Cuillères</span>
-                    </h3>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <h3>
+                            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            <span data-i18n="spoons_title">Mes Cuillères</span>
+                        </h3>
+                        <button onclick="toggleSpoonDetails()" style="background:none; border:none; color:var(--primary-dark); cursor:pointer;">ℹ️</button>
+                    </div>
                     <div id="spoon-tracker-container">
                         <!-- Spoons will be injected here -->
                         <p>...</p>
+                    </div>
+                    <div id="spoon-details" class="hidden" style="margin-top: 15px; font-size: 0.85rem; color: var(--text-muted); background: var(--bg-color); padding: 10px; border-radius: 10px;">
+                        <strong style="display:block; margin-bottom:5px;">Coût Énergétique :</strong>
+                        <ul style="padding-left: 20px; margin: 0;">
+                            <li>📸 Shooting (10 articles) : <b>4-5 Cuillères</b></li>
+                            <li>📝 Rédaction & Mise en ligne : <b>3 Cuillères</b></li>
+                            <li>📦 Emballage colis : <b>3 Cuillères</b></li>
+                            <li>🚶‍♀️ Dépôt Point Relais : <b>2-4 Cuillères</b></li>
+                            <li>💬 Réponses messages : <b>1 Cuillère</b></li>
+                        </ul>
                     </div>
                 </div>
 
@@ -400,14 +428,18 @@
                     </div>
                 </div>
 
-                <!-- Daily Motivation -->
-                <div class="card" style="grid-column: 1 / -1;">
-                    <h3>
-                        <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        <span data-i18n="tip_title">Conseil du Jour</span>
-                    </h3>
-                    <div id="daily-tip-container">
-                        <p>...</p>
+                <!-- Daily Motivation (Post-it Style) -->
+                <div class="card" style="grid-column: 1 / -1; background-color: transparent; box-shadow: none; padding: 0;">
+                    <div style="background: #fff740; color: #333; padding: 25px; transform: rotate(-1deg); box-shadow: 5px 5px 15px rgba(0,0,0,0.15); border-radius: 2px; max-width: 400px; margin: 0 auto; position: relative;">
+                        <!-- Pin -->
+                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: #ff6b6b; border-radius: 50%; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);"></div>
+
+                        <h3 style="margin-top: 0; color: #d4a017; font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; font-size: 1.2rem; border-bottom: 2px dashed #d4a017; padding-bottom: 5px; margin-bottom: 15px;">
+                            ✨ <span data-i18n="tip_title">Conseil du Jour</span>
+                        </h3>
+                        <div id="daily-tip-container" style="font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; font-size: 1.1rem; line-height: 1.5;">
+                            <p>...</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -790,6 +822,7 @@
             // Seasonal
             season_focus: ["Sport, Détox", "Saint-Valentin", "Mi-saison", "Robes, Festivals", "Maillots, Été", "Canicule, Lin", "Soldes", "Rentrée", "Automne, Bottes", "Halloween", "Ski, Fêtes", "Cadeaux"],
             season_prep: ["Saint-Valentin", "Mi-saison", "Robes fleurs", "Maillots", "Vacances", "Rentrée", "Rentrée scolaire", "Automne", "Halloween", "Ski", "Après-ski", "Sport Janvier"],
+            season_focus_label: "À vendre", season_prep_label: "À préparer",
             nav_home: "Accueil", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Outils", nav_relax: "Détente", nav_crush: "Crush", nav_trophies: "Succès",
             spoons_title: "Mes Cuillères", chrono_title: "Chronobiologie", tip_title: "Conseil du Jour",
             studio_title: "Studio Virtuel", studio_subtitle: "Sélectionne une catégorie pour commencer ton shooting guidé.",
@@ -836,6 +869,7 @@
             jokes: ["Why do scuba divers fall backwards? Because otherwise they'd fall into the boat.", "What do you call a fake noodle? A impasta.", "Why did the scarecrow win an award? Because he was outstanding in his field.", "What do you call a bear with no teeth? A gummy bear.", "Why don't skeletons fight each other? They don't have the guts."],
             season_focus: ["Sport, Detox", "Valentine's", "Mid-season", "Dresses, Festivals", "Swimwear, Summer", "Heatwave, Linen", "Sales", "Back to School", "Autumn, Boots", "Halloween", "Ski, Holidays", "Gifts"],
             season_prep: ["Valentine's", "Mid-season", "Floral Dresses", "Swimwear", "Vacation", "Back to School", "School Run", "Autumn", "Halloween", "Ski", "Apres-Ski", "Jan Sport"],
+            season_focus_label: "Sell Now", season_prep_label: "Prep Now",
             nav_home: "Home", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Tools", nav_relax: "Relax", nav_crush: "Crush", nav_trophies: "Trophies",
             spoons_title: "My Spoons", chrono_title: "Chronobiology", tip_title: "Tip of the Day",
             studio_title: "Virtual Studio", studio_subtitle: "Select a category to start your guided shoot.",
@@ -882,6 +916,7 @@
             jokes: ["Was ist grün und rennt durch den Wald? Ein Rudel Gurken.", "Was macht ein Clown im Büro? Faxen.", "Warum können Geister so schlecht lügen? Weil man durch sie hindurchsehen kann.", "Was essen Autos? Parkplätzchen.", "Egal wie gut du schläfst, Albert schläft wie Einstein."],
             season_focus: ["Sport, Detox", "Valentinstag", "Übergang", "Kleider", "Bade, Sommer", "Hitze, Leinen", "Sale", "Schulstart", "Herbst, Stiefel", "Halloween", "Ski, Fest", "Geschenke"],
             season_prep: ["Valentinstag", "Übergang", "Blumenkleider", "Bade", "Urlaub", "Schulstart", "Schule", "Herbst", "Halloween", "Ski", "Après-Ski", "Januar Sport"],
+            season_focus_label: "Verkaufen", season_prep_label: "Vorbereiten",
             nav_home: "Start", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Tools", nav_relax: "Entspannung", nav_crush: "Crush", nav_trophies: "Erfolge",
             spoons_title: "Meine Löffel", chrono_title: "Chronobiologie", tip_title: "Tipp des Tages",
             studio_title: "Virtuelles Studio", studio_subtitle: "Wähle eine Kategorie, um dein geführtes Shooting zu starten.",
@@ -928,6 +963,7 @@
             jokes: ["¿Qué hace una abeja en el gimnasio? ¡Zum-ba!", "¿Cuál es el último animal que subió al arca de Noé? El del-fin.", "¿Cómo se queda un mago después de comer? Magordito.", "¿Qué le dice un techo a otro? Techo de menos.", "¿Qué hace un perro con un taladro? Taladrando."],
             season_focus: ["Deporte", "San Valentín", "Entretiempo", "Vestidos", "Baño, Verano", "Calor, Lino", "Rebajas", "Vuelta al cole", "Otoño", "Halloween", "Esquí", "Regalos"],
             season_prep: ["San Valentín", "Entretiempo", "Flores", "Baño", "Vacaciones", "Vuelta al cole", "Colegio", "Otoño", "Halloween", "Esquí", "Post-Esquí", "Deporte Enero"],
+            season_focus_label: "Vender ya", season_prep_label: "Preparar",
             nav_home: "Inicio", nav_studio: "Estudio", nav_seo: "SEO", nav_tools: "Herramientas", nav_relax: "Relax", nav_crush: "Crush", nav_trophies: "Trofeos",
             spoons_title: "Mis Cucharas", chrono_title: "Cronobiología", tip_title: "Consejo del Día",
             studio_title: "Estudio Virtual", studio_subtitle: "Selecciona una categoría para comenzar tu sesión guiada.",
@@ -974,6 +1010,7 @@
             jokes: ["Cosa fa un caffè allo specchio? Si guarda e si esprime.", "Qual è il colmo per un computer? Avere la memoria corta.", "Cosa dice un muro all'altro? Ci vediamo all'angolo!", "Perché i pesci vivono nell'acqua salata? Perché il pepe li fa starnutire.", "Cosa fa un pomodoro al mattino? La salsa."],
             season_focus: ["Sport", "San Valentino", "Mezza stagione", "Abiti", "Mare, Estate", "Caldo, Lino", "Saldi", "Rientro", "Autunno", "Halloween", "Sci, Feste", "Regali"],
             season_prep: ["San Valentino", "Mezza stagione", "Fiori", "Mare", "Vacanze", "Rientro", "Scuola", "Autunno", "Halloween", "Sci", "Dopo Sci", "Sport Gennaio"],
+            season_focus_label: "Vendere", season_prep_label: "Preparare",
             nav_home: "Home", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Strumenti", nav_relax: "Relax", nav_crush: "Crush", nav_trophies: "Trofei",
             spoons_title: "I Miei Cucchiai", chrono_title: "Cronobiologia", tip_title: "Consiglio del Giorno",
             studio_title: "Studio Virtuale", studio_subtitle: "Seleziona una categoria per iniziare lo shooting guidato.",
@@ -1020,6 +1057,7 @@
             jokes: ["Dlaczego woda nie płaci rachunków? Bo cieknie.", "Co robi kucharz w biurze? Miesza w papierach.", "Jaki jest ulubiony owoc żołnierza? Granat.", "Co mówi zero do ósemki? Fajny pasek!", "Dlaczego komputer poszedł do lekarza? Bo złapał wirusa."],
             season_focus: ["Sport", "Walentynki", "Wiosna", "Sukienki", "Plaża, Lato", "Upał, Len", "Wyprzedaż", "Powrót do szkoły", "Jesień", "Halloween", "Narty", "Prezenty"],
             season_prep: ["Walentynki", "Wiosna", "Kwiaty", "Plaża", "Wakacje", "Szkoła", "Szkoła", "Jesień", "Halloween", "Narty", "Po nartach", "Sport Styczeń"],
+            season_focus_label: "Sprzedawaj", season_prep_label: "Przygotuj",
             nav_home: "Start", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Narzędzia", nav_relax: "Relaks", nav_crush: "Crush", nav_trophies: "Trofea",
             spoons_title: "Moje Łyżki", chrono_title: "Chronobiologia", tip_title: "Porada Dnia",
             studio_title: "Wirtualne Studio", studio_subtitle: "Wybierz kategorię, aby rozpocząć sesję zdjęciową.",
@@ -1147,6 +1185,15 @@
         localStorage.setItem('spoons', window.currentSpoons);
         localStorage.setItem('spoons_date', new Date().toDateString()); // Update date to avoid reset on refresh same day
         renderSpoons();
+    }
+
+    window.toggleSpoonDetails = function() {
+        const el = document.getElementById('spoon-details');
+        if (el.classList.contains('hidden')) {
+            el.classList.remove('hidden');
+        } else {
+            el.classList.add('hidden');
+        }
     }
 
     function renderSpoons() {
