@@ -325,6 +325,15 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
+        .guidance {
+            display: block;
+            margin-top: 4px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-left: 5px;
+        }
+
     </style>
 </head>
 <body>
@@ -528,19 +537,37 @@
                             <svg class="icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                             <span data-i18n="title_perfect">Le Titre Parfait</span>
                         </h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px;">
-                            <input type="text" id="gen-brand" data-placeholder-i18n="ph_brand" placeholder="Marque" oninput="updateSeoPreview()">
-                            <input type="text" id="gen-type" data-placeholder-i18n="ph_type" placeholder="Type" oninput="updateSeoPreview()">
-                            <input type="text" id="gen-color" data-placeholder-i18n="ph_color" placeholder="Couleur" oninput="updateSeoPreview()">
-                            <input type="text" id="gen-material" data-placeholder-i18n="ph_material" placeholder="Matière" oninput="updateSeoPreview()">
-                            <select id="gen-condition" oninput="updateSeoPreview()">
-                                <option value="" data-i18n="ph_condition">-- État --</option>
-                                <option value="Neuf avec étiquette" data-i18n="cond_new">Neuf avec étiquette</option>
-                                <option value="Très bon état" data-i18n="cond_vgood">Très bon état</option>
-                                <option value="Bon état" data-i18n="cond_good">Bon état</option>
-                                <option value="Satisfaisant" data-i18n="cond_fair">Satisfaisant</option>
-                            </select>
-                            <input type="text" id="gen-vibe" data-placeholder-i18n="ph_vibe" placeholder="Style" oninput="updateSeoPreview()">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px;">
+                            <div>
+                                <input type="text" id="gen-brand" data-placeholder-i18n="ph_brand" placeholder="Marque" oninput="updateSeoPreview()">
+                                <small class="guidance" data-i18n="ex_brand">Ex: Zara, Sézane</small>
+                            </div>
+                            <div>
+                                <input type="text" id="gen-type" data-placeholder-i18n="ph_type" placeholder="Type" oninput="updateSeoPreview()">
+                                <small class="guidance" data-i18n="ex_type">Ex: Robe Midi, Jean Mom</small>
+                            </div>
+                            <div>
+                                <input type="text" id="gen-color" data-placeholder-i18n="ph_color" placeholder="Couleur" oninput="updateSeoPreview()">
+                                <small class="guidance" data-i18n="ex_color">Ex: Vert émeraude</small>
+                            </div>
+                            <div>
+                                <input type="text" id="gen-material" data-placeholder-i18n="ph_material" placeholder="Matière" oninput="updateSeoPreview()">
+                                <small class="guidance" data-i18n="ex_material">Ex: Soie, Laine, Coton</small>
+                            </div>
+                            <div>
+                                <select id="gen-condition" oninput="updateSeoPreview()">
+                                    <option value="" data-i18n="ph_condition">-- État --</option>
+                                    <option value="Neuf avec étiquette" data-i18n="cond_new">Neuf avec étiquette</option>
+                                    <option value="Très bon état" data-i18n="cond_vgood">Très bon état</option>
+                                    <option value="Bon état" data-i18n="cond_good">Bon état</option>
+                                    <option value="Satisfaisant" data-i18n="cond_fair">Satisfaisant</option>
+                                </select>
+                                <small class="guidance" data-i18n="ex_condition">Sois honnête !</small>
+                            </div>
+                            <div>
+                                <input type="text" id="gen-vibe" data-placeholder-i18n="ph_vibe" placeholder="Style" oninput="updateSeoPreview()">
+                                <small class="guidance" data-i18n="ex_vibe">Ex: Bohème, Vintage</small>
+                            </div>
                         </div>
 
                         <div style="margin-top: 15px; background: var(--bg-color); padding: 15px; border-radius: 10px; border: 1px dashed var(--primary-dark); position: relative;">
@@ -823,6 +850,7 @@
             season_focus: ["Sport, Détox", "Saint-Valentin", "Mi-saison", "Robes, Festivals", "Maillots, Été", "Canicule, Lin", "Soldes", "Rentrée", "Automne, Bottes", "Halloween", "Ski, Fêtes", "Cadeaux"],
             season_prep: ["Saint-Valentin", "Mi-saison", "Robes fleurs", "Maillots", "Vacances", "Rentrée", "Rentrée scolaire", "Automne", "Halloween", "Ski", "Après-ski", "Sport Janvier"],
             season_focus_label: "À vendre", season_prep_label: "À préparer",
+            tip_autumn: "🍂 Prépare les manteaux et la rentrée.", tip_winter: "❄️ Fêtes & Hiver : Robes de soirée et cadeaux.", tip_jan: "💪 Résolutions : Sport & Détox placard.", tip_summer: "☀️ Été : Maillots & Robes légères.", tip_spring: "👗 Mi-saison : Vestes légères et jeans.",
             nav_home: "Accueil", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Outils", nav_relax: "Détente", nav_crush: "Crush", nav_trophies: "Succès",
             spoons_title: "Mes Cuillères", chrono_title: "Chronobiologie", tip_title: "Conseil du Jour",
             studio_title: "Studio Virtuel", studio_subtitle: "Sélectionne une catégorie pour commencer ton shooting guidé.",
@@ -843,8 +871,16 @@
             breath_title: "Cohérence Cardiaque", breath_instruction: "Suit le rythme pour calmer ton anxiété.",
             joke_title: "Minute Sourire", btn_next_joke: "Une autre ! 🎭",
             panic_title: "Tu es en sécurité.", panic_text: "Respire. Tu es aimée. Tu es capable. <br>Cette anxiété n'est qu'un nuage qui passe, tu es le ciel. <br>Prends tout le temps qu'il te faut. 💖",
-            anchor_title: "Technique d'Ancrage 5-4-3-2-1", anchor_5: "👀 <b>5</b> choses que tu vois", anchor_4: "✋ <b>4</b> choses que tu peux toucher", anchor_3: "👂 <b>3</b> choses que tu entends", anchor_2: "👃 <b>2</b> choses que tu peux sentir", anchor_1: "👅 <b>1</b> chose que tu peux goûter", btn_better: "Je me sens mieux 🌿"
-    },
+            anchor_title: "Technique d'Ancrage 5-4-3-2-1", anchor_5: "👀 <b>5</b> choses que tu vois", anchor_4: "✋ <b>4</b> choses que tu peux toucher", anchor_3: "👂 <b>3</b> choses que tu entends", anchor_2: "👃 <b>2</b> choses que tu peux sentir", anchor_1: "👅 <b>1</b> chose que tu peux goûter", btn_better: "Je me sens mieux 🌿",
+            ex_brand: "Ex: Zara, Sézane", ex_type: "Ex: Robe Midi, Jean Mom", ex_color: "Ex: Vert émeraude", ex_material: "Ex: Soie, Laine, Coton", ex_condition: "Sois honnête !", ex_vibe: "Ex: Bohème, Vintage",
+        seo_hint_short: "Titre trop court !", seo_hint_brand: "Manque la marque !", seo_hint_type: "Quel est le type ?", seo_hint_adj: "Évite 'joli' ou 'sympa', sois factuelle !", seo_hint_perfect: "🔥 Titre Parfait ! L'algorithme va adorer.",
+        desc_intro_rare: "🔥 RARE :", desc_intro_nugget: "✨ PÉPITE À SAISIR :", desc_part_1: "Je me sépare de cette merveille car je fais du tri dans mon dressing (trop de vêtements !).", desc_part_2: "C'est une pièce idéale pour la saison, très agréable à porter et qui fait son petit effet. ✨", desc_tech_title: "📏 TAILLE & ÉTAT :", desc_cond_label: "• État :", desc_verified: "(Vérifié avec soin)", desc_color_label: "• Couleur :", desc_mat_label: "• Matière :", desc_info_label: "• Info + :", desc_ship_title: "🚀 ENVOI RAPIDE :", desc_ship_1: "• J'envoie sous 24h (Mondial Relay / Chrono préférés).", desc_ship_2: "• Emballage soigné et protégé 🎁", desc_ship_3: "• Maison non-fumeur.", desc_closing: "💡 Premier arrivé, premier servi ! N'hésitez pas à faire une offre ou un lot pour économiser les frais de port. 😉",
+        studio_final_title: "Photos Parfaites !", studio_final_subtitle: "Derniers conseils SEO :", studio_final_tip1: "Utilise <b>tous</b> les mots clés de l'étiquette dans ta description.", studio_final_tip2: "Prix psychologique : <b>9.90€</b> vend mieux que 10.00€.", studio_final_tip3: "Poste ton annonce le <b>Dimanche soir</b> ou le <b>Mardi soir</b>.",
+        spoons_high: "⚡ Tu as de l'énergie ! Attaque les photos ou les mises en ligne.", spoons_mid: "✨ Énergie modérée. Fais des colis ou réponds aux messages.", spoons_low: "🌙 Batterie faible. Repose-toi ou fais juste de la veille.",
+        chrono_prime: "🔥 C'EST LE MOMENT ! Poste maintenant !", chrono_good: "Bientôt le pic (%h%h). Finis tes photos !", chrono_calm: "Moment calme. Prépare tes brouillons.",
+        studio_new: "Nouvelle annonce", studio_success: "Tu as toutes les photos nécessaires pour maximiser ta vente.", studio_next: "Étape suivante", studio_validate: "📸 Je valide cette étape", studio_done: "✅ Photo Validée !",
+        notif_pack: "📦 Colis Prêt ! Beau travail.", notif_trophy: "🏆 Succès débloqué :", tr_n_first_visit: "Bienvenue", tr_d_first_visit: "Ouvrir l'application.", tr_n_dark_mode: "Mode Nuit", tr_d_dark_mode: "Activer le mode sombre.", tr_n_seo_master: "Reine du SEO", tr_d_seo_master: "Générer un titre parfait.", tr_n_photo_pro: "Shooting Star", tr_d_photo_pro: "Terminer un guide photo.", tr_n_spoon_saver: "Économe", tr_d_spoon_saver: "Mettre à jour ses cuillères.", tr_n_gamer: "Joueuse", tr_d_gamer: "Lancer une partie de Crush.", tr_n_high_score_100: "Score 100", tr_d_high_score_100: "Atteindre 100 points au Crush.", tr_n_relax_master: "Zen", tr_d_relax_master: "Utiliser la zone détente.", tr_n_copy_paste: "Presse-Papier", tr_d_copy_paste: "Copier un texte généré.", tr_n_explorer: "Curieuse", tr_d_explorer: "Visiter tous les onglets.", tr_n_panic_button: "SOS", tr_d_panic_button: "Utiliser le bouton SOS.", tr_n_trend_setter: "Trend Setter", tr_d_trend_setter: "Utiliser un pack de hashtags.", tr_n_profit_calc: "Comptable", tr_d_profit_calc: "Calculer un profit.", tr_n_packing_done: "Colis Ready", tr_d_packing_done: "Compléter la checklist colis.", tr_n_diplomat: "Diplomate", tr_d_diplomat: "Copier une réponse type.", tr_n_night_owl: "Oiseau de Nuit", tr_d_night_owl: "Utiliser l'app après 22h.", tr_n_early_bird: "Lève-tôt", tr_d_early_bird: "Utiliser l'app avant 8h.", tr_n_weekend_warrior: "Weekend", tr_d_weekend_warrior: "Utiliser l'app un Samedi ou Dimanche.", tr_n_score_500: "Pro du Crush", tr_d_score_500: "Atteindre 500 points au Crush.", tr_n_combo_master: "Combo", tr_d_combo_master: "Faire un combo au jeu.", tr_n_seasonal_check: "Stratège", tr_d_seasonal_check: "Consulter le calendrier.", tr_n_breath_deep: "Respiration", tr_d_breath_deep: "Rester 10s sur la zone détente.", tr_n_joke_lover: "Humour", tr_d_joke_lover: "Lire 5 blagues.", tr_n_full_battery: "Pleine Forme", tr_d_full_battery: "Avoir 12 cuillères.", tr_n_low_battery: "Mode Éco", tr_d_low_battery: "Avoir moins de 3 cuillères.", tr_n_studio_master: "Studio Pro", tr_d_studio_master: "Visiter le studio 3 fois.", tr_n_tag_collector: "Tagueuse", tr_d_tag_collector: "Ajouter 10 tags.", tr_n_share_love: "Amour", tr_d_share_love: "Ouvrir la section SOS.", tr_n_expert_seller: "Experte", tr_d_expert_seller: "Débloquer 10 succès.", tr_n_imperatrice: "L'Impératrice", tr_d_imperatrice: "Débloquer 20 succès.",
+        },
     en: {
             cat_clothes: "Clothes & Fashion", cat_shoes: "Shoes & Sneakers", cat_bags: "Bags & Leather Goods",
             step_cover_t: "The Visual Hook (Cover)", step_cover_d: "Take photo in <b>Natural Light</b> (Facing window). PORTRAIT format.", step_cover_s: "🧠 <b>Computer Vision:</b> AI detects human silhouette. Wearing it increases CTR by +40%.",
@@ -870,6 +906,7 @@
             season_focus: ["Sport, Detox", "Valentine's", "Mid-season", "Dresses, Festivals", "Swimwear, Summer", "Heatwave, Linen", "Sales", "Back to School", "Autumn, Boots", "Halloween", "Ski, Holidays", "Gifts"],
             season_prep: ["Valentine's", "Mid-season", "Floral Dresses", "Swimwear", "Vacation", "Back to School", "School Run", "Autumn", "Halloween", "Ski", "Apres-Ski", "Jan Sport"],
             season_focus_label: "Sell Now", season_prep_label: "Prep Now",
+            tip_autumn: "🍂 Prep coats & Back to School.", tip_winter: "❄️ Holidays & Winter: Party dresses & gifts.", tip_jan: "💪 Resolutions: Sport & Closet Detox.", tip_summer: "☀️ Summer: Swimwear & Light dresses.", tip_spring: "👗 Mid-season: Light jackets & jeans.",
             nav_home: "Home", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Tools", nav_relax: "Relax", nav_crush: "Crush", nav_trophies: "Trophies",
             spoons_title: "My Spoons", chrono_title: "Chronobiology", tip_title: "Tip of the Day",
             studio_title: "Virtual Studio", studio_subtitle: "Select a category to start your guided shoot.",
@@ -890,8 +927,16 @@
             breath_title: "Cardiac Coherence", breath_instruction: "Follow the rhythm to calm your anxiety.",
             joke_title: "Smile Minute", btn_next_joke: "Another one! 🎭",
             panic_title: "You are safe.", panic_text: "Breathe. You are loved. You are capable. <br>This anxiety is just a passing cloud, you are the sky. <br>Take all the time you need. 💖",
-            anchor_title: "Grounding Technique 5-4-3-2-1", anchor_5: "👀 <b>5</b> things you see", anchor_4: "✋ <b>4</b> things you can touch", anchor_3: "👂 <b>3</b> things you hear", anchor_2: "👃 <b>2</b> things you can smell", anchor_1: "👅 <b>1</b> thing you can taste", btn_better: "I feel better 🌿"
-    },
+            anchor_title: "Grounding Technique 5-4-3-2-1", anchor_5: "👀 <b>5</b> things you see", anchor_4: "✋ <b>4</b> things you can touch", anchor_3: "👂 <b>3</b> things you hear", anchor_2: "👃 <b>2</b> things you can smell", anchor_1: "👅 <b>1</b> thing you can taste", btn_better: "I feel better 🌿",
+            ex_brand: "Ex: Zara, Nike", ex_type: "Ex: Midi Dress, Mom Jeans", ex_color: "Ex: Emerald Green", ex_material: "Ex: Silk, Wool, Cotton", ex_condition: "Be honest!", ex_vibe: "Ex: Boho, Vintage",
+        seo_hint_short: "Title too short!", seo_hint_brand: "Brand missing!", seo_hint_type: "What is the type?", seo_hint_adj: "Avoid 'cute' or 'nice', be factual!", seo_hint_perfect: "🔥 Perfect Title! The algo will love it.",
+        desc_intro_rare: "🔥 RARE :", desc_intro_nugget: "✨ GEM TO GRAB :", desc_part_1: "I'm parting with this beauty as I'm decluttering my wardrobe (too many clothes!).", desc_part_2: "It's a perfect piece for the season, very comfy and looks great. ✨", desc_tech_title: "📏 SIZE & CONDITION :", desc_cond_label: "• Condition :", desc_verified: "(Carefully checked)", desc_color_label: "• Color :", desc_mat_label: "• Material :", desc_info_label: "• Extra Info :", desc_ship_title: "🚀 FAST SHIPPING :", desc_ship_1: "• I ship within 24h.", desc_ship_2: "• Carefully packed 🎁", desc_ship_3: "• Smoke-free home.", desc_closing: "💡 First come, first served! Feel free to make an offer or bundle to save on shipping. 😉",
+        studio_final_title: "Perfect Photos!", studio_final_subtitle: "Last SEO Tips:", studio_final_tip1: "Use <b>all</b> keywords from the label in your description.", studio_final_tip2: "Psychological price: <b>9.90€</b> sells better than 10.00€.", studio_final_tip3: "Post your listing on <b>Sunday evening</b> or <b>Tuesday evening</b>.",
+        spoons_high: "⚡ High energy! Tackle photos or listings.", spoons_mid: "✨ Moderate energy. Pack items or reply to messages.", spoons_low: "🌙 Low battery. Rest or just browse.",
+        chrono_prime: "🔥 IT'S TIME! Post now!", chrono_good: "Peak soon (%h%h). Finish your photos!", chrono_calm: "Quiet time. Prepare drafts.",
+        studio_new: "New Listing", studio_success: "You have all the photos needed to maximize your sale.", studio_next: "Next Step", studio_validate: "📸 Validate Step", studio_done: "✅ Photo Validated!",
+        notif_pack: "📦 Package Ready! Great job.", notif_trophy: "🏆 Achievement Unlocked:", tr_n_first_visit: "Welcome", tr_d_first_visit: "Open the app.", tr_n_dark_mode: "Dark Mode", tr_d_dark_mode: "Enable dark mode.", tr_n_seo_master: "SEO Queen", tr_d_seo_master: "Generate a perfect title.", tr_n_photo_pro: "Shooting Star", tr_d_photo_pro: "Complete a photo guide.", tr_n_spoon_saver: "Thrifty", tr_d_spoon_saver: "Update your spoons.", tr_n_gamer: "Gamer", tr_d_gamer: "Start a Crush game.", tr_n_high_score_100: "Score 100", tr_d_high_score_100: "Reach 100 points in Crush.", tr_n_relax_master: "Zen", tr_d_relax_master: "Use the relax zone.", tr_n_copy_paste: "Clipboard", tr_d_copy_paste: "Copy generated text.", tr_n_explorer: "Curious", tr_d_explorer: "Visit all tabs.", tr_n_panic_button: "SOS", tr_d_panic_button: "Use the SOS button.", tr_n_trend_setter: "Trend Setter", tr_d_trend_setter: "Use a hashtag pack.", tr_n_profit_calc: "Accountant", tr_d_profit_calc: "Calculate profit.", tr_n_packing_done: "Parcel Ready", tr_d_packing_done: "Complete packing checklist.", tr_n_diplomat: "Diplomat", tr_d_diplomat: "Copy a template reply.", tr_n_night_owl: "Night Owl", tr_d_night_owl: "Use app after 10 PM.", tr_n_early_bird: "Early Bird", tr_d_early_bird: "Use app before 8 AM.", tr_n_weekend_warrior: "Weekend", tr_d_weekend_warrior: "Use app on Sat or Sun.", tr_n_score_500: "Crush Pro", tr_d_score_500: "Reach 500 points in Crush.", tr_n_combo_master: "Combo", tr_d_combo_master: "Make a combo in game.", tr_n_seasonal_check: "Strategist", tr_d_seasonal_check: "Check the calendar.", tr_n_breath_deep: "Breathing", tr_d_breath_deep: "Stay 10s in relax zone.", tr_n_joke_lover: "Humor", tr_d_joke_lover: "Read 5 jokes.", tr_n_full_battery: "Full Power", tr_d_full_battery: "Have 12 spoons.", tr_n_low_battery: "Eco Mode", tr_d_low_battery: "Have less than 3 spoons.", tr_n_studio_master: "Studio Pro", tr_d_studio_master: "Visit studio 3 times.", tr_n_tag_collector: "Tagger", tr_d_tag_collector: "Add 10 tags.", tr_n_share_love: "Love", tr_d_share_love: "Open SOS section.", tr_n_expert_seller: "Expert", tr_d_expert_seller: "Unlock 10 achievements.", tr_n_imperatrice: "The Empress", tr_d_imperatrice: "Unlock 20 achievements.",
+        },
     de: {
             cat_clothes: "Kleidung & Mode", cat_shoes: "Schuhe & Sneaker", cat_bags: "Taschen & Lederwaren",
             step_cover_t: "Der visuelle Hook (Cover)", step_cover_d: "Foto bei <b>Tageslicht</b> (Fenster). HOCHFORMAT.", step_cover_s: "🧠 <b>Computer Vision:</b> KI erkennt Silhouette. Tragefotos erhöhen Klickrate um +40%.",
@@ -917,6 +962,7 @@
             season_focus: ["Sport, Detox", "Valentinstag", "Übergang", "Kleider", "Bade, Sommer", "Hitze, Leinen", "Sale", "Schulstart", "Herbst, Stiefel", "Halloween", "Ski, Fest", "Geschenke"],
             season_prep: ["Valentinstag", "Übergang", "Blumenkleider", "Bade", "Urlaub", "Schulstart", "Schule", "Herbst", "Halloween", "Ski", "Après-Ski", "Januar Sport"],
             season_focus_label: "Verkaufen", season_prep_label: "Vorbereiten",
+            tip_autumn: "🍂 Bereite Mäntel & Schulstart vor.", tip_winter: "❄️ Feiertage & Winter: Partykleider & Geschenke.", tip_jan: "💪 Vorsätze: Sport & Schrank-Detox.", tip_summer: "☀️ Sommer: Bade & Leichte Kleider.", tip_spring: "👗 Übergang: Leichte Jacken & Jeans.",
             nav_home: "Start", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Tools", nav_relax: "Entspannung", nav_crush: "Crush", nav_trophies: "Erfolge",
             spoons_title: "Meine Löffel", chrono_title: "Chronobiologie", tip_title: "Tipp des Tages",
             studio_title: "Virtuelles Studio", studio_subtitle: "Wähle eine Kategorie, um dein geführtes Shooting zu starten.",
@@ -937,8 +983,16 @@
             breath_title: "Herzkohärenz", breath_instruction: "Folge dem Rhythmus, um deine Angst zu beruhigen.",
             joke_title: "Lächel-Minute", btn_next_joke: "Noch einer! 🎭",
             panic_title: "Du bist in Sicherheit.", panic_text: "Atme. Du wirst geliebt. Du schaffst das. <br>Diese Angst ist nur eine Wolke, die vorbeizieht, du bist der Himmel. <br>Nimm dir alle Zeit, die du brauchst. 💖",
-            anchor_title: "Erdungstechnik 5-4-3-2-1", anchor_5: "👀 <b>5</b> Dinge, die du siehst", anchor_4: "✋ <b>4</b> Dinge, die du berühren kannst", anchor_3: "👂 <b>3</b> Dinge, die du hörst", anchor_2: "👃 <b>2</b> Dinge, die du riechen kannst", anchor_1: "👅 <b>1</b> Sache, die du schmecken kannst", btn_better: "Ich fühle mich besser 🌿"
-    },
+            anchor_title: "Erdungstechnik 5-4-3-2-1", anchor_5: "👀 <b>5</b> Dinge, die du siehst", anchor_4: "✋ <b>4</b> Dinge, die du berühren kannst", anchor_3: "👂 <b>3</b> Dinge, die du hörst", anchor_2: "👃 <b>2</b> Dinge, die du riechen kannst", anchor_1: "👅 <b>1</b> Sache, die du schmecken kannst", btn_better: "Ich fühle mich besser 🌿",
+            ex_brand: "Bsp: Zara, Adidas", ex_type: "Bsp: Maxikleid, Mom Jeans", ex_color: "Bsp: Smaragdgrün", ex_material: "Bsp: Seide, Wolle", ex_condition: "Sei ehrlich!", ex_vibe: "Bsp: Boho, Vintage",
+        seo_hint_short: "Titel zu kurz!", seo_hint_brand: "Marke fehlt!", seo_hint_type: "Was ist der Typ?", seo_hint_adj: "Vermeide 'hübsch', sei sachlich!", seo_hint_perfect: "🔥 Perfekter Titel! Der Algo wird es lieben.",
+        desc_intro_rare: "🔥 SELTEN :", desc_intro_nugget: "✨ SCHNÄPPCHEN :", desc_part_1: "Ich trenne mich von diesem schönen Stück, da ich meinen Kleiderschrank aussortiere.", desc_part_2: "Ein perfektes Teil für die Saison, sehr angenehm zu tragen und ein echter Hingucker. ✨", desc_tech_title: "📏 GRÖSSE & ZUSTAND :", desc_cond_label: "• Zustand :", desc_verified: "(Sorgfältig geprüft)", desc_color_label: "• Farbe :", desc_mat_label: "• Material :", desc_info_label: "• Info + :", desc_ship_title: "🚀 SCHNELLER VERSAND :", desc_ship_1: "• Versand innerhalb von 24h.", desc_ship_2: "• Sorgfältig verpackt 🎁", desc_ship_3: "• Tierfreier Nichtraucherhaushalt.", desc_closing: "💡 Wer zuerst kommt, mahlt zuerst! Macht gerne Angebote oder Pakete, um Versand zu sparen. 😉",
+        studio_final_title: "Perfekte Fotos!", studio_final_subtitle: "Letzte SEO-Tipps:", studio_final_tip1: "Verwende <b>alle</b> Schlüsselwörter vom Etikett.", studio_final_tip2: "Psychologischer Preis: <b>9.90€</b> verkauft sich besser als 10.00€.", studio_final_tip3: "Poste deine Anzeige am <b>Sonntagabend</b> oder <b>Dienstagabend</b>.",
+        spoons_high: "⚡ Viel Energie! Mach Fotos oder lade hoch.", spoons_mid: "✨ Mittlere Energie. Packe Pakete oder antworte.", spoons_low: "🌙 Akku leer. Ruh dich aus.",
+        chrono_prime: "🔥 JETZT POSTEN!", chrono_good: "Bald Peak (%h%h). Fotos fertig machen!", chrono_calm: "Ruhig. Entwürfe vorbereiten.",
+        studio_new: "Neue Anzeige", studio_success: "Du hast alle Fotos für einen Top-Verkauf.", studio_next: "Nächster Schritt", studio_validate: "📸 Bestätigen", studio_done: "✅ Erledigt!",
+        notif_pack: "📦 Paket bereit! Super.", notif_trophy: "🏆 Erfolg freigeschaltet:", tr_n_first_visit: "Willkommen", tr_d_first_visit: "Öffne die App.", tr_n_dark_mode: "Dunkelmodus", tr_d_dark_mode: "Aktiviere den Dunkelmodus.", tr_n_seo_master: "SEO-Königin", tr_d_seo_master: "Generiere einen perfekten Titel.", tr_n_photo_pro: "Shooting Star", tr_d_photo_pro: "Schließe einen Foto-Guide ab.", tr_n_spoon_saver: "Sparsam", tr_d_spoon_saver: "Aktualisiere deine Löffel.", tr_n_gamer: "Spielerin", tr_d_gamer: "Starte ein Crush-Spiel.", tr_n_high_score_100: "Punkte 100", tr_d_high_score_100: "Erreiche 100 Punkte in Crush.", tr_n_relax_master: "Zen", tr_d_relax_master: "Nutze die Entspannungszone.", tr_n_copy_paste: "Zwischenablage", tr_d_copy_paste: "Kopiere generierten Text.", tr_n_explorer: "Neugierig", tr_d_explorer: "Besuche alle Tabs.", tr_n_panic_button: "SOS", tr_d_panic_button: "Benutze den SOS-Knopf.", tr_n_trend_setter: "Trendsetter", tr_d_trend_setter: "Benutze ein Hashtag-Paket.", tr_n_profit_calc: "Buchhalter", tr_d_profit_calc: "Berechne Gewinn.", tr_n_packing_done: "Paket Fertig", tr_d_packing_done: "Vervollständige Packliste.", tr_n_diplomat: "Diplomat", tr_d_diplomat: "Kopiere eine Antwortvorlage.", tr_n_night_owl: "Nachteule", tr_d_night_owl: "Benutze App nach 22 Uhr.", tr_n_early_bird: "Frühaufsteher", tr_d_early_bird: "Benutze App vor 8 Uhr.", tr_n_weekend_warrior: "Wochenende", tr_d_weekend_warrior: "Benutze App am Sa oder So.", tr_n_score_500: "Crush Pro", tr_d_score_500: "Erreiche 500 Punkte in Crush.", tr_n_combo_master: "Combo", tr_d_combo_master: "Mache eine Combo im Spiel.", tr_n_seasonal_check: "Stratege", tr_d_seasonal_check: "Prüfe den Kalender.", tr_n_breath_deep: "Atmung", tr_d_breath_deep: "Bleibe 10s in der Entspannungszone.", tr_n_joke_lover: "Humor", tr_d_joke_lover: "Lies 5 Witze.", tr_n_full_battery: "Volle Kraft", tr_d_full_battery: "Habe 12 Löffel.", tr_n_low_battery: "Eco-Modus", tr_d_low_battery: "Habe weniger als 3 Löffel.", tr_n_studio_master: "Studio-Profi", tr_d_studio_master: "Besuche Studio 3 mal.", tr_n_tag_collector: "Taggerin", tr_d_tag_collector: "Füge 10 Tags hinzu.", tr_n_share_love: "Liebe", tr_d_share_love: "Öffne SOS-Sektion.", tr_n_expert_seller: "Experte", tr_d_expert_seller: "Schalte 10 Erfolge frei.", tr_n_imperatrice: "Die Kaiserin", tr_d_imperatrice: "Schalte 20 Erfolge frei.",
+        },
     es: {
             cat_clothes: "Ropa y Moda", cat_shoes: "Zapatos y Sneakers", cat_bags: "Bolsos y Accesorios",
             step_cover_t: "El Gancho Visual", step_cover_d: "Foto con <b>Luz Natural</b>. Formato RETRATO.", step_cover_s: "🧠 <b>Visión Artificial:</b> La IA detecta la silueta. Foto puesta aumenta clics +40%.",
@@ -964,6 +1018,7 @@
             season_focus: ["Deporte", "San Valentín", "Entretiempo", "Vestidos", "Baño, Verano", "Calor, Lino", "Rebajas", "Vuelta al cole", "Otoño", "Halloween", "Esquí", "Regalos"],
             season_prep: ["San Valentín", "Entretiempo", "Flores", "Baño", "Vacaciones", "Vuelta al cole", "Colegio", "Otoño", "Halloween", "Esquí", "Post-Esquí", "Deporte Enero"],
             season_focus_label: "Vender ya", season_prep_label: "Preparar",
+            tip_autumn: "🍂 Prepara abrigos & Vuelta al cole.", tip_winter: "❄️ Fiestas & Invierno: Vestidos fiesta & regalos.", tip_jan: "💪 Resoluciones: Deporte & Detox armario.", tip_summer: "☀️ Verano: Baño & Vestidos ligeros.", tip_spring: "👗 Entretiempo: Chaquetas & Jeans.",
             nav_home: "Inicio", nav_studio: "Estudio", nav_seo: "SEO", nav_tools: "Herramientas", nav_relax: "Relax", nav_crush: "Crush", nav_trophies: "Trofeos",
             spoons_title: "Mis Cucharas", chrono_title: "Cronobiología", tip_title: "Consejo del Día",
             studio_title: "Estudio Virtual", studio_subtitle: "Selecciona una categoría para comenzar tu sesión guiada.",
@@ -984,8 +1039,16 @@
             breath_title: "Coherencia Cardíaca", breath_instruction: "Sigue el ritmo para calmar tu ansiedad.",
             joke_title: "Minuto Sonrisa", btn_next_joke: "¡Otro! 🎭",
             panic_title: "Estás a salvo.", panic_text: "Respira. Eres amada. Eres capaz. <br>Esta ansiedad es solo una nube que pasa, tú eres el cielo. <br>Tómate todo el tiempo que necesites. 💖",
-            anchor_title: "Técnica de Anclaje 5-4-3-2-1", anchor_5: "👀 <b>5</b> cosas que ves", anchor_4: "✋ <b>4</b> cosas que puedes tocar", anchor_3: "👂 <b>3</b> cosas que oyes", anchor_2: "👃 <b>2</b> cosas que puedes oler", anchor_1: "👅 <b>1</b> cosa que puedes saborear", btn_better: "Me siento mejor 🌿"
-    },
+            anchor_title: "Técnica de Anclaje 5-4-3-2-1", anchor_5: "👀 <b>5</b> cosas que ves", anchor_4: "✋ <b>4</b> cosas que puedes tocar", anchor_3: "👂 <b>3</b> cosas que oyes", anchor_2: "👃 <b>2</b> cosas que puedes oler", anchor_1: "👅 <b>1</b> cosa que puedes saborear", btn_better: "Me siento mejor 🌿",
+            ex_brand: "Ej: Zara, Mango", ex_type: "Ej: Vestido Midi, Jeans", ex_color: "Ej: Verde esmeralda", ex_material: "Ej: Seda, Lana", ex_condition: "¡Sé honesta!", ex_vibe: "Ej: Boho, Vintage",
+        seo_hint_short: "¡Título muy corto!", seo_hint_brand: "¡Falta la marca!", seo_hint_type: "¿Qué tipo es?", seo_hint_adj: "¡Evita 'bonito', sé objetiva!", seo_hint_perfect: "🔥 ¡Título Perfecto! Al algoritmo le encantará.",
+        desc_intro_rare: "🔥 RARO :", desc_intro_nugget: "✨ JOYA A CONSEGUIR :", desc_part_1: "Me despido de esta maravilla porque estoy haciendo limpieza de armario.", desc_part_2: "Es una pieza ideal para la temporada, muy cómoda y que queda genial. ✨", desc_tech_title: "📏 TALLA & ESTADO :", desc_cond_label: "• Estado :", desc_verified: "(Verificado con cuidado)", desc_color_label: "• Color :", desc_mat_label: "• Material :", desc_info_label: "• Info + :", desc_ship_title: "🚀 ENVÍO RÁPIDO :", desc_ship_1: "• Envío en 24h.", desc_ship_2: "• Embalaje cuidado 🎁", desc_ship_3: "• Casa sin humo.", desc_closing: "💡 ¡El primero que llega se lo lleva! No dudes en hacer una oferta o lote para ahorrar envío. 😉",
+        studio_final_title: "¡Fotos Perfectas!", studio_final_subtitle: "Últimos consejos SEO:", studio_final_tip1: "Usa <b>todas</b> las palabras clave de la etiqueta.", studio_final_tip2: "Precio psicológico: <b>9.90€</b> vende mejor que 10.00€.", studio_final_tip3: "Publica tu anuncio el <b>Domingo por la noche</b> o <b>Martes por la noche</b>.",
+        spoons_high: "⚡ ¡Tienes energía! Haz fotos o sube artículos.", spoons_mid: "✨ Energía media. Prepara paquetes.", spoons_low: "🌙 Batería baja. Descansa.",
+        chrono_prime: "🔥 ¡ES EL MOMENTO! ¡Publica!", chrono_good: "Pico pronto (%h%h). ¡Termina fotos!", chrono_calm: "Momento tranquilo. Prepara borradores.",
+        studio_new: "Nuevo Anuncio", studio_success: "Tienes todas las fotos necesarias.", studio_next: "Siguiente paso", studio_validate: "📸 Validar paso", studio_done: "✅ ¡Foto Validada!",
+        notif_pack: "📦 ¡Paquete listo! Bien hecho.", notif_trophy: "🏆 Logro desbloqueado:", tr_n_first_visit: "Bienvenido", tr_d_first_visit: "Abre la aplicación.", tr_n_dark_mode: "Modo Oscuro", tr_d_dark_mode: "Activa el modo oscuro.", tr_n_seo_master: "Reina del SEO", tr_d_seo_master: "Genera un título perfecto.", tr_n_photo_pro: "Estrella fugaz", tr_d_photo_pro: "Completa una guía de fotos.", tr_n_spoon_saver: "Ahorradora", tr_d_spoon_saver: "Actualiza tus cucharas.", tr_n_gamer: "Jugadora", tr_d_gamer: "Inicia una partida de Crush.", tr_n_high_score_100: "Puntuación 100", tr_d_high_score_100: "Alcanza 100 puntos en Crush.", tr_n_relax_master: "Zen", tr_d_relax_master: "Usa la zona de relax.", tr_n_copy_paste: "Portapapeles", tr_d_copy_paste: "Copia texto generado.", tr_n_explorer: "Curiosa", tr_d_explorer: "Visita todas las pestañas.", tr_n_panic_button: "SOS", tr_d_panic_button: "Usa el botón SOS.", tr_n_trend_setter: "Creadora de tendencias", tr_d_trend_setter: "Usa un pack de hashtags.", tr_n_profit_calc: "Contable", tr_d_profit_calc: "Calcula beneficios.", tr_n_packing_done: "Paquete Listo", tr_d_packing_done: "Completa la lista de empaquetado.", tr_n_diplomat: "Diplomática", tr_d_diplomat: "Copia una respuesta tipo.", tr_n_night_owl: "Búho Nocturno", tr_d_night_owl: "Usa la app después de las 22h.", tr_n_early_bird: "Madrugadora", tr_d_early_bird: "Usa la app antes de las 8h.", tr_n_weekend_warrior: "Finde", tr_d_weekend_warrior: "Usa la app en fin de semana.", tr_n_score_500: "Pro de Crush", tr_d_score_500: "Alcanza 500 puntos en Crush.", tr_n_combo_master: "Combo", tr_d_combo_master: "Haz un combo en el juego.", tr_n_seasonal_check: "Estratega", tr_d_seasonal_check: "Consulta el calendario.", tr_n_breath_deep: "Respiración", tr_d_breath_deep: "Quédate 10s en zona relax.", tr_n_joke_lover: "Humor", tr_d_joke_lover: "Lee 5 chistes.", tr_n_full_battery: "Plena Forma", tr_d_full_battery: "Ten 12 cucharas.", tr_n_low_battery: "Modo Eco", tr_d_low_battery: "Ten menos de 3 cucharas.", tr_n_studio_master: "Pro de Estudio", tr_d_studio_master: "Visita el estudio 3 veces.", tr_n_tag_collector: "Etiquetadora", tr_d_tag_collector: "Añade 10 etiquetas.", tr_n_share_love: "Amor", tr_d_share_love: "Abre la sección SOS.", tr_n_expert_seller: "Experta", tr_d_expert_seller: "Desbloquea 10 logros.", tr_n_imperatrice: "La Emperatriz", tr_d_imperatrice: "Desbloquea 20 logros.",
+        },
     it: {
             cat_clothes: "Abbigliamento", cat_shoes: "Scarpe & Sneakers", cat_bags: "Borse & Pelletteria",
             step_cover_t: "Gancio Visivo", step_cover_d: "Foto <b>Luce Naturale</b>. RITRATTO.", step_cover_s: "🧠 <b>Computer Vision:</b> L'IA rileva la silhouette. Foto indossata aumenta click +40%.",
@@ -1011,6 +1074,7 @@
             season_focus: ["Sport", "San Valentino", "Mezza stagione", "Abiti", "Mare, Estate", "Caldo, Lino", "Saldi", "Rientro", "Autunno", "Halloween", "Sci, Feste", "Regali"],
             season_prep: ["San Valentino", "Mezza stagione", "Fiori", "Mare", "Vacanze", "Rientro", "Scuola", "Autunno", "Halloween", "Sci", "Dopo Sci", "Sport Gennaio"],
             season_focus_label: "Vendere", season_prep_label: "Preparare",
+            tip_autumn: "🍂 Prepara cappotti & Rientro.", tip_winter: "❄️ Feste & Inverno: Abiti festa & regali.", tip_jan: "💪 Risoluzioni: Sport & Detox armadio.", tip_summer: "☀️ Estate: Mare & Abiti leggeri.", tip_spring: "👗 Mezza stagione: Giacche & Jeans.",
             nav_home: "Home", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Strumenti", nav_relax: "Relax", nav_crush: "Crush", nav_trophies: "Trofei",
             spoons_title: "I Miei Cucchiai", chrono_title: "Cronobiologia", tip_title: "Consiglio del Giorno",
             studio_title: "Studio Virtuale", studio_subtitle: "Seleziona una categoria per iniziare lo shooting guidato.",
@@ -1031,8 +1095,16 @@
             breath_title: "Coerenza Cardiaca", breath_instruction: "Segui il ritmo per calmare la tua ansia.",
             joke_title: "Minuto Sorriso", btn_next_joke: "Un'altra! 🎭",
             panic_title: "Sei al sicuro.", panic_text: "Respira. Sei amata. Sei capace. <br>Questa ansia è solo una nuvola che passa, tu sei il cielo. <br>Prenditi tutto il tempo di cui hai bisogno. 💖",
-            anchor_title: "Tecnica di Ancoraggio 5-4-3-2-1", anchor_5: "👀 <b>5</b> cose che vedi", anchor_4: "✋ <b>4</b> cose che puoi toccare", anchor_3: "👂 <b>3</b> cose che senti", anchor_2: "👃 <b>2</b> cose che puoi annusare", anchor_1: "👅 <b>1</b> cosa che puoi gustare", btn_better: "Mi sento meglio 🌿"
-    },
+            anchor_title: "Tecnica di Ancoraggio 5-4-3-2-1", anchor_5: "👀 <b>5</b> cose che vedi", anchor_4: "✋ <b>4</b> cose che puoi toccare", anchor_3: "👂 <b>3</b> cose che senti", anchor_2: "👃 <b>2</b> cose che puoi annusare", anchor_1: "👅 <b>1</b> cosa che puoi gustare", btn_better: "Mi sento meglio 🌿",
+            ex_brand: "Es: Zara, Gucci", ex_type: "Es: Abito Midi, Jeans", ex_color: "Es: Verde smeraldo", ex_material: "Es: Seta, Lana", ex_condition: "Sii onesta!", ex_vibe: "Es: Boho, Vintage",
+        seo_hint_short: "Titolo troppo corto!", seo_hint_brand: "Manca la marca!", seo_hint_type: "Qual è il tipo?", seo_hint_adj: "Evita 'carino', sii fattuale!", seo_hint_perfect: "🔥 Titolo Perfetto! L'algoritmo lo adorerà.",
+        desc_intro_rare: "🔥 RARO :", desc_intro_nugget: "✨ AFFARE :", desc_part_1: "Vendo questa meraviglia perché sto facendo decluttering (troppi vestiti!).", desc_part_2: "È un pezzo ideale per la stagione, molto comodo e fa la sua figura. ✨", desc_tech_title: "📏 TAGLIA & CONDIZIONI :", desc_cond_label: "• Condizioni :", desc_verified: "(Controllato con cura)", desc_color_label: "• Colore :", desc_mat_label: "• Materiale :", desc_info_label: "• Info + :", desc_ship_title: "🚀 SPEDIZIONE RAPIDA :", desc_ship_1: "• Spedisco in 24h.", desc_ship_2: "• Imballaggio curato 🎁", desc_ship_3: "• Casa non fumatori.", desc_closing: "💡 Chi prima arriva meglio alloggia! Fai un'offerta o crea un set per risparmiare sulla spedizione. 😉",
+        studio_final_title: "Foto Perfette!", studio_final_subtitle: "Ultimi consigli SEO:", studio_final_tip1: "Usa <b>tutte</b> le parole chiave dell'etichetta.", studio_final_tip2: "Prezzo psicologico: <b>9.90€</b> vende meglio di 10.00€.", studio_final_tip3: "Pubblica il tuo annuncio <b>Domenica sera</b> o <b>Martedì sera</b>.",
+        spoons_high: "⚡ Hai energia! Fai foto o pubblica.", spoons_mid: "✨ Energia media. Fai pacchi.", spoons_low: "🌙 Batteria scarica. Riposati.",
+        chrono_prime: "🔥 È IL MOMENTO! Pubblica ora!", chrono_good: "Picco presto (%h%h). Finisci le foto!", chrono_calm: "Momento calmo. Prepara bozze.",
+        studio_new: "Nuovo Annuncio", studio_success: "Hai tutte le foto necessarie.", studio_next: "Prossimo step", studio_validate: "📸 Convalida", studio_done: "✅ Foto Validata!",
+        notif_pack: "📦 Pacco Pronto! Ottimo lavoro.", notif_trophy: "🏆 Obiettivo sbloccato:", tr_n_first_visit: "Benvenuto", tr_d_first_visit: "Apri l'app.", tr_n_dark_mode: "Modalità Scura", tr_d_dark_mode: "Attiva la modalità scura.", tr_n_seo_master: "Regina SEO", tr_d_seo_master: "Genera un titolo perfetto.", tr_n_photo_pro: "Shooting Star", tr_d_photo_pro: "Completa una guida fotografica.", tr_n_spoon_saver: "Risparmiatrice", tr_d_spoon_saver: "Aggiorna i tuoi cucchiai.", tr_n_gamer: "Giocatrice", tr_d_gamer: "Inizia una partita a Crush.", tr_n_high_score_100: "Punteggio 100", tr_d_high_score_100: "Raggiungi 100 punti a Crush.", tr_n_relax_master: "Zen", tr_d_relax_master: "Usa la zona relax.", tr_n_copy_paste: "Appunti", tr_d_copy_paste: "Copia testo generato.", tr_n_explorer: "Curiosa", tr_d_explorer: "Visita tutte le schede.", tr_n_panic_button: "SOS", tr_d_panic_button: "Usa il pulsante SOS.", tr_n_trend_setter: "Trend Setter", tr_d_trend_setter: "Usa un pacchetto hashtag.", tr_n_profit_calc: "Contabile", tr_d_profit_calc: "Calcola profitto.", tr_n_packing_done: "Pacco Pronto", tr_d_packing_done: "Completa la lista di imballaggio.", tr_n_diplomat: "Diplomatica", tr_d_diplomat: "Copia una risposta tipo.", tr_n_night_owl: "Gufo Notturno", tr_d_night_owl: "Usa app dopo le 22:00.", tr_n_early_bird: "Mattiniera", tr_d_early_bird: "Usa app prima delle 8:00.", tr_n_weekend_warrior: "Weekend", tr_d_weekend_warrior: "Usa app nel weekend.", tr_n_score_500: "Crush Pro", tr_d_score_500: "Raggiungi 500 punti a Crush.", tr_n_combo_master: "Combo", tr_d_combo_master: "Fai una combo nel gioco.", tr_n_seasonal_check: "Stratega", tr_d_seasonal_check: "Consulta il calendario.", tr_n_breath_deep: "Respirazione", tr_d_breath_deep: "Resta 10s in zona relax.", tr_n_joke_lover: "Umorismo", tr_d_joke_lover: "Leggi 5 barzellette.", tr_n_full_battery: "Piena Forma", tr_d_full_battery: "Avere 12 cucchiai.", tr_n_low_battery: "Modalità Eco", tr_d_low_battery: "Avere meno di 3 cucchiai.", tr_n_studio_master: "Studio Pro", tr_d_studio_master: "Visita lo studio 3 volte.", tr_n_tag_collector: "Taggatrice", tr_d_tag_collector: "Aggiungi 10 tag.", tr_n_share_love: "Amore", tr_d_share_love: "Apri la sezione SOS.", tr_n_expert_seller: "Esperta", tr_d_expert_seller: "Sblocca 10 obiettivi.", tr_n_imperatrice: "L'Imperatrice", tr_d_imperatrice: "Sblocca 20 obiettivi.",
+        },
     pl: {
             cat_clothes: "Odzież", cat_shoes: "Buty & Sneakersy", cat_bags: "Torebki",
             step_cover_t: "Wizualny Haczyk", step_cover_d: "Zdjęcie w <b>Świetle Dziennym</b>. PORTRET.", step_cover_s: "🧠 <b>Computer Vision:</b> AI wykrywa sylwetkę. Zdjęcie na osobie zwiększa klikalność +40%.",
@@ -1058,6 +1130,7 @@
             season_focus: ["Sport", "Walentynki", "Wiosna", "Sukienki", "Plaża, Lato", "Upał, Len", "Wyprzedaż", "Powrót do szkoły", "Jesień", "Halloween", "Narty", "Prezenty"],
             season_prep: ["Walentynki", "Wiosna", "Kwiaty", "Plaża", "Wakacje", "Szkoła", "Szkoła", "Jesień", "Halloween", "Narty", "Po nartach", "Sport Styczeń"],
             season_focus_label: "Sprzedawaj", season_prep_label: "Przygotuj",
+            tip_autumn: "🍂 Szykuj płaszcze & Szkoła.", tip_winter: "❄️ Święta & Zima: Sukienki & prezenty.", tip_jan: "💪 Postanowienia: Sport & Detox szafy.", tip_summer: "☀️ Lato: Stroje & Sukienki.", tip_spring: "👗 Wiosna: Kurtki & Jeansy.",
             nav_home: "Start", nav_studio: "Studio", nav_seo: "SEO", nav_tools: "Narzędzia", nav_relax: "Relaks", nav_crush: "Crush", nav_trophies: "Trofea",
             spoons_title: "Moje Łyżki", chrono_title: "Chronobiologia", tip_title: "Porada Dnia",
             studio_title: "Wirtualne Studio", studio_subtitle: "Wybierz kategorię, aby rozpocząć sesję zdjęciową.",
@@ -1078,8 +1151,16 @@
             breath_title: "Koherencja Serca", breath_instruction: "Podążaj za rytmem, aby uspokoić lęk.",
             joke_title: "Minuta Uśmiechu", btn_next_joke: "Jeszcze jeden! 🎭",
             panic_title: "Jesteś bezpieczna.", panic_text: "Oddychaj. Jesteś kochana. Jesteś zdolna. <br>Ten lęk to tylko chmura, która mija, ty jesteś niebem. <br>Weź tyle czasu, ile potrzebujesz. 💖",
-            anchor_title: "Technika Uziemienia 5-4-3-2-1", anchor_5: "👀 <b>5</b> rzeczy, które widzisz", anchor_4: "✋ <b>4</b> rzeczy, które możesz dotknąć", anchor_3: "👂 <b>3</b> rzeczy, które słyszysz", anchor_2: "👃 <b>2</b> rzeczy, które czujesz", anchor_1: "👅 <b>1</b> rzecz, którą możesz posmakować", btn_better: "Czuję się lepiej 🌿"
-    }
+            anchor_title: "Technika Uziemienia 5-4-3-2-1", anchor_5: "👀 <b>5</b> rzeczy, które widzisz", anchor_4: "✋ <b>4</b> rzeczy, które możesz dotknąć", anchor_3: "👂 <b>3</b> rzeczy, które słyszysz", anchor_2: "👃 <b>2</b> rzeczy, które czujesz", anchor_1: "👅 <b>1</b> rzecz, którą możesz posmakować", btn_better: "Czuję się lepiej 🌿",
+            ex_brand: "Np: Zara, H&M", ex_type: "Np: Sukienka Midi, Jeansy", ex_color: "Np: Szmaragdowy", ex_material: "Np: Jedwab, Wełna", ex_condition: "Bądź szczera!", ex_vibe: "Np: Boho, Vintage",
+        seo_hint_short: "Tytuł za krótki!", seo_hint_brand: "Brak marki!", seo_hint_type: "Jaki to typ?", seo_hint_adj: "Unikaj 'ładne', konkrety!", seo_hint_perfect: "🔥 Tytuł Idealny! Algorytm to pokocha.",
+        desc_intro_rare: "🔥 UNIKAT :", desc_intro_nugget: "✨ PEREŁKA :", desc_part_1: "Sprzedaję to cudo, bo robię porządki w szafie (za dużo ubrań!).", desc_part_2: "Idealna rzecz na ten sezon, bardzo wygodna i robi wrażenie. ✨", desc_tech_title: "📏 ROZMIAR & STAN :", desc_cond_label: "• Stan :", desc_verified: "(Sprawdzone dokładnie)", desc_color_label: "• Kolor :", desc_mat_label: "• Materiał :", desc_info_label: "• Info + :", desc_ship_title: "🚀 SZYBKA WYSYŁKA :", desc_ship_1: "• Wysyłam w 24h.", desc_ship_2: "• Starannie zapakowane 🎁", desc_ship_3: "• Dom bez papierosów.", desc_closing: "💡 Kto pierwszy ten lepszy! Śmiało składaj oferty lub zestawy, żeby oszczędzić na wysyłce. 😉",
+        studio_final_title: "Zdjęcia Idealne!", studio_final_subtitle: "Ostatnie porady SEO:", studio_final_tip1: "Użyj <b>wszystkich</b> słów kluczowych z metki.", studio_final_tip2: "Cena psychologiczna: <b>9.90€</b> sprzedaje się lepiej niż 10.00€.", studio_final_tip3: "Wstaw ogłoszenie w <b>Niedzielę wieczorem</b> lub <b>Wtorek wieczorem</b>.",
+        spoons_high: "⚡ Masz energię! Rób zdjęcia.", spoons_mid: "✨ Średnia energia. Pakuj paczki.", spoons_low: "🌙 Słaba bateria. Odpocznij.",
+        chrono_prime: "🔥 TO TEN MOMENT! Wstawiaj!", chrono_good: "Zaraz szczyt (%h%h). Kończ zdjęcia!", chrono_calm: "Spokój. Szykuj wersje robocze.",
+        studio_new: "Nowe Ogłoszenie", studio_success: "Masz wszystkie potrzebne zdjęcia.", studio_next: "Dalej", studio_validate: "📸 Zatwierdź", studio_done: "✅ Gotowe!",
+        notif_pack: "📦 Paczka Gotowa! Dobra robota.", notif_trophy: "🏆 Osiągnięcie:", tr_n_first_visit: "Witaj", tr_d_first_visit: "Otwórz aplikację.", tr_n_dark_mode: "Tryb Nocny", tr_d_dark_mode: "Włącz tryb ciemny.", tr_n_seo_master: "Królowa SEO", tr_d_seo_master: "Wygeneruj idealny tytuł.", tr_n_photo_pro: "Gwiazda zdjęć", tr_d_photo_pro: "Ukończ przewodnik fotograficzny.", tr_n_spoon_saver: "Oszczędna", tr_d_spoon_saver: "Zaktualizuj swoje łyżki.", tr_n_gamer: "Gracz", tr_d_gamer: "Rozpocznij grę Crush.", tr_n_high_score_100: "Wynik 100", tr_d_high_score_100: "Osiągnij 100 punktów w Crush.", tr_n_relax_master: "Zen", tr_d_relax_master: "Użyj strefy relaksu.", tr_n_copy_paste: "Schowek", tr_d_copy_paste: "Skopiuj wygenerowany tekst.", tr_n_explorer: "Ciekawska", tr_d_explorer: "Odwiedź wszystkie karty.", tr_n_panic_button: "SOS", tr_d_panic_button: "Użyj przycisku SOS.", tr_n_trend_setter: "Kreator trendów", tr_d_trend_setter: "Użyj pakietu hashtagów.", tr_n_profit_calc: "Księgowa", tr_d_profit_calc: "Oblicz zysk.", tr_n_packing_done: "Paczka Gotowa", tr_d_packing_done: "Ukończ listę pakowania.", tr_n_diplomat: "Dyplomata", tr_d_diplomat: "Skopiuj gotową odpowiedź.", tr_n_night_owl: "Nocny Marek", tr_d_night_owl: "Użyj aplikacji po 22:00.", tr_n_early_bird: "Ranny Ptaszek", tr_d_early_bird: "Użyj aplikacji przed 8:00.", tr_n_weekend_warrior: "Weekend", tr_d_weekend_warrior: "Użyj aplikacji w weekend.", tr_n_score_500: "Mistrz Crush", tr_d_score_500: "Osiągnij 500 punktów w Crush.", tr_n_combo_master: "Combo", tr_d_combo_master: "Wykonaj combo w grze.", tr_n_seasonal_check: "Strateg", tr_d_seasonal_check: "Sprawdź kalendarz.", tr_n_breath_deep: "Oddech", tr_d_breath_deep: "Zostań 10s w strefie relaksu.", tr_n_joke_lover: "Humor", tr_d_joke_lover: "Przeczytaj 5 żartów.", tr_n_full_battery: "Pełna Forma", tr_d_full_battery: "Miej 12 łyżek.", tr_n_low_battery: "Tryb Eco", tr_d_low_battery: "Miej mniej niż 3 łyżki.", tr_n_studio_master: "Studio Pro", tr_d_studio_master: "Odwiedź studio 3 razy.", tr_n_tag_collector: "Tagierka", tr_d_tag_collector: "Dodaj 10 tagów.", tr_n_share_love: "Miłość", tr_d_share_love: "Otwórz sekcję SOS.", tr_n_expert_seller: "Ekspert", tr_d_expert_seller: "Odblokuj 10 osiągnięć.", tr_n_imperatrice: "Cesarzowa", tr_d_imperatrice: "Odblokuj 20 osiągnięć.",
+        }
 };
 
     let currentLang = localStorage.getItem('app_lang') || 'fr';
@@ -1108,6 +1189,7 @@
         updateDailyTip(); // Need translated tips
         showJoke(); // Need translated jokes
         updateSeoPreview(); // Need translated copy
+        initTrophies(); // Need translated trophies
     }
 
     /* --- STATE MANAGEMENT & UTILS --- */
@@ -1225,10 +1307,11 @@
                     ${window.currentSpoons} / ${SPOON_MAX} Cuillères
                  </p>`;
 
+        const d = i18nData[currentLang] || i18nData['fr'];
         let advice = "";
-        if(window.currentSpoons > 8) advice = "⚡ Tu as de l'énergie ! Attaque les photos ou les mises en ligne.";
-        else if(window.currentSpoons > 4) advice = "✨ Énergie modérée. Fais des colis ou réponds aux messages.";
-        else advice = "🌙 Batterie faible. Repose-toi ou fais juste de la veille.";
+        if(window.currentSpoons > 8) advice = d.spoons_high;
+        else if(window.currentSpoons > 4) advice = d.spoons_mid;
+        else advice = d.spoons_low;
 
         html += `<p style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">${advice}</p>`;
 
@@ -1375,25 +1458,26 @@
 
         // VIEW 2: SUCCESS
         if (isFinished) {
+            const d = i18nData[currentLang] || i18nData['fr'];
             root.innerHTML = `
                 <div style="text-align: center; padding: 40px 20px;">
                     <div style="background: var(--success-color); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: white;">
                         <svg class="icon" style="width: 40px; height: 40px;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
                     </div>
-                    <h2 style="color: var(--primary-dark);">Photos Parfaites !</h2>
-                    <p>Tu as toutes les photos nécessaires pour maximiser ta vente.</p>
+                    <h2 style="color: var(--primary-dark);">${d.studio_final_title}</h2>
+                    <p>${d.studio_success}</p>
 
                     <div style="background: var(--bg-color); padding: 20px; border-radius: var(--border-radius); text-align: left; margin: 20px 0;">
-                        <h4 style="margin-top: 0;">Derniers conseils SEO :</h4>
+                        <h4 style="margin-top: 0;">${d.studio_final_subtitle}</h4>
                         <ul style="padding-left: 20px; color: var(--text-main);">
-                            <li>Utilise <b>tous</b> les mots clés de l'étiquette dans ta description.</li>
-                            <li>Prix psychologique : <b>9.90€</b> vend mieux que 10.00€.</li>
-                            <li>Poste ton annonce le <b>Dimanche soir</b> ou le <b>Mardi soir</b>.</li>
+                            <li>${d.studio_final_tip1}</li>
+                            <li>${d.studio_final_tip2}</li>
+                            <li>${d.studio_final_tip3}</li>
                         </ul>
                     </div>
 
                     <button onclick="resetStudio()" style="background: var(--primary-dark); color: white; padding: 15px 30px; border-radius: 30px; font-weight: bold; width: 100%;">
-                        Nouvelle annonce
+                        ${d.studio_new}
                     </button>
                 </div>
             `;
@@ -1403,6 +1487,7 @@
         // VIEW 3: STEPS (REDESIGNED PRO MODE)
         const currentStepData = catData.steps[studioState.currentStep];
         const isCurrentStepDone = studioState.completedSteps.includes(studioState.currentStep);
+        const d = i18nData[currentLang] || i18nData['fr'];
 
         let html = `
             <!-- Pro Header -->
@@ -1444,12 +1529,12 @@
                                    color: white;
                                    transform: ${isCurrentStepDone ? 'scale(0.98)' : 'scale(1)'};
                                    box-shadow: 0 8px 20px -5px ${isCurrentStepDone ? 'rgba(0,0,0,0)' : 'var(--accent-color)'};">
-                        ${isCurrentStepDone ? '✅ Photo Validée !' : '📸 Je valide cette étape'}
+                        ${isCurrentStepDone ? d.studio_done : d.studio_validate}
                     </button>
 
                     ${isCurrentStepDone && studioState.currentStep < totalSteps - 1 ?
                         `<div onclick="goToStep(${studioState.currentStep + 1})" style="text-align: center; margin-top: 15px; color: var(--text-muted); cursor: pointer; padding: 10px; font-size: 0.9rem;">
-                            Étape suivante <span style="display: inline-block; transform: translateY(1px);">▼</span>
+                            ${d.studio_next} <span style="display: inline-block; transform: translateY(1px);">▼</span>
                          </div>`
                         : ''}
                 </div>
@@ -1557,11 +1642,13 @@
         let score = 0;
         let hints = [];
 
-        if(title.length > 10) score += 20;
-        else hints.push("Titre trop court !");
+        const d = i18nData[currentLang] || i18nData['fr'];
 
-        if(brand) score += 20; else hints.push("Manque la marque !");
-        if(type) score += 20; else hints.push("Quel est le type ?");
+        if(title.length > 10) score += 20;
+        else hints.push(d.seo_hint_short);
+
+        if(brand) score += 20; else hints.push(d.seo_hint_brand);
+        if(type) score += 20; else hints.push(d.seo_hint_type);
         if(color) score += 10;
         if(material) score += 10;
         if(condition) score += 10;
@@ -1570,7 +1657,7 @@
         // Penalties
         if(title.toLowerCase().includes("joli") || title.toLowerCase().includes("sympa")) {
             score -= 10;
-            hints.push("Évite 'joli' ou 'sympa', sois factuelle !");
+            hints.push(d.seo_hint_adj);
         }
 
         score = Math.min(100, Math.max(0, score));
@@ -1587,33 +1674,33 @@
         else bar.style.background = "#6bff6b"; // Green
 
         if(score < 100) feedback.innerText = "Conseil : " + hints.join(", ");
-        else feedback.innerText = "🔥 Titre Parfait ! L'algorithme va adorer.";
+        else feedback.innerText = d.seo_hint_perfect;
 
         // SALES COPY DESCRIPTION
         let desc = "";
 
         // Hook
-        if(brand) desc += `🔥 RARE : ${brand} ${type || 'Pièce'} - ${vibe || 'Tendance'} !\n\n`;
-        else desc += `✨ PÉPITE À SAISIR : ${type || 'Article'} ${vibe || ''}\n\n`;
+        if(brand) desc += `${d.desc_intro_rare} ${brand} ${type || ''} - ${vibe || ''} !\n\n`;
+        else desc += `${d.desc_intro_nugget} ${type || ''} ${vibe || ''}\n\n`;
 
         // Emotional/Descriptive Body
-        desc += `Je me sépare de cette merveille car je fais du tri dans mon dressing (trop de vêtements !). \n`;
-        desc += `C'est une pièce idéale pour la saison, très agréable à porter et qui fait son petit effet. ✨\n\n`;
+        desc += `${d.desc_part_1} \n`;
+        desc += `${d.desc_part_2}\n\n`;
 
         // Technical Specs
-        desc += `📏 TAILLE & ÉTAT :\n`;
-        if(condition) desc += `• État : ${condition} (Vérifié avec soin)\n`;
-        if(color) desc += `• Couleur : ${color}\n`;
-        if(material) desc += `• Matière : ${material}\n`;
-        if(details) desc += `• Info + : ${details}\n`;
+        desc += `${d.desc_tech_title}\n`;
+        if(condition) desc += `${d.desc_cond_label} ${condition} ${d.desc_verified}\n`;
+        if(color) desc += `${d.desc_color_label} ${color}\n`;
+        if(material) desc += `${d.desc_mat_label} ${material}\n`;
+        if(details) desc += `${d.desc_info_label} ${details}\n`;
 
         // Urgency & CTA
-        desc += `\n🚀 ENVOI RAPIDE :\n`;
-        desc += `• J'envoie sous 24h (Mondial Relay / Chrono préférés).\n`;
-        desc += `• Emballage soigné et protégé 🎁\n`;
-        desc += `• Maison non-fumeur.\n\n`;
+        desc += `\n${d.desc_ship_title}\n`;
+        desc += `${d.desc_ship_1}\n`;
+        desc += `${d.desc_ship_2}\n`;
+        desc += `${d.desc_ship_3}\n\n`;
 
-        desc += `💡 Premier arrivé, premier servi ! N'hésitez pas à faire une offre ou un lot pour économiser les frais de port. 😉\n\n`;
+        desc += `${d.desc_closing}\n\n`;
 
         if(selectedTags.length > 0) {
             desc += selectedTags.join(' ');
@@ -1659,17 +1746,22 @@
             6: [[9, 11], [17, 19]]   // Sat
         };
 
-        const dayNames = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+        // Dynamic Day Name
+        const dayName = new Intl.DateTimeFormat(currentLang, { weekday: 'long' }).format(now);
+        // Capitalize first letter
+        const dayNameCap = dayName.charAt(0).toUpperCase() + dayName.slice(1);
+
         const todaySlots = slots[day] || [];
 
+        const d = i18nData[currentLang] || i18nData['fr'];
         let status = "neutral"; // neutral, good, prime
-        let message = "Moment calme. Prépare tes brouillons.";
+        let message = d.chrono_calm;
 
         // Check if current time is in a slot
         for(let slot of todaySlots) {
             if(hour >= slot[0] && hour < slot[1]) {
                 status = "prime";
-                message = "🔥 C'EST LE MOMENT ! Poste maintenant !";
+                message = d.chrono_prime;
                 break;
             }
         }
@@ -1679,7 +1771,7 @@
             for(let slot of todaySlots) {
                  if(hour >= slot[0] - 2 && hour < slot[0]) {
                      status = "good";
-                     message = `Bientôt le pic (${slot[0]}h). Finis tes photos !`;
+                     message = d.chrono_good.replace("%h", slot[0]);
                      break;
                  }
             }
@@ -1692,21 +1784,22 @@
 
         let html = `<div style="text-align: center;">
                         <div style="font-size: 2rem; font-weight: bold; color: ${color};">${now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
-                        <div style="font-weight: bold; margin-bottom: 5px;">${dayNames[day]}</div>
+                        <div style="font-weight: bold; margin-bottom: 5px;">${dayNameCap}</div>
                         <div style="color: ${color}; font-weight: 600;">${message}</div>
                     </div>`;
 
         // Seasonality
         const month = now.getMonth(); // 0 = Jan
         let seasonTip = "";
-        if(month >= 7 && month <= 8) seasonTip = "🍂 Prépare les manteaux et la rentrée.";
-        else if(month >= 10) seasonTip = "❄️ Fêtes & Hiver : Robes de soirée et cadeaux.";
-        else if(month >= 0 && month <= 1) seasonTip = "💪 Résolutions : Sport & Détox placard.";
-        else if(month >= 3 && month <= 5) seasonTip = "☀️ Été : Maillots & Robes légères.";
-        else seasonTip = "👗 Mi-saison : Vestes légères et jeans.";
+
+        if(month >= 7 && month <= 8) seasonTip = d.tip_autumn;
+        else if(month >= 10) seasonTip = d.tip_winter;
+        else if(month >= 0 && month <= 1) seasonTip = d.tip_jan;
+        else if(month >= 3 && month <= 5) seasonTip = d.tip_summer;
+        else seasonTip = d.tip_spring;
 
         html += `<div style="margin-top: 15px; font-size: 0.85rem; background: var(--bg-color); padding: 8px; border-radius: 8px;">
-                    💡 Conseil Saison : ${seasonTip}
+                    💡 ${seasonTip}
                  </div>`;
 
         container.innerHTML = html;
@@ -1994,46 +2087,56 @@
     }
 
     // --- TROPHY SYSTEM ---
-    const trophies = [
-        { id: 'first_visit', name: 'Bienvenue', icon: '👋', desc: 'Ouvrir l\'application.' },
-        { id: 'dark_mode', name: 'Mode Nuit', icon: '🌙', desc: 'Activer le mode sombre.' },
-        { id: 'seo_master', name: 'Reine du SEO', icon: '✍️', desc: 'Générer un titre parfait.' },
-        { id: 'photo_pro', name: 'Shooting Star', icon: '📸', desc: 'Terminer un guide photo.' },
-        { id: 'spoon_saver', name: 'Économe', icon: '🥄', desc: 'Mettre à jour ses cuillères.' },
-        { id: 'gamer', name: 'Joueuse', icon: '🎮', desc: 'Lancer une partie de Crush.' },
-        { id: 'high_score_100', name: 'Score 100', icon: '💯', desc: 'Atteindre 100 points au Crush.' },
-        { id: 'relax_master', name: 'Zen', icon: '🧘‍♀️', desc: 'Utiliser la zone détente.' },
-        { id: 'copy_paste', name: 'Presse-Papier', icon: '📋', desc: 'Copier un texte généré.' },
-        { id: 'explorer', name: 'Curieuse', icon: '🧭', desc: 'Visiter tous les onglets.' },
-
-        // Expanded List
-        { id: 'panic_button', name: 'SOS', icon: '💖', desc: 'Utiliser le bouton SOS.' },
-        { id: 'trend_setter', name: 'Trend Setter', icon: '👗', desc: 'Utiliser un pack de hashtags.' },
-        { id: 'profit_calc', name: 'Comptable', icon: '💰', desc: 'Calculer un profit.' },
-        { id: 'packing_done', name: 'Colis Ready', icon: '📦', desc: 'Compléter la checklist colis.' },
-        { id: 'diplomat', name: 'Diplomate', icon: '🤝', desc: 'Copier une réponse type.' },
-        { id: 'night_owl', name: 'Oiseau de Nuit', icon: '🦉', desc: 'Utiliser l\'app après 22h.' },
-        { id: 'early_bird', name: 'Lève-tôt', icon: '🐦', desc: 'Utiliser l\'app avant 8h.' },
-        { id: 'weekend_warrior', name: 'Weekend', icon: '🎉', desc: 'Utiliser l\'app un Samedi ou Dimanche.' },
-        { id: 'score_500', name: 'Pro du Crush', icon: '🏆', desc: 'Atteindre 500 points au Crush.' },
-        { id: 'combo_master', name: 'Combo', icon: '🔥', desc: 'Faire un combo au jeu.' }, // Needs hook
-        { id: 'seasonal_check', name: 'Stratège', icon: '📅', desc: 'Consulter le calendrier.' },
-        { id: 'breath_deep', name: 'Respiration', icon: '🌬', desc: 'Rester 10s sur la zone détente.' },
-        { id: 'joke_lover', name: 'Humour', icon: '😂', desc: 'Lire 5 blagues.' },
-        { id: 'full_battery', name: 'Pleine Forme', icon: '⚡', desc: 'Avoir 12 cuillères.' },
-        { id: 'low_battery', name: 'Mode Éco', icon: '🪫', desc: 'Avoir moins de 3 cuillères.' },
-        { id: 'studio_master', name: 'Studio Pro', icon: '🎬', desc: 'Visiter le studio 3 fois.' },
-        { id: 'tag_collector', name: 'Tagueuse', icon: '🏷', desc: 'Ajouter 10 tags.' },
-        { id: 'share_love', name: 'Amour', icon: '💌', desc: 'Ouvrir la section SOS.' },
-        { id: 'expert_seller', name: 'Experte', icon: '🎓', desc: 'Débloquer 10 succès.' },
-        { id: 'imperatrice', name: 'L\'Impératrice', icon: '👑', desc: 'Débloquer 20 succès.' }
+    const trophyConfig = [
+        { id: 'first_visit', icon: '👋' },
+        { id: 'dark_mode', icon: '🌙' },
+        { id: 'seo_master', icon: '✍️' },
+        { id: 'photo_pro', icon: '📸' },
+        { id: 'spoon_saver', icon: '🥄' },
+        { id: 'gamer', icon: '🎮' },
+        { id: 'high_score_100', icon: '💯' },
+        { id: 'relax_master', icon: '🧘‍♀️' },
+        { id: 'copy_paste', icon: '📋' },
+        { id: 'explorer', icon: '🧭' },
+        { id: 'panic_button', icon: '💖' },
+        { id: 'trend_setter', icon: '👗' },
+        { id: 'profit_calc', icon: '💰' },
+        { id: 'packing_done', icon: '📦' },
+        { id: 'diplomat', icon: '🤝' },
+        { id: 'night_owl', icon: '🦉' },
+        { id: 'early_bird', icon: '🐦' },
+        { id: 'weekend_warrior', icon: '🎉' },
+        { id: 'score_500', icon: '🏆' },
+        { id: 'combo_master', icon: '🔥' },
+        { id: 'seasonal_check', icon: '📅' },
+        { id: 'breath_deep', icon: '🌬' },
+        { id: 'joke_lover', icon: '😂' },
+        { id: 'full_battery', icon: '⚡' },
+        { id: 'low_battery', icon: '🪫' },
+        { id: 'studio_master', icon: '🎬' },
+        { id: 'tag_collector', icon: '🏷' },
+        { id: 'share_love', icon: '💌' },
+        { id: 'expert_seller', icon: '🎓' },
+        { id: 'imperatrice', icon: '👑' }
     ];
+
+    function getTrophies() {
+        const d = i18nData[currentLang] || i18nData['fr'];
+        return trophyConfig.map(t => ({
+            id: t.id,
+            icon: t.icon,
+            name: d[`tr_n_${t.id}`],
+            desc: d[`tr_d_${t.id}`]
+        }));
+    }
 
     let unlockedTrophies = JSON.parse(localStorage.getItem('unlocked_trophies') || '[]');
 
     function initTrophies() {
         const grid = document.getElementById('trophy-grid');
         if(!grid) return;
+
+        const trophies = getTrophies();
 
         grid.innerHTML = trophies.map(t => {
             const isUnlocked = unlockedTrophies.includes(t.id);
@@ -2055,8 +2158,12 @@
             if(el) el.classList.add('unlocked');
 
             // Notification
-            showNotification(`🏆 Succès débloqué : ${trophies.find(t=>t.id===id).name}`);
-            triggerConfetti();
+            const d = i18nData[currentLang] || i18nData['fr'];
+            const t = getTrophies().find(tr => tr.id === id);
+            if(t) {
+                showNotification(`${d.notif_trophy} ${t.name}`);
+                triggerConfetti();
+            }
         }
     }
 
@@ -2250,8 +2357,9 @@
         localStorage.setItem('packing_state', JSON.stringify(savedState));
 
         if(all.length === checked.length && all.length > 0) {
+            const d = i18nData[currentLang] || i18nData['fr'];
             // Only trigger if not already triggered recently to avoid spam on reload
-            showNotification("📦 Colis Prêt ! Beau travail.");
+            showNotification(d.notif_pack);
             triggerConfetti();
         }
     }
